@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use View;
 
 class ServiceController extends Controller
 {
@@ -19,6 +20,11 @@ class ServiceController extends Controller
         //
     }
 
+
+    public function showForm()
+    {
+        return View('apply');
+    }
     /**
      * Show the form for creating a new resource.
      *

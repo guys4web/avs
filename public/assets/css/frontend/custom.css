@@ -675,6 +675,10 @@ footer .btn-primary.text-white {
     padding: 0.5% 0;
     margin: 0.5% 0;
 }
+
+.copyright .modal p {
+    color: #000;
+}
 /* ---------- //Copy Right Section Css  ---------- */
 /* ---------- Advanced Features Css ---------- */
 
