@@ -19,6 +19,7 @@ Route::model('blog', 'App\Blog');
 Route::model('file', 'App\File');
 Route::model('task', 'App\Task');
 Route::model('users', 'App\User');
+Route::model('products', 'App\Product');
 
 Route::pattern('slug', '[a-z0-9- _]+');
 
@@ -148,6 +149,11 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 	# in real world scenario, you may be required to define all routes manually
 
 	Route::get('{name?}', 'JoshController@showView');
+
+	#Products Routes
+	Route::get('product/new', 'ProductController@newProduct');	
+	Route::get('product/destroy/{id}', 'ProductController@destroy');
+	Route::post('product/save', 'ProductController@add');
 
 });
 
