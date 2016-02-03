@@ -19,7 +19,8 @@ Route::model('blog', 'App\Blog');
 Route::model('file', 'App\File');
 Route::model('task', 'App\Task');
 Route::model('users', 'App\User');
-Route::model('products', 'App\Product');
+Route::model('services', 'App\Service');
+Route::model('visas', 'App\Visa');
 
 Route::pattern('slug', '[a-z0-9- _]+');
 
@@ -150,10 +151,15 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 
 	Route::get('{name?}', 'JoshController@showView');
 
-	#Products Routes
-	Route::get('product/new', 'ProductController@newProduct');	
-	Route::get('product/destroy/{id}', 'ProductController@destroy');
-	Route::post('product/save', 'ProductController@add');
+	#Services Routes
+	Route::get('service/new', 'ServiceController@newProduct');	
+	Route::get('services/destroy/{id}', 'ServiceController@destroy');
+	Route::post('services/save', 'ServiceController@add');
+
+	#Visas Routes
+	Route::get('visa/new', 'VisaController@newProduct');	
+	Route::get('visa/destroy/{id}', 'VisaController@destroy');
+	Route::post('visa/save', 'VisaController@add');
 
 });
 

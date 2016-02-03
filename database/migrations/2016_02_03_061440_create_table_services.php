@@ -1,26 +1,28 @@
 <?php
- 
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
- 
-class CreateTableProducts extends Migration
+
+class CreateTableServices extends Migration
 {
- 
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('description');
-            $table->float('price');
-            //$table->string('imageurl');
-            //$table->string('file_id');
+            $table->integer('country_id');
             $table->timestamps();
         });
     }
  
     public function down()
     {
-        Schema::drop('products');
+        Schema::drop('services');
     }
 }
