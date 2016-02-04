@@ -151,6 +151,7 @@ return [
         yajra\Datatables\DatatablesServiceProvider::class,
         AdrianMejias\States\StatesServiceProvider::class,
         Webpatser\Countries\CountriesServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 
@@ -208,6 +209,7 @@ return [
         'Datatables' => yajra\Datatables\Datatables::class,
         'States'     => AdrianMejias\States\StatesFacade::class,
         'Countries' => Webpatser\Countries\CountriesFacade::class,
+        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
 
     ],
 

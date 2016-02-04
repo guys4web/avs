@@ -18,7 +18,6 @@
     </title>
     <!--global css starts-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <link href="{{ asset('assets/css/panel.css') }}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/frontend/custom.css') }}">
     <!--end of global css-->
     <!--page level css-->

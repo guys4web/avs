@@ -12,6 +12,7 @@ Visa Application
 <link rel="stylesheet" href="{{ asset('assets/vendors/wizard/jquery-steps/css/wizard.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/vendors/wizard/jquery-steps/css/jquery.steps.css') }}">
 <link href="{{ asset('assets/vendors/jasny-bootstrap/css/jasny-bootstrap.css') }}" rel="stylesheet" />
+
 <link href="{{ asset('assets/vendors/select2/select2.min.css') }}" rel="stylesheet"/>
 <link href="{{ asset('assets/vendors/select2/select2-bootstrap.min.css') }}"/>
 <!--end of page level css-->
@@ -59,11 +60,37 @@ Visa Application
 
                                     <div class="form-group">
                                         <label for="service" class="col-md-6 control-label">How soon would you like to go to <b> {{ $country->name}}</b> ? *</label>
-                                        <div class="col-md-3">
+                                        <div class="col-md-5">
                                             {!! Form::select('service', $services, '',['class' => 'form-control select2', 'id' => 'service']) !!}
                                         </div>
                                     </div>
-
+                                    <div class="portlet box info">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                Visa Types
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <table class="table table-striped table-hover">
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Visa</th>
+                                                    <th>Max Length of Stay</th>
+                                                    <th>Fee</th>       
+                                                    <th></th>                                     
+                                                </tr>
+                                                @foreach($visas as $visa)                                            
+                                                    <tr>
+                                                        <td><input type="checkbox"></td>
+                                                        <td>{{ $visa['name'] }}</td>
+                                                        <td>{{ $visa['max_stay'] or '30 days'}}</td>
+                                                        <td>{{ $visa['price'] }}</td>
+                                                        <td>{{ $visa['req'] or 'requirements'}}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </table>
+                                        </div>
+                                    </div>
 
                                     <p>(*) Mandatory</p>
 
@@ -196,7 +223,13 @@ Visa Application
                     </div>
                     <div class="panel-body">
                         <section>
-                            Service Type: 
+                            <ul>
+                                <li><b>Service Type: </b> <span id='service_type'></span></li>
+                                <li><b>Visa Type: </b> <span id='visa_type'></span></li>
+                                <li><b>Quantity: </b> <span id='quantity'></span></li>
+                            </ul>
+                            <hr>
+                            <div class='total'><strong>Total</strong>: </div>
                         </section>
                     </div>
                 </div>
@@ -213,4 +246,5 @@ Visa Application
     <script src="{{ asset('assets/vendors/jasny-bootstrap/js/jasny-bootstrap.js') }}"></script>
     <script src="{{ asset('assets/vendors/select2/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/form_wizard.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/cart.js') }}"></script>
 @stop

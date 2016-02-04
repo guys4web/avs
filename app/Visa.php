@@ -8,7 +8,7 @@ class Visa extends Model
 {
     public function service()
     {
-        return $this->belongsTo('App\Service');
+        return $this->belongsToMany('App\Service', 'service_visas', 'visa_id', 'service_id');
     }
    
 }
