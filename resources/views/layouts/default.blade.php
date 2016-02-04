@@ -18,6 +18,7 @@
     </title>
     <!--global css starts-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link href="{{ asset('assets/css/panel.css') }}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/frontend/custom.css') }}">
     <!--end of global css-->
     <!--page level css-->
@@ -56,11 +57,11 @@
                         <ul class="list-inline icon-position">
                             <li>
                                 <a href="mailto:"><i class="livicon" data-name="mail" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
-                                <label class="hidden-xs"><a href="mailto:" class="text-white">info@joshadmin.com</a></label>
+                                <label class="hidden-xs"><a href="mailto:" class="text-white">info@americanvisaservices.net</a></label>
                             </li>
                             <li>
                                 <a href="tel:"><i class="livicon" data-name="phone" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
-                                <label class="hidden-xs"><a href="tel:" class="text-white">(703) 717-4200</a></label>
+                                <label class="hidden-xs"><a href="tel:" class="text-white">+1 201-880-7150</a></label>
                             </li>
                         </ul>
                     </li>
@@ -75,66 +76,16 @@
                     <span><a href="#">_<i class="livicon" data-name="responsive-menu" data-size="25" data-loop="true" data-c="#757b87" data-hc="#ccc"></i>
                     </a></span>
                 </button>
-                <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('assets/images/logo.png') }}" alt="logo" class="logo_position">
+                <a class="navbar-brand" href="{{ route('home') }}">
+                    <img src="{{ asset('assets/images/logo.jpg') }}" alt="logo" class="logo_position">
+                    <img src="{{ asset('assets/images/avslogobrand.jpg') }}" alt="YOUR GATE TO THE WORLD" class="logo_position">
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li {!! (Request::is('/') ? 'class="active"' : '') !!}><a href="{{ route('home') }}"> Home</a>
                     </li>
-                    <li class="dropdown {!! (Request::is('typography') || Request::is('advancedfeatures') || Request::is('grid') ? 'active' : '') !!}"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> Features</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ URL::to('typography') }}">Typography</a>
-                            </li>
-                            <li><a href="{{ URL::to('advancedfeatures') }}">Advanced Features</a>
-                            </li>
-                            <li><a href="{{ URL::to('grid') }}">Grid System</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown {!! (Request::is('aboutus') || Request::is('timeline') || Request::is('faq') || Request::is('blank_page')  ? 'active' : '') !!}"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> Pages</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ URL::to('aboutus') }}">About Us</a>
-                            </li>
-                            <li><a href="{{ URL::to('timeline') }}">Timeline</a></li>
-                            <li><a href="{{ URL::to('price') }}">Price</a>
-                            </li>
-                            <li><a href="{{ URL::to('404') }}">404 Error</a>
-                            </li>
-                            <li><a href="{{ URL::to('500') }}">500 Error</a>
-                            </li>
-                            <li><a href="{{ URL::to('faq') }}">FAQ</a>
-                            </li>
-                            <li><a href="{{ URL::to('blank_page') }}">Blank</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown {!! (Request::is('products') || Request::is('single_product') || Request::is('compareproducts') || Request::is('category')  ? 'active' : '') !!}"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> Shop</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ URL::to('products') }}">Products</a>
-                            </li>
-                            <li><a href="{{ URL::to('single_product') }}">Single Product</a>
-                            </li>
-                            <li><a href="{{ URL::to('compareproducts') }}">Compare Products</a>
-                            </li>
-                            <li><a href="{{ URL::to('category') }}">Categories</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown {!! (Request::is('portfolio') || Request::is('portfolioitem') ? 'active' : '') !!}"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> Portfolio</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ URL::to('portfolio') }}">Portfolio</a>
-                            </li>
-                            <li><a href="{{ URL::to('portfolioitem') }}">Portfolio Item</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown {!! (Request::is('news') || Request::is('news_item') ? 'active' : '') !!}"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> News</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ URL::to('news') }}">News</a>
-                            </li>
-                            <li><a href="{{ URL::to('news_item') }}">News Item</a>
-                            </li>
-                        </ul>
+                    <li {!! (Request::is('track') ? 'class="active"' : '') !!}><a href="{{ URL::to('track') }}">Track Order</a>
                     </li>
                     <li {!! (Request::is('blog') || Request::is('blogitem/*') ? 'class="active"' : '') !!}><a href="{{ URL::to('blog') }}"> Blog</a>
                     </li>
@@ -148,9 +99,10 @@
                         </li>
                     @else
                         <li {{ (Request::is('my-account') ? 'class=active' : '') }}><a href="{{ URL::to('my-account') }}">My Account</a>
-                        </li>
-                        <li><a href="{{ URL::to('logout') }}">Logout</a>
-                        </li>
+                           <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ URL::to('logout') }}">Logout</a></li>   
+                            </ul>
+                        </li>                        
                     @endif
                 </ul>
             </div>
@@ -321,7 +273,6 @@
               </div>
             </div>
           </div>
-
         </div>
     </div>
     <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Return to top" data-toggle="tooltip" data-placement="left">

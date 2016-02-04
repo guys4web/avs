@@ -290,7 +290,7 @@ class JoshController extends Controller {
         $countries = DB::table('countries')
                 ->orderBy('popular')
                 ->orderBy('name')
-                ->get();
+                ->lists('name', 'id');
         view::share('countries',$countries);
     }
 

@@ -185,7 +185,9 @@ Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@post
 
 #frontend views
 Route::get('/', array('as' => 'home', 'uses' => 'JoshController@showUserIndex'));
-Route::get('apply', array('as' => 'apply', 'uses' => 'ServiceController@showForm'));
+Route::post('apply', array('as' => 'apply', 'uses' => 'CartController@create'));
+
+Route::resource('carts', 'CartController');
 
 Route::get('blog', array('as' => 'blog', 'uses' => 'BlogController@getIndexFrontend'));
 Route::get('blog/{slug}/tag', 'BlogController@getBlogTagFrontend');

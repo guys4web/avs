@@ -13,7 +13,9 @@
         "cviebrock/eloquent-taggable": "dev-master",
         "yajra/laravel-datatables-oracle": "~5.0",
         "adrianmejias/laravel-states": "dev-master",
-        "webpatser/laravel-countries": "dev-master"
+        "webpatser/laravel-countries": "dev-master",
+        "payum/payum-laravel-package": "^1.0",
+        "payum/authorize-net-aim": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

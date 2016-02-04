@@ -9,7 +9,7 @@ body {
     color: #757b87;
 }
 .icon-section{
-    background-color: #09bd8f;
+    background-color: #ED1B24;
     line-height: 7px;
     padding-top: 10px;
     margin-bottom: 10px;
@@ -217,6 +217,9 @@ p label {
     color: #01bc8c;
 }
 
+.navbar-brand>img {
+    display: inline;
+}
 .navbar-nav .dropdown-menu li:hover {
     border: none;
 }
@@ -688,6 +691,11 @@ footer .btn-primary.text-white {
     margin-bottom: 15px;
 }
 /* ---------- //Advanced Features Css ---------- */
+
+.applicationForm {
+    padding: 2.5em;
+}
+
 
 @media(max-width: 759px) {
     .navbar-nav .dropdown-menu:before {

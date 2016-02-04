@@ -36,7 +36,7 @@ Home
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-1"></div>                    
-                    <form class="form-horizontal" action="#" method="post">
+                    <form class="form-horizontal" action="{{ route('apply') }}" method="post">
                         <fieldset>
                             
                             <div class="form-group">
