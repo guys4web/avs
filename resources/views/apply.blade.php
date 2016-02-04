@@ -190,7 +190,7 @@ Visa Application
                 <div class="panel panel-success ">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            <i class="livicon" data-name="notebook" data-size="18" data-c="#fff" data-hc="#fff" data-loop="true"></i>
+                            <i class="livicon" data-name="shopping-cart-in" data-size="18" data-c="#fff" data-hc="#fff" data-loop="true"></i>
                             Order Summary
                         </h3>                        
                     </div>
