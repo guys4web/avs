@@ -61,9 +61,16 @@ Visa Application
                                     <div class="form-group">
                                         <label for="service" class="col-md-6 control-label">How soon would you like to go to <b> {{ $country->name}}</b> ? *</label>
                                         <div class="col-md-5">
-                                            {!! Form::select('service', $services, '',['class' => 'form-control select2', 'id' => 'service']) !!}
+                                           <select class="form-control input" name="services" id="services">
+                                            <option selected disabled>Please select a service</option>                                            
+                                            @foreach($services as $id => $item)
+                                            {{$item}}
+                                                <option value="{{$id}}">{{$item}}</option>
+                                            @endforeach
+                                           </select>
+
                                         </div>
-                                    </div>
+                                    </div>                                    
                                     <div class="portlet box info">
                                         <div class="portlet-title">
                                             <div class="caption">
@@ -81,7 +88,7 @@ Visa Application
                                                 </tr>
                                                 @foreach($visas as $visa)                                            
                                                     <tr>
-                                                        <td><input type="checkbox"></td>
+                                                        <td><input type="radio" name="visa" class="visas" data-name="{{ $visa['name'] }}" data-id="{{ $visa['id'] }}" data-price="{{ $visa['price'] }}"></td>
                                                         <td>{{ $visa['name'] }}</td>
                                                         <td>{{ $visa['max_stay'] or '30 days'}}</td>
                                                         <td>{{ $visa['price'] }}</td>
@@ -91,7 +98,12 @@ Visa Application
                                             </table>
                                         </div>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label for="service" class="col-md-6 control-label">How many people are traveling ? *</label>
+                                        <div class="col-sm-1">
+                                            <input type="number" id="qty" value="1" min="1">
+                                        </div>
+                                    </div>
                                     <p>(*) Mandatory</p>
 
                                 </section>
@@ -100,8 +112,6 @@ Visa Application
                                 <h1>Bio</h1>
 
                                 <section>
-
-
                                     <div class="form-group required">
                                         <label for="dob" class="col-sm-2 control-label">Date of Birth</label>
                                         <div class="col-sm-10">
@@ -226,10 +236,11 @@ Visa Application
                             <ul>
                                 <li><b>Service Type: </b> <span id='service_type'></span></li>
                                 <li><b>Visa Type: </b> <span id='visa_type'></span></li>
+                                <li><b>Visa Fee: </b> <span id='visa_fee'></span></li>
                                 <li><b>Quantity: </b> <span id='quantity'></span></li>
                             </ul>
                             <hr>
-                            <div class='total'><strong>Total</strong>: </div>
+                            <div class='total'><strong>Total</strong>: <span id="order_total"></span></div>
                         </section>
                     </div>
                 </div>

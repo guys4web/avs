@@ -32,9 +32,11 @@ class CartController extends Controller
                 ->groupBy('service_id')
                 ->get();
                 
+        $service = $services->first();
+
         $visas = Visa::join('service_visas', 'visas.id', '=', 'service_visas.visa_id')
                 ->orderBy('price')
-                ->where('service_id', '=', $services->first()->id)
+                ->where('service_id', '=', $service->id)
                 ->groupBy('visa_id')
                 ->get();
 
@@ -47,6 +49,7 @@ class CartController extends Controller
         $country = Country::find($request->get('country'));
 
         return View('apply', ['services' => $services->lists('title', 'id'),
+                            'service' => $service,
                             'country' => $country,
                             'countries' => $countries,
                             'visas' => $visas->toArray(),
