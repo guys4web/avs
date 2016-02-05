@@ -355,6 +355,7 @@ blockquote {
     display: block;
     margin-top: 60px;
     margin-bottom: 15px;
+    min-height: 196px;
 }
 /* ---------- //Our services Box  Style Css End ---------- */
 /* ------------- Our Services Box Icon Css ---------- */
@@ -696,6 +697,16 @@ footer .btn-primary.text-white {
     padding: 2.5em;
 }
 
+.panel-success>.panel-heading {
+    color: #fff;
+    background-color: #01BC8C;
+    border-color: #01BC8C;
+}
+
+.portlet {
+    background-color: #fff;
+    text-align: left;
+}
 
 @media(max-width: 759px) {
     .navbar-nav .dropdown-menu:before {

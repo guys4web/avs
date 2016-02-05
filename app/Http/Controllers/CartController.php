@@ -6,6 +6,7 @@ use App\Cart;
 use App\CartItem;
 use App\Country;
 use App\Service;
+use App\Visa;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -24,11 +25,20 @@ class CartController extends Controller
 
     public function create(ApplicationRequest $request)
     {        
-        $services = Service::with(['visas' => function($query)
-                {
-                   $query->orderBy('name');
-                }])
-                ->lists('name', 'id');
+        $services = Service::join('service_visas', 'services.id', '=', 'service_visas.service_id')
+                ->orderBy('min_process')
+                ->orderBy('max_process')
+                ->where('country_id', '=', $request->get('country'))
+                ->groupBy('service_id')
+                ->get();
+                
+        $service = $services->first();
+
+        $visas = Visa::join('service_visas', 'visas.id', '=', 'service_visas.visa_id')
+                ->orderBy('price')
+                ->where('service_id', '=', $service->id)
+                ->groupBy('visa_id')
+                ->get();
 
         $states = [''=>'Select State'] + DB::table('states')                
                 ->orderBy('name', 'asc')
@@ -38,9 +48,11 @@ class CartController extends Controller
 
         $country = Country::find($request->get('country'));
 
-        return View('apply', ['services' => $services,
+        return View('apply', ['services' => $services->lists('title', 'id'),
+                            'service' => $service,
                             'country' => $country,
                             'countries' => $countries,
+                            'visas' => $visas->toArray(),
                             'states' => $states]);        
     }
 

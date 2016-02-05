@@ -12,6 +12,7 @@ Visa Application
 <link rel="stylesheet" href="{{ asset('assets/vendors/wizard/jquery-steps/css/wizard.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/vendors/wizard/jquery-steps/css/jquery.steps.css') }}">
 <link href="{{ asset('assets/vendors/jasny-bootstrap/css/jasny-bootstrap.css') }}" rel="stylesheet" />
+
 <link href="{{ asset('assets/vendors/select2/select2.min.css') }}" rel="stylesheet"/>
 <link href="{{ asset('assets/vendors/select2/select2-bootstrap.min.css') }}"/>
 <!--end of page level css-->
@@ -59,12 +60,50 @@ Visa Application
 
                                     <div class="form-group">
                                         <label for="service" class="col-md-6 control-label">How soon would you like to go to <b> {{ $country->name}}</b> ? *</label>
-                                        <div class="col-md-3">
-                                            {!! Form::select('service', $services, '',['class' => 'form-control select2', 'id' => 'service']) !!}
+                                        <div class="col-md-5">
+                                           <select class="form-control input" name="services" id="services">
+                                            <option selected disabled>Please select a service</option>                                            
+                                            @foreach($services as $id => $item)
+                                            {{$item}}
+                                                <option value="{{$id}}">{{$item}}</option>
+                                            @endforeach
+                                           </select>
+
+                                        </div>
+                                    </div>                                    
+                                    <div class="portlet box info">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                Visa Types
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <table class="table table-striped table-hover">
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Visa</th>
+                                                    <th>Max Length of Stay</th>
+                                                    <th>Fee</th>       
+                                                    <th></th>                                     
+                                                </tr>
+                                                @foreach($visas as $visa)                                            
+                                                    <tr>
+                                                        <td><input type="radio" name="visa" class="visas" data-name="{{ $visa['name'] }}" data-id="{{ $visa['id'] }}" data-price="{{ $visa['price'] }}"></td>
+                                                        <td>{{ $visa['name'] }}</td>
+                                                        <td>{{ $visa['max_stay'] or '30 days'}}</td>
+                                                        <td>{{ $visa['price'] }}</td>
+                                                        <td>{{ $visa['req'] or 'requirements'}}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </table>
                                         </div>
                                     </div>
-
-
+                                    <div class="form-group">
+                                        <label for="service" class="col-md-6 control-label">How many people are traveling ? *</label>
+                                        <div class="col-sm-1">
+                                            <input type="number" id="qty" value="1" min="1">
+                                        </div>
+                                    </div>
                                     <p>(*) Mandatory</p>
 
                                 </section>
@@ -73,8 +112,6 @@ Visa Application
                                 <h1>Bio</h1>
 
                                 <section>
-
-
                                     <div class="form-group required">
                                         <label for="dob" class="col-sm-2 control-label">Date of Birth</label>
                                         <div class="col-sm-10">
@@ -190,13 +227,20 @@ Visa Application
                 <div class="panel panel-success ">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            <i class="livicon" data-name="notebook" data-size="18" data-c="#fff" data-hc="#fff" data-loop="true"></i>
+                            <i class="livicon" data-name="shopping-cart-in" data-size="18" data-c="#fff" data-hc="#fff" data-loop="true"></i>
                             Order Summary
                         </h3>                        
                     </div>
                     <div class="panel-body">
                         <section>
-                            Service Type: 
+                            <ul>
+                                <li><b>Service Type: </b> <span id='service_type'></span></li>
+                                <li><b>Visa Type: </b> <span id='visa_type'></span></li>
+                                <li><b>Visa Fee: </b> <span id='visa_fee'></span></li>
+                                <li><b>Quantity: </b> <span id='quantity'></span></li>
+                            </ul>
+                            <hr>
+                            <div class='total'><strong>Total</strong>: <span id="order_total"></span></div>
                         </section>
                     </div>
                 </div>
@@ -213,4 +257,5 @@ Visa Application
     <script src="{{ asset('assets/vendors/jasny-bootstrap/js/jasny-bootstrap.js') }}"></script>
     <script src="{{ asset('assets/vendors/select2/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/form_wizard.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/cart.js') }}"></script>
 @stop
