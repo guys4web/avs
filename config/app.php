@@ -152,6 +152,7 @@ return [
         AdrianMejias\States\StatesServiceProvider::class,
         Webpatser\Countries\CountriesServiceProvider::class,
 
+        Payum\LaravelPackage\PayumServiceProvider::class,
     ],
 
     /*
