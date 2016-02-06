@@ -78,23 +78,14 @@ Visa Application
                                             </div>
                                         </div>
                                         <div class="portlet-body">
-                                            <table class="table table-striped table-hover">
+                                            <table class="table table-striped table-hover" id="service_visas">
                                                 <tr>
                                                     <th></th>
                                                     <th>Visa</th>
                                                     <th>Max Length of Stay</th>
                                                     <th>Fee</th>       
                                                     <th></th>                                     
-                                                </tr>
-                                                @foreach($visas as $visa)                                            
-                                                    <tr>
-                                                        <td><input type="radio" name="visa" class="visas" data-name="{{ $visa['name'] }}" data-id="{{ $visa['id'] }}" data-price="{{ $visa['price'] }}"></td>
-                                                        <td>{{ $visa['name'] }}</td>
-                                                        <td>{{ $visa['max_stay'] or '30 days'}}</td>
-                                                        <td>{{ $visa['price'] }}</td>
-                                                        <td>{{ $visa['req'] or 'requirements'}}</td>
-                                                    </tr>
-                                                @endforeach
+                                                </tr>                                          
                                             </table>
                                         </div>
                                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Visa;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -19,6 +20,18 @@ class VisaController extends Controller
         //
     }
 
+    public function findByService($serviceId)
+    {
+        $visas = Visa::join('service_visas', 'visas.id', '=', 'service_visas.visa_id')
+                ->orderBy('price')
+                ->where('service_id', '=', $serviceId)
+                ->get();
+
+        return \Response::json(array(
+            'status' => 'success',
+            'data' => iterator_to_array($visas)
+        ));
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -159,7 +159,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 	#Visas Routes
 	Route::get('visa/new', 'VisaController@newProduct');	
 	Route::get('visa/destroy/{id}', 'VisaController@destroy');
-	Route::post('visa/save', 'VisaController@add');
+	Route::post('visa/save', 'VisaController@add');	
 
 });
 
@@ -197,6 +197,8 @@ Route::post('blogitem/{blog}/comment', 'BlogController@storeCommentFrontend');
 Route::get('index_test_payment', array('as' => 'index_test_payment','uses' => 'PaymentController@getIndex'));
 Route::any('prepare_payment', array('as' => 'prepare_payment','uses' => 'PaymentController@prepare'));
 Route::any('payment_done/{payum_token}', array('as' => 'payment_done','uses' => 'PaymentController@done'));
+
+Route::any('visa/service/{id}', 'VisaController@findByService');
 
 Route::get('{name?}', 'JoshController@showFrontEndView');
 # End of frontend views

@@ -706,6 +706,7 @@ footer .btn-primary.text-white {
 .portlet {
     background-color: #fff;
     text-align: left;
+    display: none;
 }
 
 @media(max-width: 759px) {

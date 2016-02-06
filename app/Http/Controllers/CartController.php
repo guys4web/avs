@@ -34,13 +34,7 @@ class CartController extends Controller
                 
         $service = $services->first();
 
-        $visas = Visa::join('service_visas', 'visas.id', '=', 'service_visas.visa_id')
-                ->orderBy('price')
-                ->where('service_id', '=', $service->id)
-                ->groupBy('visa_id')
-                ->get();
-
-        $states = [''=>'Select State'] + DB::table('states')                
+        $states = [''=>'Select State'] + DB::table('states')
                 ->orderBy('name', 'asc')
                 ->lists('name', 'id');
 
@@ -52,7 +46,6 @@ class CartController extends Controller
                             'service' => $service,
                             'country' => $country,
                             'countries' => $countries,
-                            'visas' => $visas->toArray(),
                             'states' => $states]);        
     }
 
