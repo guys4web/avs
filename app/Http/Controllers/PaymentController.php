@@ -13,9 +13,19 @@ class PaymentController extends PayumController{
 	private $key = "7p75R2a3ZZ4Yx5zg" ;
 	private $secret= "Simon" ;
 
-	public function getIndex()
+	public function postIndex(Request $request)
 	{
-		return view("paymentindex");
+		$request->session()->put('cardnum',$request->get('cardnum'));
+        $request->session()->put('expDate',$request->get('expDate'));
+        $request->session()->put('ccv',$request->get('ccv'));
+        $request->session()->put('bname',$request->get('bname'));
+        $request->session()->put('bcity',$request->get('bcity'));
+        $request->session()->put('baddress',$request->get('baddress'));
+        $request->session()->put('bstate',$request->get('bstate'));
+        $request->session()->put('postal',$request->get('postal'));
+
+        return redirect()->route("prepare_payment");
+
 	}
 	
 	public function prepare()
@@ -30,7 +40,6 @@ class PaymentController extends PayumController{
         $storage->update($details);
 
         $captureToken = $this->getPayum()->getTokenFactory()->createCaptureToken('authorize_net', $details, 'payment_done');
-
         return redirect()->to($captureToken->getTargetUrl());
 	}
 

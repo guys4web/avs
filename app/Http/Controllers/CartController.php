@@ -49,6 +49,11 @@ class CartController extends Controller
                             'states' => $states]);        
     }
 
+    public function payment(Request $request)
+    {
+        
+    }
+
     public function addItem ($productId){
 
         $cart = Cart::where('user_id',Auth::user()->id)->first();

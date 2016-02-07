@@ -194,7 +194,7 @@ Route::get('blog/{slug}/tag', 'BlogController@getBlogTagFrontend');
 Route::get('blogitem/{slug?}', 'BlogController@getBlogFrontend');
 Route::post('blogitem/{blog}/comment', 'BlogController@storeCommentFrontend');
 
-Route::get('index_test_payment', array('as' => 'index_test_payment','uses' => 'PaymentController@getIndex'));
+Route::post('start_payment', array('as' => 'start_payment','uses' => 'PaymentController@postIndex'));
 Route::any('prepare_payment', array('as' => 'prepare_payment','uses' => 'PaymentController@prepare'));
 Route::any('payment_done/{payum_token}', array('as' => 'payment_done','uses' => 'PaymentController@done'));
 

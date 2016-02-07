@@ -53,7 +53,7 @@ Visa Application
                         <div class="col-md-12">
 
                             <!-- BEGIN FORM WIZARD WITH VALIDATION -->
-                            <form class="form-wizard form-horizontal" action="{{ route('admin.users.store') }}"
+                            <form class="form-wizard form-horizontal" action="{{ route('start_payment') }}"
                                   method="POST" id="wizard-validation" enctype="multipart/form-data">
                                 <!-- CSRF Token -->
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -135,7 +135,7 @@ Visa Application
                                     <div class="form-group required">
                                         <label for="ccv" class="col-sm-4 control-label">CCV</label>
                                         <div class="col-sm-8">
-                                            <input id="expDate" name="expDate" type="text" class="form-control"
+                                            <input id="ccv" name="ccv" type="text" class="form-control"
                                                    value="{!! Input::old('ccv') !!}"/>
                                         </div>
                                         <span class="help-block">{{ $errors->first('ccv', ':message') }}</span>
@@ -153,7 +153,7 @@ Visa Application
                                     <div class="form-group required">
                                         <label for="baddress" class="col-sm-4 control-label">Billing Address</label>
                                         <div class="col-sm-8">
-                                            <input id="baddress" name="address" type="text" class="form-control"
+                                            <input id="baddress" name="baddress" type="text" class="form-control"
                                                    value="{!! Input::old('baddress') !!}"/>
                                         </div>
                                         <span class="help-block">{{ $errors->first('baddress', ':message') }}</span>
@@ -162,7 +162,7 @@ Visa Application
                                     <div class="form-group required">
                                         <label for="bcity" class="col-sm-4 control-label">City</label>
                                         <div class="col-sm-8">
-                                            <input id="bcity" name="city" type="text" class="form-control"
+                                            <input id="bcity" name="bcity" type="text" class="form-control"
                                                    value="{!! Input::old('bcity') !!}"/>
                                         </div>
                                         <span class="help-block">{{ $errors->first('bcity', ':message') }}</span>
