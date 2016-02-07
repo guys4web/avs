@@ -40,6 +40,54 @@ $(function () {
         var fee = $('form input[type=radio]:checked').data('price');
         $('#quantity').text($(this).val());
         $('#order_total').text($(this).val() * fee);
+        $("#passengers").html('');
+        for (var i = 0; i < $(this).val(); i++) {
+            $("#passengers").append("<div class='form-group'>" +
+                        "<label for='gender-"+i+"' class='col-sm-2 control-label'>Gender</label>" +
+                        "<div class='col-sm-2'>" +
+                            "<select class='form-control' title='Select Gender...' name='gender-"+i+"'>" +
+                                "<option value=''>Select</option>" +
+                                "<option value='male'>Male</option>" +
+                                "<option value='female'>Female</option>" +                            
+                            "</select>" +
+                        "</div>" +
+                    "</div>" +
+                    "<div class='form-group required'>" +
+                        "<label for='fname-"+i+"' class='col-sm-2 control-label'>First Name</label>" +
+                        "<div class='col-sm-4'>" +
+                            "<input id='fname-"+i+"' name='fname-"+i+"' type='text' class='form-control'/>" +
+                        "</div>" +
+                    "</div>" +
+                    "<div class='form-group required'>" +
+                        "<label for='lname-"+i+"' class='col-sm-2 control-label'>Last Name</label>" +
+                        "<div class='col-sm-4'>" +
+                            "<input id='lname-"+i+"' name='lname-"+i+"' type='text' class='form-control'/>" +
+                        "</div>" +
+                    "</div>" +
+
+                    "<div class='form-group required'>" +
+                        "<label for='dob-"+i+"' class='col-sm-2 control-label'>Date of Birth</label>" +
+                        "<div class='col-sm-4'>" +
+                            "<input id='dob-"+i+"' name='dob-"+i+"' type='text' class='form-control' " +
+                                   "data-mask='12-31-9999' placeholder='mm-dd-yyyy'/>" +
+                        "</div>" +
+                    "</div>" +
+
+                    "<div class='form-group required'>" +
+                        "<label for='passport-"+i+"' class='col-sm-2 control-label'>Pasport No.</label>" +
+                        "<div class='col-sm-4'>" +
+                            "<input id='passport-"+i+"' name='passport-"+i+"' type='text' class='form-control'/>" +
+                        "</div>" +
+                    "</div>" +
+
+                    "<div class='form-group required'>" +
+                        "<label for='passportExp-"+i+"' class='col-sm-2 control-label'>Pasport Expiration.</label>" +
+                        "<div class='col-sm-4'>" +
+                            "<input id='passportExp-"+i+"' name='passportExp-"+i+"' type='text' class='form-control'/>" +
+                        "</div>" +
+                    "</div>" +
+                    "<hr>");
+        }
     });    
     
 

@@ -54,7 +54,7 @@ Visa Application
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
                                 <!-- first tab -->
-                                <h1>Visa Information</h1>
+                                <h1>Visa</h1>
 
                                 <section>
 
@@ -100,111 +100,89 @@ Visa Application
                                 </section>
 
                                 <!-- second tab -->
-                                <h1>Bio</h1>
+                                <h1>Passenger(s)</h1>
 
                                 <section>
-                                    <div class="form-group required">
-                                        <label for="dob" class="col-sm-2 control-label">Date of Birth</label>
-                                        <div class="col-sm-10">
-                                            <input id="dob" name="dob" type="text" class="form-control"
-                                                   data-mask="9999-99-99" value="{!! Input::old('dob') !!}"
-                                                   placeholder="yyyy-mm-dd"/>
-                                        </div>
-                                        <span class="help-block">{{ $errors->first('dob', ':message') }}</span>
+                                    <div id="passengers">
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="pic" class="col-sm-2 control-label">Profile picture</label>
-                                        <div class="col-sm-10">
-                                            <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;">
-                                                    <img src="http://placehold.it/200x200" alt="profile pic">
-                                                </div>
-                                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 200px;"></div>
-                                                <div>
-                                                    <span class="btn btn-default btn-file">
-                                                        <span class="fileinput-new">Select image</span>
-                                                        <span class="fileinput-exists">Change</span>
-                                                        <input id="pic" name="pic" type="file" class="form-control" />
-                                                    </span>
-                                                    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group required">
-                                        <label for="bio" class="col-sm-2 control-label">Bio <small>(brief intro)</small></label>
-                                        <div class="col-sm-10">
-                                            <textarea name="bio" id="bio" class="form-control" rows="4">{!! Input::old('bio') !!}</textarea>
-                                        </div>
-                                    </div>
-
+                                    
                                 </section>
 
                                 <!-- third tab -->
-                                <h1>Address</h1>
+                                <h1>Payment</h1>
                                 <section>
-
-                                    <div class="form-group {{ $errors->first('gender', 'has-error') }}">
-                                        <label for="email" class="col-sm-2 control-label">Gender</label>
-                                        <div class="col-sm-10">
-                                            <select class="form-control" title="Select Gender..." name="gender">
-                                                <option value="">Select</option>
-                                                <option value="male" @if(Input::old('gender') === 'male') selected="selected" @endif >MALE</option>
-                                                <option value="female" @if(Input::old('gender') === 'female') selected="selected" @endif >FEMALE</option>
-                                                <option value="other" @if(Input::old('gender') === 'other') selected="selected" @endif >OTHER</option>
-
-                                            </select>
+                                    <div class="form-group required">
+                                        <label for="cardnum" class="col-sm-4 control-label">Card Number</label>
+                                        <div class="col-sm-8">
+                                            <input id="cardnum" name="cardnum" type="text" class="form-control"
+                                                   value="{!! Input::old('cardnum') !!}"/>
                                         </div>
-                                        <span class="help-block">{{ $errors->first('gender', ':message') }}</span>
+                                        <span class="help-block">{{ $errors->first('cardnum', ':message') }}</span>
                                     </div>
-
-                                    <div class="form-group {{ $errors->first('email', 'has-error') }}">
-                                        <label for="country" class="col-sm-2 control-label">Country</label>
-                                        <div class="col-sm-10">
-                                            {!! Form::select('country', $countries, '',['class' => 'form-control select2', 'id' => 'countries']) !!}
+                                    <div class="form-group required">
+                                        <label for="expDate" class="col-sm-4 control-label">Expiration Date</label>
+                                        <div class="col-sm-8">
+                                            <input id="expDate" name="expDate" type="text" class="form-control"
+                                                   value="{!! Input::old('expDate') !!}"/>
                                         </div>
-                                        <span class="help-block">{{ $errors->first('country', ':message') }}</span>
+                                        <span class="help-block">{{ $errors->first('expDate', ':message') }}</span>
+                                    </div>
+                                    
+                                    <div class="form-group required">
+                                        <label for="ccv" class="col-sm-4 control-label">CCV</label>
+                                        <div class="col-sm-8">
+                                            <input id="expDate" name="expDate" type="text" class="form-control"
+                                                   value="{!! Input::old('ccv') !!}"/>
+                                        </div>
+                                        <span class="help-block">{{ $errors->first('ccv', ':message') }}</span>
                                     </div>
 
                                     <div class="form-group required">
-                                        <label for="state" class="col-sm-2 control-label">State</label>
-                                        <div class="col-sm-10">
-                                            <input id="state" name="state" type="text" class="form-control"
-                                                   value="{!! Input::old('state') !!}"/>
+                                        <label for="bname" class="col-sm-4 control-label">Name on Card</label>
+                                        <div class="col-sm-8">
+                                            <input id="bname" name="bname" type="text" class="form-control"
+                                                   value="{!! Input::old('bname') !!}"/>
                                         </div>
-                                        <span class="help-block">{{ $errors->first('state', ':message') }}</span>
+                                        <span class="help-block">{{ $errors->first('bname', ':message') }}</span>
                                     </div>
 
                                     <div class="form-group required">
-                                        <label for="city" class="col-sm-2 control-label">City</label>
-                                        <div class="col-sm-10">
-                                            <input id="city" name="city" type="text" class="form-control"
-                                                   value="{!! Input::old('city') !!}"/>
+                                        <label for="baddress" class="col-sm-4 control-label">Billing Address</label>
+                                        <div class="col-sm-8">
+                                            <input id="baddress" name="address" type="text" class="form-control"
+                                                   value="{!! Input::old('baddress') !!}"/>
                                         </div>
-                                        <span class="help-block">{{ $errors->first('city', ':message') }}</span>
+                                        <span class="help-block">{{ $errors->first('baddress', ':message') }}</span>
                                     </div>
 
                                     <div class="form-group required">
-                                        <label for="address" class="col-sm-2 control-label">Address</label>
-                                        <div class="col-sm-10">
-                                            <input id="address" name="address" type="text" class="form-control"
-                                                   value="{!! Input::old('address') !!}"/>
+                                        <label for="bcity" class="col-sm-4 control-label">City</label>
+                                        <div class="col-sm-8">
+                                            <input id="bcity" name="city" type="text" class="form-control"
+                                                   value="{!! Input::old('bcity') !!}"/>
                                         </div>
-                                        <span class="help-block">{{ $errors->first('address', ':message') }}</span>
-                                    </div>
-
+                                        <span class="help-block">{{ $errors->first('bcity', ':message') }}</span>
+                                    </div>                                    
                                     <div class="form-group required">
-                                        <label for="postal" class="col-sm-2 control-label">Postal/zip</label>
-                                        <div class="col-sm-10">
+                                        <label for="bstate" class="col-sm-4 control-label">State</label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control input" name="bstates" id="bstates">
+                                                <option selected disabled>Select State</option>                                            
+                                                @foreach($states as $id => $item)                                                
+                                                    <option value="{{$id}}">{{$item}}</option>
+                                                @endforeach
+                                           </select>
+                                        </div>
+                                        <span class="help-block">{{ $errors->first('bstate', ':message') }}</span>
+                                    </div>
+                                    <div class="form-group required">
+                                        <label for="postal" class="col-sm-4 control-label">Postal/zip</label>
+                                        <div class="col-sm-8">
                                             <input id="postal" name="postal" type="text" class="form-control"
                                                    value="{!! Input::old('postal') !!}"/>
                                         </div>
                                         <span class="help-block">{{ $errors->first('postal', ':message') }}</span>
                                     </div>
-
                                 </section>
 
                             </form>

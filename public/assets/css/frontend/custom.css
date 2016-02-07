@@ -709,6 +709,11 @@ footer .btn-primary.text-white {
     display: none;
 }
 
+
+#passengers hr {
+    border-top: 1px solid #000
+}
+
 @media(max-width: 759px) {
     .navbar-nav .dropdown-menu:before {
         content: none;

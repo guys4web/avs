@@ -34,11 +34,11 @@ class CartController extends Controller
                 
         $service = $services->first();
 
-        $states = [''=>'Select State'] + DB::table('states')
+        $states = DB::table('states')
                 ->orderBy('name', 'asc')
                 ->lists('name', 'id');
 
-        $countries = Country::orderBy('name')->get();
+        $countries = Country::orderBy('name')->lists('name', 'id');
 
         $country = Country::find($request->get('country'));
 
