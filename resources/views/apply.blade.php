@@ -16,6 +16,11 @@ Visa Application
 <link href="{{ asset('assets/vendors/select2/select2.min.css') }}" rel="stylesheet"/>
 <link href="{{ asset('assets/vendors/select2/select2-bootstrap.min.css') }}"/>
 <!--end of page level css-->
+<style type="text/css">
+    .wizard > .content > .body {
+        position:relative;
+    }
+</style>
 @stop
 
 
@@ -104,8 +109,7 @@ Visa Application
 
                                 <section>
                                     <div id="passengers">
-                                    </div>
-                                    
+                                    </div>                                    
                                 </section>
 
                                 <!-- third tab -->
