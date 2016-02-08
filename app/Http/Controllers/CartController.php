@@ -26,10 +26,11 @@ class CartController extends Controller
     public function create(ApplicationRequest $request)
     {
         $services = Service::join('service_visas', 'services.id', '=', 'service_visas.service_id')
+                ->select('services.id', 'services.name', 'min_process', 'max_process')
                 ->orderBy('min_process')
                 ->orderBy('max_process')
                 ->where('country_id', '=', $request->get('country'))
-                ->groupBy('service_id')
+                ->groupBy('services.id')
                 ->get();
 
         $service = $services->first();

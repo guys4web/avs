@@ -8,16 +8,23 @@ use App\Visa;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class VisaController extends Controller
+class VisasController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function adminIndex()
     {
-        //
+        $visas = Visa::join('service_visas', 'service_visas.visa_id', '=', 'visas.id')
+                             ->join('services', 'service_visas.service_id', '=', 'services.id')
+                             ->select('visas.id', 'visas.name', 'services.name as service_name', 'min_process', 'price')
+                             ->orderBy('services.min_process')->get();
+
+        return View('admin.visas', [
+                            'visas' => $visas
+                            ]);      
     }
 
     public function findByService($serviceId)

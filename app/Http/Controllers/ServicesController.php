@@ -8,16 +8,24 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use View;
 use DB;
-class ServiceController extends Controller
+use App\Service;
+
+class ServicesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function adminIndex()
     {
-        //
+        $services = Service::join('countries', 'services.country_id', '=', 'countries.id')
+                             ->select('services.id', 'services.name', 'min_process', 'max_process', 'countries.name as country')
+                             ->orderBy('services.min_process')->get();
+
+        return View('admin.services', [
+                            'services' => $services
+                            ]);      
     }
 
     /**

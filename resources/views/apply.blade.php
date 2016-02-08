@@ -68,8 +68,7 @@ Visa Application
                                         <div class="col-md-5">
                                            <select class="form-control input" name="services" id="services">
                                             <option selected disabled>Please select a service</option>                                            
-                                            @foreach($services as $id => $item)
-                                            {{$item}}
+                                            @foreach($services as $id => $item)                                            
                                                 <option value="{{$id}}">{{$item}}</option>
                                             @endforeach
                                            </select>

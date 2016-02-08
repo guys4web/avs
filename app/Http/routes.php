@@ -135,6 +135,16 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
     Route::post('crop_demo','JoshController@crop_demo');
 
 	/* laravel example routes */
+	# countries
+	Route::get('countries', 'CountriesController@index');
+	Route::get('countries/data', array('as' => 'admin.countries.data', 'uses' => 'CountriesController@index'));
+
+	# services
+	Route::get('services', 'ServicesController@adminIndex');
+
+	# visas
+	Route::get('visas', 'VisasController@adminIndex');
+
 	# datatables
 	Route::get('datatables', 'DataTablesController@index');
 	Route::get('datatables/data', array('as' => 'admin.datatables.data', 'uses' => 'DataTablesController@data'));
@@ -152,14 +162,14 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 	Route::get('{name?}', 'JoshController@showView');
 
 	#Services Routes
-	Route::get('service/new', 'ServiceController@newProduct');	
-	Route::get('services/destroy/{id}', 'ServiceController@destroy');
-	Route::post('services/save', 'ServiceController@add');
+	Route::get('service/new', 'ServicesController@newProduct');	
+	Route::get('services/destroy/{id}', 'ServicesController@destroy');
+	Route::post('services/save', 'ServicesController@add');
 
 	#Visas Routes
-	Route::get('visa/new', 'VisaController@newProduct');	
-	Route::get('visa/destroy/{id}', 'VisaController@destroy');
-	Route::post('visa/save', 'VisaController@add');	
+	Route::get('visa/new', 'VisasController@newProduct');	
+	Route::get('visa/destroy/{id}', 'VisasController@destroy');
+	Route::post('visa/save', 'VisasController@add');	
 
 });
 
@@ -198,7 +208,7 @@ Route::post('start_payment', array('as' => 'start_payment','uses' => 'PaymentCon
 Route::any('prepare_payment', array('as' => 'prepare_payment','uses' => 'PaymentController@prepare'));
 Route::any('payment_done/{payum_token}', array('as' => 'payment_done','uses' => 'PaymentController@done'));
 
-Route::any('visa/service/{id}', 'VisaController@findByService');
+Route::any('visa/service/{id}', 'VisasController@findByService');
 
 Route::get('{name?}', 'JoshController@showFrontEndView');
 # End of frontend views

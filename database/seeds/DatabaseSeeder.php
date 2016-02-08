@@ -24,6 +24,18 @@ class DatabaseSeeder extends Seeder
         $this->call('CountriesSeeder');
         $this->command->info('Seeded the countries!'); 
 
+        //Seed the services
+        $this->call('ServicesSeeder');
+        $this->command->info('Seeded the services!'); 
+
+        //Seed the visas
+        $this->call('VisaSeeder');
+        $this->command->info('Seeded the visas!'); 
+
+        //Seed the service_visas
+        $this->call('ServiceVisaSeeder');
+        $this->command->info('Seeded the service_visas!'); 
+
 
         Model::reguard();
     }
