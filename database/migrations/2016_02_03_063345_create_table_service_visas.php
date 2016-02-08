@@ -16,6 +16,7 @@ class CreateTableServiceVisas extends Migration
             $table->increments('id');
             $table->integer('service_id');
             $table->integer('visa_id');
+            $table->decimal('price', 8, 2);
             $table->timestamps();
         });
     }

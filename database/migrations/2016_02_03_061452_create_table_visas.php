@@ -15,9 +15,8 @@ class CreateTableVisas extends Migration
         Schema::create('visas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description');
-            $table->float('price');
-            $table->integer('service_id');
+            $table->string('description');            
+            $table->string('max_stay');
             $table->timestamps();
         });
     }
