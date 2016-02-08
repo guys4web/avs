@@ -24,14 +24,14 @@ class CartController extends Controller
     }
 
     public function create(ApplicationRequest $request)
-    {        
+    {
         $services = Service::join('service_visas', 'services.id', '=', 'service_visas.service_id')
                 ->orderBy('min_process')
                 ->orderBy('max_process')
                 ->where('country_id', '=', $request->get('country'))
                 ->groupBy('service_id')
                 ->get();
-                
+
         $service = $services->first();
 
         $states = DB::table('states')
@@ -46,15 +46,15 @@ class CartController extends Controller
                             'service' => $service,
                             'country' => $country,
                             'countries' => $countries,
-                            'states' => $states]);        
+                            'states' => $states]);
     }
 
     public function payment(Request $request)
     {
-        
+
     }
 
-    public function addItem ($productId){
+    public function addItem (Request $request,$productId){
 
         $cart = Cart::where('user_id',Auth::user()->id)->first();
 
@@ -62,6 +62,19 @@ class CartController extends Controller
             $cart =  new Cart();
             $cart->user_id=Auth::user()->id;
             $cart->save();
+        }
+
+
+        if($request->has('cardnum')){
+
+            $request->session()->put('cardnum',$request->get('cardnum'));
+            $request->session()->put('expDate',$request->get('expDate'));
+            $request->session()->put('ccv',$request->get('ccv'));
+            $request->session()->put('bname',$request->get('bname'));
+            $request->session()->put('bcity',$request->get('bcity'));
+            $request->session()->put('baddress',$request->get('baddress'));
+            $request->session()->put('bstate',$request->get('bstate'));
+            $request->session()->put('postal',$request->get('postal'));
         }
 
         $cartItem  = new Cartitem();
@@ -98,4 +111,3 @@ class CartController extends Controller
     }
 
 }
-

@@ -15,14 +15,6 @@ class PaymentController extends PayumController{
 
 	public function postIndex(Request $request)
 	{
-		$request->session()->put('cardnum',$request->get('cardnum'));
-        $request->session()->put('expDate',$request->get('expDate'));
-        $request->session()->put('ccv',$request->get('ccv'));
-        $request->session()->put('bname',$request->get('bname'));
-        $request->session()->put('bcity',$request->get('bcity'));
-        $request->session()->put('baddress',$request->get('baddress'));
-        $request->session()->put('bstate',$request->get('bstate'));
-        $request->session()->put('postal',$request->get('postal'));
 
         return redirect()->route("prepare_payment");
 
