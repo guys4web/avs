@@ -11,6 +11,7 @@ $(function () {
         //console.log(this.value, $(this).find("option:selected").text());
         $('#service_type').text($(this).find("option:selected").text());
         order.clear();
+        $('#numPassengers').hide();
         $('.visa_item').remove();
         $.ajax({
             type: "GET",
@@ -40,8 +41,25 @@ $(function () {
         var fee = $('form input[type=radio]:checked').data('price');
         $('#quantity').text($(this).val());
         $('#order_total').text($(this).val() * fee);
-        $("#passengers").html('');
-        for (var i = 0; i < $(this).val(); i++) {
+        updatePassengersForm();
+    });
+
+    updatePassengersForm();
+});
+
+function updateVisa(visa) {
+    // console.log($(visa).data('name'), visa);
+    fee = $(visa).data('price');
+    $('#visa_type').text($(visa).data('name'));
+    $('#visa_fee').text(fee);        
+    $('#quantity').text($('#qty').val());
+    $('#order_total').text($('#qty').val() * fee);
+    $('#numPassengers').show();
+};
+
+function updatePassengersForm() {
+    $("#passengers").html('');
+        for (var i = 0; i < $('#qty').val(); i++) {
             $("#passengers").append("<div class='form-group'>" +
                         "<label for='gender-"+i+"' class='col-sm-2 control-label'>Gender</label>" +
                         "<div class='col-sm-2'>" +
@@ -69,7 +87,7 @@ $(function () {
                         "<label for='dob-"+i+"' class='col-sm-2 control-label'>Date of Birth</label>" +
                         "<div class='col-sm-4'>" +
                             "<input id='dob-"+i+"' name='dob-"+i+"' type='text' class='form-control' " +
-                                   "data-mask='12-31-9999' placeholder='mm-dd-yyyy'/>" +
+                                   " placeholder='mm-dd-yyyy'/>" +
                         "</div>" +
                     "</div>" +
 
@@ -88,17 +106,5 @@ $(function () {
                     "</div>" +
                     "<hr>");
         }
-    });    
-    
-
-});
-
-function updateVisa(visa) {
-        // console.log($(visa).data('name'), visa);
-        fee = $(visa).data('price');
-        $('#visa_type').text($(visa).data('name'));
-        $('#visa_fee').text(fee);        
-        $('#quantity').text($('#qty').val());
-        $('#order_total').text($('#qty').val() * fee);
-    };
+};
 

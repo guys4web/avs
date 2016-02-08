@@ -94,8 +94,8 @@ Visa Application
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="service" class="col-md-6 control-label">How many people are traveling ? *</label>
+                                    <div class="form-group" id="numPassengers">
+                                        <label for="qty" class="col-md-6 control-label">How many people are traveling ? *</label>
                                         <div class="col-sm-1">
                                             <input type="number" id="qty" value="1" min="1">
                                         </div>
@@ -160,7 +160,7 @@ Visa Application
                                     </div>
 
                                     <div class="form-group required">
-                                        <label for="bcity" class="col-sm-4 control-label">City</label>
+                                        <label for="bcity" class="col-sm-4 control-label">Billing City</label>
                                         <div class="col-sm-8">
                                             <input id="bcity" name="bcity" type="text" class="form-control"
                                                    value="{!! Input::old('bcity') !!}"/>
@@ -168,7 +168,7 @@ Visa Application
                                         <span class="help-block">{{ $errors->first('bcity', ':message') }}</span>
                                     </div>                                    
                                     <div class="form-group required">
-                                        <label for="bstate" class="col-sm-4 control-label">State</label>
+                                        <label for="bstate" class="col-sm-4 control-label">Billing State</label>
                                         <div class="col-sm-8">
                                             <select class="form-control input" name="bstates" id="bstates">
                                                 <option selected disabled>Select State</option>                                            
@@ -180,7 +180,7 @@ Visa Application
                                         <span class="help-block">{{ $errors->first('bstate', ':message') }}</span>
                                     </div>
                                     <div class="form-group required">
-                                        <label for="postal" class="col-sm-4 control-label">Postal/zip</label>
+                                        <label for="postal" class="col-sm-4 control-label">Billing Postal/zip</label>
                                         <div class="col-sm-8">
                                             <input id="postal" name="postal" type="text" class="form-control"
                                                    value="{!! Input::old('postal') !!}"/>

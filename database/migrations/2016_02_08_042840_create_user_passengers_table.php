@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DropServiceidFromVisas extends Migration
+class CreateUserPassengersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class DropServiceidFromVisas extends Migration
      */
     public function up()
     {
-        Schema::table('visas', function ($table) {
-            
-            $table->dropColumn('service_id');
-
+        Schema::create('user_passengers', function(Blueprint $table)
+        {
+            $table->increments('passenger_id');
+            $table->integer('user_id');            
         });
     }
 
@@ -26,6 +26,6 @@ class DropServiceidFromVisas extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('user_passengers');
     }
 }
