@@ -23,7 +23,7 @@ class ServiceVisaSeeder extends Seeder
 		DB::table('service_visas')->insert(array(
                 'service_id' => 1,
                 'visa_id' => 2,
-                'price' => 400
+                'price' => 200
             ));
 
 		DB::table('service_visas')->insert(array(

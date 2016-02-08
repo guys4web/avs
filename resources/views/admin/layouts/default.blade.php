@@ -18,7 +18,7 @@
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
     <!-- font Awesome -->
     <link href="{{ asset('assets/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('assets/css/styles/black.css') }}" rel="stylesheet" type="text/css" id="colorscheme"/>
+    <link href="{{ asset('assets/css/styles/white.css') }}" rel="stylesheet" type="text/css" id="colorscheme"/>
     <link href="{{ asset('assets/css/panel.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('assets/css/metisMenu.css') }}" rel="stylesheet" type="text/css"/>
 
@@ -31,7 +31,7 @@
 <body class="skin-josh">
 <header class="header">
     <a href="{{ route('dashboard') }}" class="logo">
-        <img src="{{ asset('assets/img/logo.png') }}" alt="logo">
+        <img src="{{ asset('assets/images/logo.jpg') }}" alt="logo">
     </a>
     <nav class="navbar navbar-static-top" role="navigation">
         <!-- Sidebar toggle button-->
@@ -310,6 +310,27 @@
                             <i class="livicon" data-name="home" data-size="18" data-c="#418BCA" data-hc="#418BCA"
                                data-loop="true"></i>
                             <span class="title">Dashboard</span>
+                        </a>
+                    </li>
+                    <li {!! (Request::is('admin/countries') ? 'class="active"' : '') !!}>
+                        <a href="{{ URL::to('admin/countries') }}">
+                            <i class="livicon" data-name="medal" data-size="18" data-c="#418BCA" data-hc="#418BCA"
+                               data-loop="true"></i>
+                            <span class="title">Countries</span>
+                        </a>
+                    </li>
+                    <li {!! (Request::is('admin/services') ? 'class="active"' : '') !!}>
+                        <a href="{{ URL::to('admin/services') }}">
+                            <i class="livicon" data-name="medal" data-size="18" data-c="#418BCA" data-hc="#418BCA"
+                               data-loop="true"></i>
+                            <span class="title">Services</span>
+                        </a>
+                    </li>
+                    <li {!! (Request::is('admin/visas') ? 'class="active"' : '') !!}>
+                        <a href="{{ URL::to('admin/visas') }}">
+                            <i class="livicon" data-name="medal" data-size="18" data-c="#418BCA" data-hc="#418BCA"
+                               data-loop="true"></i>
+                            <span class="title">Visas</span>
                         </a>
                     </li>
                     <li {!! (Request::is('admin/datatables') || Request::is('admin/dropzone') || Request::is('admin/multiple_upload')? 'class="active"' : '') !!}>
