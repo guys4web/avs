@@ -13,8 +13,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ApplicationRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use DB;
+use App\Passenger;
+
+
 class CartController extends Controller
 {
 
@@ -57,6 +59,18 @@ class CartController extends Controller
 
     public function addItem (Request $request,$productId){
 
+        $qty = $request->get("qty",0);
+        if($qty==0)
+        {
+            return redirect()->route("");
+        }
+
+        for($i=0;$i<$qty;$i++)
+        {
+            $passenger = new Passenger();
+            $passenger->set();
+        }
+
         $cart = Cart::where('user_id',Auth::user()->id)->first();
 
         if(!$cart){
@@ -82,6 +96,9 @@ class CartController extends Controller
         $cartItem->product_id=$productId;
         $cartItem->cart_id= $cart->id;
         $cartItem->save();
+
+
+
 
         return redirect('/cart');
 
