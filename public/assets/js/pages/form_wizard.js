@@ -57,8 +57,8 @@ $(function () {
         onFinished: function (event, currentIndex) {
             var form = $(this);
             var form_url = form.attr("action");
-            var productId = $('#services').val();
-            form_url = form_url.replace("productId",productId);
+            var productId = $('input[name="visa"]').val();
+            form_url = form_url.replace("productId",productId);;
             // Submit form input
             form.attr('action',form_url);
             form.submit();

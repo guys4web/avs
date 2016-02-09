@@ -7,6 +7,7 @@ use App\CartItem;
 use App\Country;
 use App\Service;
 use App\Visa;
+use App\Product;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -60,9 +61,9 @@ class CartController extends Controller
     public function addItem (Request $request,$productId){
 
         #check service
-        $service = Service::find($productId);
-        if(!$service){
-            return redirect("home")->with("errors","Service required");
+        $product = Product::find($productId);
+        if(!$product){
+            return redirect()->route("home")->with("errors","No product select");
         }
 
         $qty = $request->get("qty",0);
@@ -77,7 +78,6 @@ class CartController extends Controller
 
 
         if($request->has('cardnum')){
-
             $request->session()->put('cardnum',$request->get('cardnum'));
             $request->session()->put('expDate',$request->get('expDate'));
             $request->session()->put('ccv',$request->get('ccv'));
