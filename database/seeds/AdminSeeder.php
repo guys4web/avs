@@ -10,7 +10,7 @@ class AdminSeeder extends DatabaseSeeder {
 		DB::table('activations')->truncate();
 
 		$admin = Sentinel::registerAndActivate(array(
-			'email'       => 'admin@admin.com',
+			'email'       => 'mohamahm2001@yahoo.com',
 			'password'    => "admin",
 			'first_name'  => 'John',
 			'last_name'   => 'Doe',

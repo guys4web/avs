@@ -198,6 +198,7 @@ Route::get('/', array('as' => 'home', 'uses' => 'JoshController@showUserIndex'))
 Route::post('apply', array('as' => 'apply', 'uses' => 'CartController@create'));
 Route::any('cart/additem/{productId}', array('middleware'=>'SentinelUser','as' => 'additem', 'uses' => 'CartController@addItem'));
 Route::any('cart/removeitem/{id}', array('middleware'=>'SentinelUser','as' => 'removeitem', 'uses' => 'CartController@removeItem'));
+Route::post('cart/payment', array('middleware'=>'SentinelUser','as' => 'cart_payment', 'uses' => 'CartController@payment'));
 Route::any('cart', array('middleware'=>'SentinelUser','as' => 'cart', 'uses' => 'CartController@showCart'));
 Route::resource('carts', 'CartController');
 
@@ -207,7 +208,7 @@ Route::get('blogitem/{slug?}', 'BlogController@getBlogFrontend');
 Route::post('blogitem/{blog}/comment', 'BlogController@storeCommentFrontend');
 
 Route::post('start_payment', array('as' => 'start_payment','uses' => 'PaymentController@postIndex'));
-Route::any('prepare_payment', array('as' => 'prepare_payment','uses' => 'PaymentController@prepare'));
+Route::any('prepare_payment/{currencycode}/{amt}', array('as' => 'prepare_payment','uses' => 'PaymentController@prepare'));
 Route::any('payment_done/{payum_token}', array('as' => 'payment_done','uses' => 'PaymentController@done'));
 
 Route::any('visa/service/{id}', 'VisasController@findByService');

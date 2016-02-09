@@ -19,16 +19,16 @@ class PaymentController extends PayumController{
         return redirect()->route("prepare_payment");
 
 	}
-	
-	public function prepare()
+
+	public function prepare($currencycode,$amt)
 	{
-		$storage = $this->getPayum()->getStorage('Payum\Core\Model\ArrayObject');
+				$storage = $this->getPayum()->getStorage('Payum\Core\Model\ArrayObject');
 
         $details = $storage->create();
-        $details['paymentrequest_0_currencycode'] = 'EUR';
-        $details['paymentrequest_0_amt'] = 1;
-        $details['currencycode'] = 'EUR';
-        $details['amount'] = 1;
+        $details['paymentrequest_0_currencycode'] = strtoupper($currencycode);
+        $details['paymentrequest_0_amt'] = $amt;
+        $details['currencycode'] = strtoupper($currencycode);
+        $details['amount'] = $amt;
         $storage->update($details);
 
         $captureToken = $this->getPayum()->getTokenFactory()->createCaptureToken('authorize_net', $details, 'payment_done');

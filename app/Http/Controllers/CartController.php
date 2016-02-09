@@ -55,9 +55,28 @@ class CartController extends Controller
                             'states' => $states]);
     }
 
+
+    protected function _getCartTotal($cart)
+    {
+        $items = $cart->cartItems;
+        $total=0;
+        foreach($items as $item){
+            $total+=$item->product->price*$item->quantity;
+        }
+
+        return $total;
+    }
+
+
     public function payment(Request $request)
     {
-
+        $user = Sentinel::getUser();
+        $cart = Cart::where('user_id',$user->id)->first();
+        if(!$cart){
+            return redirect("/");
+        }
+        $total = $this->_getCartTotal($cart);
+        return redirect()->route("prepare_payment",["currencycode"=>"DOLLAR","amt"=>$total]);
     }
 
     public function addItem (Request $request,$productId){
@@ -132,14 +151,9 @@ class CartController extends Controller
         }
 
         $items = $cart->cartItems;
-        $total=0;
-        $prices = [];
-        foreach($items as $item){
-            $prices[$item->id] = $item->product->price*$item->quantity;
-            $total+=$prices[$item->id];
-        }
+        $total=$this->_getCartTotal($cart);
 
-        return view('cart.view',['prices'=>$prices,'items'=>$items,'total'=>$total,'cart'=>$cart]);
+        return view('cart.view',['items'=>$items,'total'=>$total,'cart'=>$cart]);
 
     }
 
