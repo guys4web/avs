@@ -32,35 +32,35 @@ Home
 
 {{-- content --}}
 @section('content')
-    <div class="container">              
+    <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-1"></div>                    
-                    <form class="form-horizontal" action="{{ route('apply') }}" method="post">
+                    <div class="col-md-1"></div>
+                    <form class="form-horizontal" id="form-home" action="{{ route('apply') }}" method="post">
                         <fieldset>
-                            
+
                             <div class="form-group">
-                                            
+
                                 <div class="col-md-3">
                                     {!! Form::select('from_country', $fromCountry, '',['class' => 'form-control select2', 'id' => 'from_country']) !!}
                                 </div>
                                 <div class="col-md-3">
                                     {!! Form::select('country', $countries, '',['class' => 'form-control select2', 'id' => 'country']) !!}
                                 </div>
-                                
+
                                 <div class="col-md-3">
                                     {!! Form::select('state', $states, '',['class' => 'form-control select2', 'id' => 'state']) !!}
-                                </div> 
-                                                                                                                                
-                            <!-- Form actions -->                            
+                                </div>
+
+                            <!-- Form actions -->
                                 <div class="col-md-2">
                                     <button type="submit" class="btn btn-responsive btn-primary">Get Started</button>
-                                </div>                 
+                                </div>
                             </div>
                          </fieldset>
                      </form>
-                </div>      
-            </div>     
+                </div>
+            </div>
         <!-- Service Section Start-->
         <div class="row">
             <!-- Responsive Section Start -->
@@ -130,13 +130,14 @@ Home
         </div>
         <!-- //Services Section End -->
     </div>
-    
+
     <!-- //Container End -->
 @stop
 
 {{-- footer scripts --}}
 @section('footer_scripts')
     <!-- page level js starts-->
+    <script type="text/javascript" src="{{ asset('assets/vendors/wizard/jquery-steps/js/jquery.validate.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/frontend/jquery.circliful.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/vendors/owl-carousel/owl.carousel.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/frontend/carousel.js') }}"></script>

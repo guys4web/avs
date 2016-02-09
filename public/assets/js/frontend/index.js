@@ -1,6 +1,8 @@
 
 // skills sliders
 $(document).ready(function() {
+
+
     $('#myStat3').circliful();
     $('#myStat4').circliful();
     $('#myStat5').circliful();
@@ -11,4 +13,21 @@ $(document).ready(function() {
     }).on('hidden.bs.collapse', function() {
         $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
     });
+
+
+    $("#form-home").validate({
+        errorPlacement: function (error, element) {
+            element.after(error);
+        },
+        rules: {
+            country : {
+              required : true,
+            },
+            state : {
+                required:true,
+            }
+        }
+    });
+
+
 });

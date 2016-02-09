@@ -48,7 +48,7 @@ Cart items
                           ${{ $item->product->price*$item->quantity  }}
                       </td>
                       <td>
-                        <a href=""><i class="fa fa-remove"></i></a>
+                        <a href="{{route('removeitem',['id'=>$item->id])}}"><i class="fa fa-remove"></i></a>
                       </td>
                   </tr>
                 @endforeach
