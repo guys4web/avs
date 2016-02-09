@@ -10,5 +10,10 @@ class Visa extends Model
     {
         return $this->belongsToMany('App\Service', 'service_visas', 'visa_id', 'service_id');
     }
-   
+
+    public function products()
+    {
+        return $this->hasMany("App\Product","visa_id","id");
+    }
+
 }

@@ -196,7 +196,8 @@ Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@post
 #frontend views
 Route::get('/', array('as' => 'home', 'uses' => 'JoshController@showUserIndex'));
 Route::post('apply', array('as' => 'apply', 'uses' => 'CartController@create'));
-Route::any('additem/{productId}', array('as' => 'additem', 'uses' => 'CartController@addItem'));
+Route::any('cart/additem/{productId}', array('middleware'=>'SentinelUser','as' => 'additem', 'uses' => 'CartController@addItem'));
+Route::any('cart', array('middleware'=>'SentinelUser','as' => 'cart', 'uses' => 'CartController@showCart'));
 Route::resource('carts', 'CartController');
 
 Route::get('blog', array('as' => 'blog', 'uses' => 'BlogController@getIndexFrontend'));

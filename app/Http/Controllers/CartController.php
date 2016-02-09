@@ -17,6 +17,8 @@ use App\Http\Controllers\Controller;
 use DB;
 use App\Passenger;
 
+use Sentinel;
+
 
 class CartController extends Controller
 {
@@ -66,13 +68,15 @@ class CartController extends Controller
             return redirect()->route("home")->with("errors","No product select");
         }
 
+
         $qty = $request->get("qty",0);
 
-        $cart = Cart::where('user_id',Auth::user()->id)->first();
+        $user = Sentinel::getUser();
+        $cart = Cart::where('user_id',$user->id)->first();
 
         if(!$cart){
             $cart =  new Cart();
-            $cart->user_id=Auth::user()->id;
+            $cart->user_id=$user->id;
             $cart->save();
         }
 
@@ -91,6 +95,7 @@ class CartController extends Controller
         $cartItem  = new Cartitem();
         $cartItem->product_id=$productId;
         $cartItem->cart_id= $cart->id;
+        $cartItem->quantity = $qty;
         $cartItem->save();
 
         for($i=0;$i<$qty;$i++)
@@ -116,21 +121,26 @@ class CartController extends Controller
     }
 
     public function showCart(){
-        $cart = Cart::where('user_id',Auth::user()->id)->first();
+
+        $user = Sentinel::getUser();
+        $cart = Cart::where('user_id',$user->id)->first();
 
         if(!$cart){
             $cart =  new Cart();
-            $cart->user_id=Auth::user()->id;
+            $cart->user_id=$user->id;
             $cart->save();
         }
 
         $items = $cart->cartItems;
         $total=0;
+        $prices = [];
         foreach($items as $item){
-            $total+=$item->product->price;
+            $prices[$item->id] = $item->product->price*$item->quantity;
+            $total+=$prices[$item->id];
         }
 
-        return view('cart.view',['items'=>$items,'total'=>$total]);
+        return view('cart.view',['prices'=>$prices,'items'=>$items,'total'=>$total,'cart'=>$cart]);
+
     }
 
     public function removeItem($id){
