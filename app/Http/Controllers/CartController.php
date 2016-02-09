@@ -59,17 +59,13 @@ class CartController extends Controller
 
     public function addItem (Request $request,$productId){
 
-        $qty = $request->get("qty",0);
-        if($qty==0)
-        {
-            return redirect()->route("");
+        #check service
+        $service = Service::find($productId);
+        if(!$service){
+            return redirect("home")->with("errors","Service required");
         }
 
-        for($i=0;$i<$qty;$i++)
-        {
-            $passenger = new Passenger();
-            $passenger->set();
-        }
+        $qty = $request->get("qty",0);
 
         $cart = Cart::where('user_id',Auth::user()->id)->first();
 
@@ -97,7 +93,22 @@ class CartController extends Controller
         $cartItem->cart_id= $cart->id;
         $cartItem->save();
 
+        for($i=0;$i<$qty;$i++)
+        {
+            if(!$request->has("passenger_id-".$i))
+            {
+                $passenger = Passenger::create(['first_name'=>$request->get("fname-".$i),
+                                              'last_name'=>$request->get("lname-".$i),
+                                              'gender'=>$request->get("gender-".$i),
+                                              'birthdate'=>$request->get("dob-".$i),
+                                              'passport_num'=>$request->get("passport-".$i),
+                                              'passport_expirate'=>$request->get("passportExp-".$i)
+                            ]);
+            }
 
+            $passenger->cartitems()->attach($cartItem->getId());
+
+        }
 
 
         return redirect('/cart');

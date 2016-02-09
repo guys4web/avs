@@ -27,14 +27,14 @@ Visa Application
 {{-- Page content --}}
 @section('content')
     <section class="content">
-        <div class="row applicationForm">        
+        <div class="row applicationForm">
             <div class="col-md-8">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             <i class="livicon" data-name="notebook" data-size="18" data-c="#fff" data-hc="#fff" data-loop="true"></i>
-                            Visa Application 
-                        </h3>                        
+                            Visa Application
+                        </h3>
                     </div>
                     <div class="panel-body">
 
@@ -53,7 +53,7 @@ Visa Application
                         <div class="col-md-12">
 
                             <!-- BEGIN FORM WIZARD WITH VALIDATION -->
-                            <form class="form-wizard form-horizontal" action="{{ route('start_payment') }}"
+                            <form class="form-wizard form-horizontal" action="{{ route('additem',['productId'=>'productId']) }}"
                                   method="POST" id="wizard-validation" enctype="multipart/form-data">
                                 <!-- CSRF Token -->
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -67,14 +67,14 @@ Visa Application
                                         <label for="service" class="col-md-6 control-label">How soon would you like to go to <b> {{ $country->name}}</b> ? *</label>
                                         <div class="col-md-5">
                                            <select class="form-control input" name="services" id="services">
-                                            <option selected disabled>Please select a service</option>                                            
-                                            @foreach($services as $id => $item)                                            
+                                            <option selected disabled>Please select a service</option>
+                                            @foreach($services as $id => $item)
                                                 <option value="{{$id}}">{{$item}}</option>
                                             @endforeach
                                            </select>
 
                                         </div>
-                                    </div>                                    
+                                    </div>
                                     <div class="portlet box info">
                                         <div class="portlet-title">
                                             <div class="caption">
@@ -87,9 +87,9 @@ Visa Application
                                                     <th></th>
                                                     <th>Visa</th>
                                                     <th>Max Length of Stay</th>
-                                                    <th>Fee</th>       
-                                                    <th></th>                                     
-                                                </tr>                                          
+                                                    <th>Fee</th>
+                                                    <th></th>
+                                                </tr>
                                             </table>
                                         </div>
                                     </div>
@@ -108,7 +108,7 @@ Visa Application
 
                                 <section>
                                     <div id="passengers">
-                                    </div>                                    
+                                    </div>
                                 </section>
 
                                 <!-- third tab -->
@@ -130,7 +130,7 @@ Visa Application
                                         </div>
                                         <span class="help-block">{{ $errors->first('expDate', ':message') }}</span>
                                     </div>
-                                    
+
                                     <div class="form-group required">
                                         <label for="ccv" class="col-sm-4 control-label">CCV</label>
                                         <div class="col-sm-8">
@@ -165,13 +165,13 @@ Visa Application
                                                    value="{!! Input::old('bcity') !!}"/>
                                         </div>
                                         <span class="help-block">{{ $errors->first('bcity', ':message') }}</span>
-                                    </div>                                    
+                                    </div>
                                     <div class="form-group required">
                                         <label for="bstate" class="col-sm-4 control-label">Billing State</label>
                                         <div class="col-sm-8">
                                             <select class="form-control input" name="bstates" id="bstates">
-                                                <option selected disabled>Select State</option>                                            
-                                                @foreach($states as $id => $item)                                                
+                                                <option selected disabled>Select State</option>
+                                                @foreach($states as $id => $item)
                                                     <option value="{{$id}}">{{$item}}</option>
                                                 @endforeach
                                            </select>
@@ -201,7 +201,7 @@ Visa Application
                         <h3 class="panel-title">
                             <i class="livicon" data-name="shopping-cart-in" data-size="18" data-c="#fff" data-hc="#fff" data-loop="true"></i>
                             Order Summary
-                        </h3>                        
+                        </h3>
                     </div>
                     <div class="panel-body">
                         <section>

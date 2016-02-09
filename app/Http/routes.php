@@ -162,14 +162,14 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 	Route::get('{name?}', 'JoshController@showView');
 
 	#Services Routes
-	Route::get('service/new', 'ServicesController@newProduct');	
+	Route::get('service/new', 'ServicesController@newProduct');
 	Route::get('services/destroy/{id}', 'ServicesController@destroy');
 	Route::post('services/save', 'ServicesController@add');
 
 	#Visas Routes
-	Route::get('visa/new', 'VisasController@newProduct');	
+	Route::get('visa/new', 'VisasController@newProduct');
 	Route::get('visa/destroy/{id}', 'VisasController@destroy');
-	Route::post('visa/save', 'VisasController@add');	
+	Route::post('visa/save', 'VisasController@add');
 
 });
 
@@ -196,7 +196,7 @@ Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@post
 #frontend views
 Route::get('/', array('as' => 'home', 'uses' => 'JoshController@showUserIndex'));
 Route::post('apply', array('as' => 'apply', 'uses' => 'CartController@create'));
-
+Route::any('additem/{productId}', array('as' => 'additem', 'uses' => 'CartController@addItem'));
 Route::resource('carts', 'CartController');
 
 Route::get('blog', array('as' => 'blog', 'uses' => 'BlogController@getIndexFrontend'));
@@ -214,5 +214,3 @@ Route::get('{name?}', 'JoshController@showFrontEndView');
 # End of frontend views
 
 #test controller payment
-
-

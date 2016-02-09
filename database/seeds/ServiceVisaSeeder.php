@@ -12,7 +12,7 @@ class ServiceVisaSeeder extends Seeder
     public function run()
     {
         DB::table('service_visas')->truncate(); // Using truncate function so all info will be cleared when re-seeding.
-		
+
 
 		DB::table('service_visas')->insert(array(
                 'service_id' => 1,

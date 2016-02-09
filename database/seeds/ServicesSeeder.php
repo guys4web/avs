@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Seeder;
 
 class ServicesSeeder extends Seeder
@@ -9,13 +8,14 @@ class ServicesSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+  public function run()
 	{
-		DB::table('services')->truncate(); // Using truncate function so all info will be cleared when re-seeding.
-		DB::table('visas')->truncate();
-		DB::table('service_visas')->truncate();
-		// DB::table('carts')->truncate();
-		// DB::table('cart_items')->truncate();
+
+  		DB::table('services')->truncate(); // Using truncate function so all info will be cleared when re-seeding.
+  		DB::table('visas')->truncate();
+  		DB::table('service_visas')->truncate();
+  		// DB::table('carts')->truncate();
+  		// DB::table('cart_items')->truncate();
 
 		DB::table('services')->insert(array(
                 'id' => 1,
@@ -43,4 +43,8 @@ class ServicesSeeder extends Seeder
 
 		$this->command->info('Services Added');
 	}
+
+
+
+
 }
