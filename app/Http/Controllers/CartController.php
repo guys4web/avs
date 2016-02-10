@@ -18,6 +18,7 @@ use App\Passenger;
 use App\Order;
 
 use Sentinel;
+use Mail;
 
 
 class CartController extends Controller
@@ -77,7 +78,7 @@ class CartController extends Controller
 
             if($force==true)
             {
-                return redirect()->route("home")->with("error","occured error");
+                return null;
             }
 
             $cart =  new Cart();
@@ -159,6 +160,9 @@ class CartController extends Controller
 
         $user = Sentinel::getUser();
         $cart = $this->_createCart(true);
+        if($cart==null){
+            return redirect()->route("home");
+        }
 
         $items = $cart->cartItems;
         $total=$this->_getCartTotal($cart);
@@ -179,6 +183,9 @@ class CartController extends Controller
         if($request->session()->has('payment_data'))
         {
             $cart = $this->_createCart(true);
+            if($cart==null){
+                return redirect()->route("home");
+            }
             $order = new Order();
             $order->user_id = Sentinel::getUser()->id;
             $order->cart_id = $cart->id;
@@ -187,7 +194,9 @@ class CartController extends Controller
             $cart->closed = 1 ;
             $cart->save();
 
-            Mail::send('emails.checkout', ['user' => Sentinel::getUser() , 'order'=>$order  ], function ($m) use ($user) {
+            $user = Sentinel::getUser();
+
+            Mail::send('emails.checkout', ['user' => $user , 'order'=>$order  ], function ($m) use ($user) {
                 $m->to("mohamahm2001@yahoo.com","Admin")->subject('New order');
                 $m->to("lalainatest@gmail.com","Test")->subject('New order');
             });
