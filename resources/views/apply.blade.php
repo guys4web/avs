@@ -98,7 +98,7 @@ Visa Application
                                     <div class="form-group" id="numPassengers">
                                         <label for="qty" class="col-md-6 control-label">How many people are traveling ? *</label>
                                         <div class="col-sm-1">
-                                            <input type="number" id="qty" value="1" min="1">
+                                            <input type="number" name="qty" id="qty" value="1" min="1">
                                         </div>
                                     </div>
                                     <p>(*) Mandatory</p>

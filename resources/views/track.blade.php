@@ -13,6 +13,22 @@
                     <td>
                         # {{ $order->id }}
                     </td>
+                    <td>
+                        <ul>
+                            @foreach($order->cart->cartItems as $item)
+                              <li>
+                                  {{  $item->product->service->name }}
+                                  <br/>
+                                  {{ $item->product->visa->name }}
+                              </li>
+                            @endforeach
+                        </ul>
+                    </td>
+                    <td>
+                        @if(empty($order->status))
+                          <label class="label label-danger">Stand by</label>
+                        @endif
+                    </td>
                 </tr>
               @endforeach
           </table>

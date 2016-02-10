@@ -82,6 +82,11 @@ $(function () {
             },
             services : {
                 required:true
+            },
+            qty : {
+              required:true,
+              min:1,
+              number: true
             }
         }
     });

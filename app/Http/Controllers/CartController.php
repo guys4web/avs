@@ -146,7 +146,7 @@ class CartController extends Controller
                             ]);
             }
 
-            $passenger->cartitems()->attach($cartItem->getId());
+            $passenger->cartitem()->attach($cartItem);
 
         }
 
