@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Cart;
@@ -193,6 +192,11 @@ class CartController extends Controller
             $order->save();
             $cart->closed = 1 ;
             $cart->save();
+
+            Mail::send('emails.checkout', ['user' => Sentinel::getUser() , 'order'=>$order  ], function ($m) use ($user) {
+                $m->to("mohamahm2001@yahoo.com","Admin")->subject('New order');
+            });
+
             return view("cart.done",["order"=>$order,"cart"=>$cart]);
         }
 
