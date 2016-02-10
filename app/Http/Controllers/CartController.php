@@ -158,13 +158,7 @@ class CartController extends Controller
     public function showCart(){
 
         $user = Sentinel::getUser();
-        $cart = Cart::where('user_id',$user->id)->first();
-
-        if(!$cart){
-            $cart =  new Cart();
-            $cart->user_id=$user->id;
-            $cart->save();
-        }
+        $cart = $this->_createCart(true);
 
         $items = $cart->cartItems;
         $total=$this->_getCartTotal($cart);
