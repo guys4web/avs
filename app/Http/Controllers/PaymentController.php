@@ -44,9 +44,25 @@ class PaymentController extends PayumController{
 
         $gateway->execute($status = new GetHumanStatus($token));
 
-        return \Response::json(array(
-            'status' => $status->getValue(),
-            'details' => iterator_to_array($status->getFirstModel())
-        ));
+				$status_txt = $status->getValue();
+				$details = iterator_to_array($status->getFirstModel());
+
+				if($status_txt=="captured")
+				{
+						if($details['approved']==true && $details['declined']==false)
+						{
+								$request->session()->put("payment_data",serialize($details));
+								return redirect()->route("cart_done");
+						}
+						else
+						{
+								return redirect()->route("home")->with("error","Payment error");
+						}
+				}
+				else
+				{
+						return redirect()->route("home")->with("error","Payment error");
+				}
+
     }
 }

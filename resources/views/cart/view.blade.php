@@ -21,7 +21,8 @@ Cart items
           </div>
       </div>
       <div class="row">
-        <table class="col-xs-6 col-md-8 table table-stripped">
+        <div class="col-xs-6 col-md-8 ">
+        <table class="table table-stripped">
             <thead>
                 <tr>
                     <th>Service name & visa </th>
@@ -58,12 +59,13 @@ Cart items
                     <td colspan="5">
                         <form method="POST" action="{{ route('cart_payment') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                            <button type="submit">Make payment</button>
+                            <button class="btn btn-primary" type="submit">Make payment</button>
                         </form>
                     </td>
                 </tr>
             </tfoot>
         </table>
+        </div>
         <div class="col-xs-6 col-md-4">
           <section>
               <ul>

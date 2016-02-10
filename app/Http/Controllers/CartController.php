@@ -16,6 +16,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
 use App\Passenger;
+use App\Order;
 
 use Sentinel;
 
@@ -67,11 +68,33 @@ class CartController extends Controller
         return $total;
     }
 
+    protected function _createCart($force=false)
+    {
+
+        $user =  Sentinel::getUser();
+        $cart = Cart::where('user_id',$user->id)->where('closed','!=',1)->orderBy('id', 'DESC')->first();
+
+        if(!$cart){
+
+            if($force==true)
+            {
+                return redirect()->route("home")->with("error","occured error");
+            }
+
+            $cart =  new Cart();
+            $cart->user_id=$user->id;
+            $cart->save();
+        }
+
+
+        return $cart;
+    }
+
 
     public function payment(Request $request)
     {
         $user = Sentinel::getUser();
-        $cart = Cart::where('user_id',$user->id)->first();
+        $cart = $this->_createCart();
         if(!$cart){
             return redirect("/");
         }
@@ -84,20 +107,14 @@ class CartController extends Controller
         #check service
         $product = Product::find($productId);
         if(!$product){
-            return redirect()->route("home")->with("errors","No product select");
+            return redirect()->route("home")->with("error","No product select");
         }
 
 
         $qty = $request->get("qty",0);
 
         $user = Sentinel::getUser();
-        $cart = Cart::where('user_id',$user->id)->first();
-
-        if(!$cart){
-            $cart =  new Cart();
-            $cart->user_id=$user->id;
-            $cart->save();
-        }
+        $cart = $this->_createCart();
 
 
         if($request->has('cardnum')){
@@ -161,6 +178,25 @@ class CartController extends Controller
 
         CartItem::destroy($id);
         return redirect('/cart');
+    }
+
+
+    public function done(Request $request)
+    {
+        if($request->session()->has('payment_data'))
+        {
+            $cart = $this->_createCart(true);
+            $order = new Order();
+            $order->user_id = Sentinel::getUser()->id;
+            $order->cart_id = $cart->id;
+            $order->payment_data = $request->session()->pull("payment_data");
+            $order->save();
+            $cart->closed = 1 ;
+            $cart->save();
+            return view("cart.done",["order"=>$order,"cart"=>$cart]);
+        }
+
+        return redirect()->route("home")->with("error","no valide payment");
     }
 
 }
