@@ -92,5 +92,9 @@ $(function () {
     });
     $("select").select2();
 
+    $('#expDate').datepicker({
+        format:"yyyy-mm" ,
+        minViewMode : "months"
+    });
 
 });

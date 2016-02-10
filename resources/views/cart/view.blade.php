@@ -60,6 +60,7 @@ Cart items
                         <form method="POST" action="{{ route('cart_payment') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                             <button class="btn btn-primary" type="submit">Make payment</button>
+                            <button class="btn btn-default" type="button" id="edit_billing">Edit Billing Informations</button>
                         </form>
                     </td>
                 </tr>
@@ -74,6 +75,7 @@ Cart items
                   <li><b>CCV : </b> <span>  {{ session('ccv','') }} </span></li>
                   <li><b>Name on Card : </b> <span>  {{ session('bname','') }} </span></li>
               </ul>
+
           </section>
         </div>
       </div>

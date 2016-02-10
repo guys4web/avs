@@ -25,9 +25,13 @@
                         </ul>
                     </td>
                     <td>
+                        <a href="#" class="btn btn-default btn-xs">Lists passengers</a>
+                    </td>
+                    <td>
                         @if(empty($order->status))
                           <label class="label label-danger">Stand by</label>
                         @endif
+
                     </td>
                 </tr>
               @endforeach

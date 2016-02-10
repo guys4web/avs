@@ -186,10 +186,19 @@ class CartController extends Controller
             if($cart==null){
                 return redirect()->route("home");
             }
+
+            $billing_data = [
+                "bcity" => $request->session()->pull('bcity',"") ,
+                "baddress" => $request->session()->pull('baddress',"") ,
+                "bstate" => $request->session()->pull('bstate',"") ,
+                "postal" => $request->session()->put('postal',"")
+            ];
+
             $order = new Order();
             $order->user_id = Sentinel::getUser()->id;
             $order->cart_id = $cart->id;
             $order->payment_data = $request->session()->pull("payment_data");
+            $order->billing_data = $billing_data;
             $order->save();
             $cart->closed = 1 ;
             $cart->save();
@@ -197,6 +206,7 @@ class CartController extends Controller
             $user = Sentinel::getUser();
 
             Mail::send('emails.checkout', ['user' => $user , 'order'=>$order  ], function ($m) use ($user) {
+                $m->from('lalainatest@gmail.com', 'Test');
                 $m->to("mohamahm2001@yahoo.com","Admin")->subject('New order');
                 $m->to("lalainatest@gmail.com","Test")->subject('New order');
             });

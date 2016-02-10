@@ -15,6 +15,8 @@ Visa Application
 
 <link href="{{ asset('assets/vendors/select2/select2.min.css') }}" rel="stylesheet"/>
 <link href="{{ asset('assets/vendors/select2/select2-bootstrap.min.css') }}"/>
+
+<link rel="stylesheet"  href="{{ asset('assets/css/bootstrap-datepicker3.css') }}"/>
 <!--end of page level css-->
 <style type="text/css">
     .wizard > .content > .body {
@@ -128,7 +130,7 @@ Visa Application
                                         <label for="expDate" class="col-sm-4 control-label">Expiration Date</label>
                                         <div class="col-sm-8">
                                             <input id="expDate" name="expDate" type="text" class="form-control"
-                                                   value="{!! Input::old('expDate') !!}"/>
+                                                   value="{!! Input::old('expDate') !!}" readonly="readonly"/>
                                         </div>
                                         <span class="help-block">{{ $errors->first('expDate', ':message') }}</span>
                                     </div>
@@ -227,6 +229,7 @@ Visa Application
 {{-- page level scripts --}}
 @section('footer_scripts')
     <script type="text/javascript" src="{{ asset('assets/vendors/wizard/jquery-steps/js/jquery.validate.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/bootstrap-datepicker.js') }}"  ></script>
     <script src="{{ asset('assets/vendors/wizard/jquery-steps/js/jquery.steps.js') }}"></script>
     <script src="{{ asset('assets/vendors/jasny-bootstrap/js/jasny-bootstrap.js') }}"></script>
     <script src="{{ asset('assets/vendors/select2/select2.min.js') }}"></script>
