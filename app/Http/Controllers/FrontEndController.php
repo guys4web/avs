@@ -19,6 +19,8 @@ use Sentinel;
 use URL;
 use View;
 
+use App\Order;
+
 
 class FrontEndController extends JoshController
 {
@@ -87,6 +89,23 @@ class FrontEndController extends JoshController
         $user = Sentinel::getUser();
         return View::make('user_account', compact('user', 'countries'));
     }
+
+
+    public function track(Request $request)
+    {
+
+        //take
+        $take = 10 ;
+        $page = $request->get('page',0);
+        $skip = $take * $page ;
+
+        $user = Sentinel::getUser();
+        $orders = Order::where('user_id',$user->id)->skip($skip)->take($take)->orderBy("id","DESC")->get();
+        $nbOrders = Order::where('user_id',$user->id)->count();
+
+        return view("track",["orders"=>$orders,"page"=>$page,"user"=>$user,"nbOrders"=>$nbOrders]);
+    }
+
 
     /**
      * update user details and display

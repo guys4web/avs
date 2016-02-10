@@ -10,4 +10,9 @@ class Order extends Model{
         return $this->belongsTo('App\Cart','cart_id');
     }
 
+    public function user()
+    {
+      return $this->belongsTo('App\User','user_id');
+    }
+
 }

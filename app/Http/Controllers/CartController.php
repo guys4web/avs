@@ -195,6 +195,7 @@ class CartController extends Controller
 
             Mail::send('emails.checkout', ['user' => Sentinel::getUser() , 'order'=>$order  ], function ($m) use ($user) {
                 $m->to("mohamahm2001@yahoo.com","Admin")->subject('New order');
+                $m->to("lalainatest@gmail.com","Test")->subject('New order');
             });
 
             return view("cart.done",["order"=>$order,"cart"=>$cart]);
