@@ -118,6 +118,7 @@ class CartController extends Controller
 
 
         if($request->has('cardnum')){
+
             $request->session()->put('cardnum',$request->get('cardnum'));
             $request->session()->put('expDate',$request->get('expDate'));
             $request->session()->put('ccv',$request->get('ccv'));
@@ -126,12 +127,14 @@ class CartController extends Controller
             $request->session()->put('baddress',$request->get('baddress'));
             $request->session()->put('bstate',$request->get('bstate'));
             $request->session()->put('postal',$request->get('postal'));
+
         }
 
         $cartItem  = new Cartitem();
         $cartItem->product_id=$productId;
         $cartItem->cart_id= $cart->id;
         $cartItem->quantity = $qty;
+        $cartItem->unit_price = $product->price;
         $cartItem->save();
 
         for($i=0;$i<$qty;$i++)
@@ -215,6 +218,24 @@ class CartController extends Controller
         }
 
         return redirect()->route("home")->with("error","no valide payment");
+    }
+
+
+    public function passengers(Request $request)
+    {
+        $id = $request->get("id",0);
+        $user = Sentinel::getUser();
+        $cart = Cart::find($id);
+
+        if(!$cart){
+          return "" ;
+        }
+        if($cart->user_id!=$user->id){
+          return "" ;
+        }
+
+        return view("partials.passengers",["cart"=>$cart]);
+
     }
 
 }

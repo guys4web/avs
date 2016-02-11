@@ -204,6 +204,7 @@ Route::any('cart/additem/{productId}', array('middleware'=>'SentinelUser','as' =
 Route::any('cart/removeitem/{id}', array('middleware'=>'SentinelUser','as' => 'removeitem', 'uses' => 'CartController@removeItem'));
 Route::post('cart/payment', array('middleware'=>'SentinelUser','as' => 'cart_payment', 'uses' => 'CartController@payment'));
 Route::any('cart/done', array('middleware'=>'SentinelUser','as' => 'cart_done', 'uses' => 'CartController@done'));
+Route::get("cart/passengers",array('middleware'=>'SentinelUser',"as"=>"cart_passengers","uses"=>"CartController@passengers"));
 Route::any('cart', array('middleware'=>'SentinelUser','as' => 'cart', 'uses' => 'CartController@showCart'));
 Route::resource('carts', 'CartController');
 
