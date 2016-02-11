@@ -605,7 +605,7 @@ footer .btn-primary.text-white {
 #owl-demo .item img {
     display: block;
     width: 100%;
-    height: auto;
+    height: 400px;
 }
 
 #owl-demo {

@@ -9,8 +9,8 @@ use Payum\LaravelPackage\Controller\PayumController;
 
 class PaymentController extends PayumController{
 
-	private $auth_login_id = "9q8HNPjd8M" ;
-	private $key = "7p75R2a3ZZ4Yx5zg" ;
+	private $auth_login_id = "62MD5gVpe6" ;
+	private $key = "5Csva6BJ52f2UN4U" ;
 	private $secret= "Simon" ;
 
 	public function postIndex(Request $request)

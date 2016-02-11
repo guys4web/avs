@@ -19,7 +19,7 @@ Contact
         <div class="container">
             <ol class="breadcrumb">
                 <li>
-                    <a href="{{ route('home') }}"> <i class="livicon icon3 icon4" data-name="home" data-size="18" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i>Dashboard
+                    <a href="{{ route('home') }}"> <i class="livicon icon3 icon4" data-name="home" data-size="18" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i>Home
                     </a>
                 </li>
                 <li class="hidden-xs">
@@ -81,12 +81,10 @@ Contact
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading">Address:</h4>
-                        <div class="danger">Jyostna</div>
+                        <div class="danger">American Visa Services</div>
                         <address>
-                            Pediatric Surgeons of Alaska
-                            <br> 3340 Providence Drive #565
-                            <br> Anchorage, AK(Alaska)
-                            <br> North Las Vegas, NV
+                            411 Hackensak Ave, Suite 201
+                            <br/>Hackensack, NJ 07601
                         </address>
                     </div>
                 </div>
@@ -99,8 +97,8 @@ Contact
                         </a>
                     </div>
                     <div class="media-body padbtm2">
-                        <h4 class="media-heading">Telephone:</h4> (703) 717-4200
-                        <br /> Fax:400 423 1456
+                        <h4 class="media-heading">Telephone:</h4> (201) 880-7150
+                        <br /> Fax: (201) 880-6147
                     </div>
                 </div>
             </div>

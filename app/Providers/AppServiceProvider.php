@@ -40,9 +40,9 @@ class AppServiceProvider extends ServiceProvider
                 ])
                 ->addGateway('authorize_net', [
                     'factory' => 'authorize_net_aim',
-                    'login_id' => '9q8HNPjd8M',
-                    'transaction_key' => '7p75R2a3ZZ4Yx5zg',
-                    'sandbox' => true
+                    'login_id' => '62MD5gVpe6',
+                    'transaction_key' => '5Csva6BJ52f2UN4U',
+                    'sandbox' => false
                 ])
             ;
         });

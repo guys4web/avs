@@ -1,13 +1,13 @@
 $(document).ready(function() {
     var map = new GMaps({
         el: '#map',
-        lat: 38.8921021,
-        lng: -77.0260358
+        lat: 40.9090389,
+        lng: -74.0359491
     });
     map.addMarker({
-        lat: 38.8921021,
-        lng: -77.0260358,
-        title: 'Washington'
+        lat: 40.9090389,
+        lng: -74.0359491,
+        title: 'Hackensack'
     });
 });
 

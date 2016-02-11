@@ -21,7 +21,7 @@
     <div class="row">
         <div class="box animation flipInX">
             <div class="box1">
-            <img src="{{ asset('assets/images/josh-new.png') }}" alt="logo" class="img-responsive mar">
+            <img src="{{ asset('assets/images/logo.jpg') }}" alt="logo" class="img-responsive mar">
             <h3 class="text-primary">Login</h3>
                 <!-- Notifications -->
                 @include('notifications')

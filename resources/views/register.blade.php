@@ -20,7 +20,7 @@
     <!--Content Section Start -->
     <div class="row">
         <div class="box animation flipInX">
-            <img src="{{ asset('assets/images/josh-new.png') }}" alt="logo" class="img-responsive mar">
+            <img src="{{ asset('assets/images/logo.jpg') }}" alt="logo" class="img-responsive mar">
             <h3 class="text-primary">Register</h3>
             <!-- Notifications -->
             @include('notifications')
