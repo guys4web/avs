@@ -173,7 +173,7 @@ Visa Application
                                     <div class="form-group required">
                                         <label for="bstate" class="col-sm-4 control-label">Billing State</label>
                                         <div class="col-sm-8">
-                                            <select class="form-control input" name="bstates" id="bstates">
+                                            <select class="form-control" name="bstates" id="bstates" style="width: 100%">
                                                 <option selected disabled>Select State</option>
                                                 @foreach($states as $id => $item)
                                                     <option value="{{$id}}">{{$item}}</option>
@@ -232,7 +232,7 @@ Visa Application
     <script type="text/javascript" src="{{ asset('assets/js/bootstrap-datepicker.js') }}"  ></script>
     <script src="{{ asset('assets/vendors/wizard/jquery-steps/js/jquery.steps.js') }}"></script>
     <script src="{{ asset('assets/vendors/jasny-bootstrap/js/jasny-bootstrap.js') }}"></script>
-    <script src="{{ asset('assets/vendors/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/select2/select2.full.js') }}"></script>
     <script src="{{ asset('assets/js/pages/form_wizard.js') }}"></script>
     <script src="{{ asset('assets/js/pages/cart.js') }}"></script>
 @stop

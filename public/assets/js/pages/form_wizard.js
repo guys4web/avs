@@ -72,12 +72,27 @@ $(function () {
                 equalTo: "#password"
             } ,
             cardnum : {
-                required:true
+                required:true ,
+                number: true
             },
             ccv : {
-                required:true
+                required:true ,
+                number: true ,
+                rangelength: [3, 3]
             },
             bname : {
+              required : true
+            },
+            baddress : {
+              required : true
+            },
+            bcity : {
+              required:true
+            },
+            bstates : {
+              required:true
+            },
+            postal :{
               required : true
             },
             services : {
@@ -87,10 +102,13 @@ $(function () {
               required:true,
               min:1,
               number: true
+            },
+            visa :{
+                required:true
             }
         }
     });
-    $("select").select2();
+    $("select").select2({width: 'resolve'});
 
     $('#expDate').datepicker({
         format:"yyyy-mm" ,

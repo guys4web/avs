@@ -22,7 +22,7 @@ $(function () {
 
                     $('#service_visas').append("<tr class='visa_item'>" +
                         "<td><input type='radio' value='"+item.id+"' name='visa' onClick='updateVisa(this)' class='visas' data-name='" + item.name +
-                        "' data-id='" + item.id + "' data-price='" + item.price + "'></td>" + 
+                        "' data-id='" + item.id + "' data-price='" + item.price + "'></td>" +
                         "<td>" + item.name + "</td>" +
                         "<td>" + (item.max_stay || '30 days') + "</td>" +
                         "<td>" + item.price + "</td>" +
@@ -58,11 +58,11 @@ function updateVisa(visa) {
 };
 
 function updatePassengersForm() {
-    $("#passengers").html('');
+    		$("#passengers").html('');
         for (var i = 0; i < $('#qty').val(); i++) {
             $("#passengers").append("<div class='form-group'>" +
                         "<label for='gender-"+i+"' class='col-sm-2 control-label'>Gender</label>" +
-                        "<div class='col-sm-2'>" +
+                        "<div class='col-sm-4'>" +
                             "<select class='form-control' title='Select Gender...' name='gender-"+i+"'>" +
                                 "<option value=''>Select</option>" +
                                 "<option value='male'>Male</option>" +
@@ -73,20 +73,20 @@ function updatePassengersForm() {
                     "<div class='form-group required'>" +
                         "<label for='fname-"+i+"' class='col-sm-2 control-label'>First Name</label>" +
                         "<div class='col-sm-4'>" +
-                            "<input id='fname-"+i+"' name='fname-"+i+"' type='text' class='form-control'/>" +
+                            "<input data-rule-required='true' id='fname-"+i+"' name='fname-"+i+"' type='text' class='form-control'/>" +
                         "</div>" +
                     "</div>" +
                     "<div class='form-group required'>" +
                         "<label for='lname-"+i+"' class='col-sm-2 control-label'>Last Name</label>" +
                         "<div class='col-sm-4'>" +
-                            "<input id='lname-"+i+"' name='lname-"+i+"' type='text' class='form-control'/>" +
+                            "<input data-rule-required='true' id='lname-"+i+"' name='lname-"+i+"' type='text' class='form-control'/>" +
                         "</div>" +
                     "</div>" +
 
                     "<div class='form-group required'>" +
                         "<label for='dob-"+i+"' class='col-sm-2 control-label'>Date of Birth</label>" +
                         "<div class='col-sm-4'>" +
-                            "<input id='dob-"+i+"' name='dob-"+i+"' type='text' class='form-control' " +
+                            "<input readonly='readonly' data-provide='datepicker' data-date-format='mm-dd-yyyy' data-rule-required='true' id='dob-"+i+"' name='dob-"+i+"' type='text' class='form-control' " +
                                    " placeholder='mm-dd-yyyy'/>" +
                         "</div>" +
                     "</div>" +
@@ -94,14 +94,14 @@ function updatePassengersForm() {
                     "<div class='form-group required'>" +
                         "<label for='passport-"+i+"' class='col-sm-2 control-label'>Pasport No.</label>" +
                         "<div class='col-sm-4'>" +
-                            "<input id='passport-"+i+"' name='passport-"+i+"' type='text' class='form-control'/>" +
+                            "<input data-rule-number='true' data-rule-required='true' id='passport-"+i+"' name='passport-"+i+"' type='text' class='form-control'/>" +
                         "</div>" +
                     "</div>" +
 
                     "<div class='form-group required'>" +
                         "<label for='passportExp-"+i+"' class='col-sm-2 control-label'>Pasport Expiration.</label>" +
                         "<div class='col-sm-4'>" +
-                            "<input id='passportExp-"+i+"' name='passportExp-"+i+"' type='text' class='form-control'/>" +
+                            "<input readonly='readonly' data-provide='datepicker' data-date-format='mm-dd-yyyy' data-rule-required='true' id='passportExp-"+i+"' name='passportExp-"+i+"' type='text' class='form-control'/>" +
                         "</div>" +
                     "</div>" +
                     "<hr>");

@@ -60,7 +60,8 @@ Cart items
                         <form method="POST" action="{{ route('cart_payment') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                             <button class="btn btn-primary" type="submit">Make payment</button>
-                            <button class="btn btn-default" type="button" id="edit_billing">Edit Billing Informations</button>
+                            <button class="btn btn-default" type="button" id="edit-billing">Edit Billing Informations</button>
+                            <button data-id="{{ $cart->id }}" class="btn btn-default" type="button" id="view-passengers">List of passengers</button>
                         </form>
                     </td>
                 </tr>
@@ -80,9 +81,36 @@ Cart items
         </div>
       </div>
     </div>
+    <!-- modal passenger -->
+    <div id="modal-passengers" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">List of passengers<span id="modal-order-num"></span></h4>
+              </div>
+              <div class="modal-body">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- end modal -->
 @stop
 
 {{-- page level scripts --}}
 @section('footer_scripts')
     <script type="text/javascript" src="{{ asset('assets/vendors/wizard/jquery-steps/js/jquery.validate.min.js') }}"></script>
+    <script>
+        $(document).on('click','#view-passengers',function(){
+          var cart_id = $(this).attr("data-id");
+          $.get("{{route('cart_passengers')}}",{id:cart_id},function(html){
+              $('#modal-passengers .modal-body').html(html);
+              $('#modal-passengers').modal("show");
+          },"html");
+        });
+    </script>
 @stop
