@@ -154,6 +154,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
 
         Payum\LaravelPackage\PayumServiceProvider::class,
+
+        App\Providers\JoshCrudGeneratorServiceProvider::class,
     ],
 
     /*
