@@ -105,10 +105,15 @@ $(function () {
             },
             visa :{
                 required:true
-            }
+            },
+        },
+        messages: {
+          ccv : {
+              rangelength:  "Must be 3 characteres"
+          },
         }
     });
-    $("select").select2({width: 'resolve'});
+    $("select[data-select2!='false']").select2();
 
     $('#expDate').datepicker({
         format:"yyyy-mm" ,

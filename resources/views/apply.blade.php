@@ -128,9 +128,29 @@ Visa Application
                                     </div>
                                     <div class="form-group required">
                                         <label for="expDate" class="col-sm-4 control-label">Expiration Date</label>
-                                        <div class="col-sm-8">
-                                            <input id="expDate" name="expDate" type="text" class="form-control"
-                                                   value="{!! Input::old('expDate') !!}" readonly="readonly"/>
+                                        <div class="col-sm-4">
+                                          <select data-select2="false" data-rule-required='true' class="form-control" id="expDate-year" name="expDate-year">
+                                              @for($i=0;$i<=7;$i++)
+                                                <option value="{{ ((int)date('Y')) + $i }}">{{ ((int)date('Y')) + $i }}</option>
+                                              @endfor
+                                          </select>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select data-select2="false" data-rule-required='true' class="form-control" id="expDate-month" name="expDate-month">
+                                                <option value="">Month</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
                                         </div>
                                         <span class="help-block">{{ $errors->first('expDate', ':message') }}</span>
                                     </div>
@@ -233,6 +253,7 @@ Visa Application
     <script src="{{ asset('assets/vendors/wizard/jquery-steps/js/jquery.steps.js') }}"></script>
     <script src="{{ asset('assets/vendors/jasny-bootstrap/js/jasny-bootstrap.js') }}"></script>
     <script src="{{ asset('assets/vendors/select2/select2.full.js') }}"></script>
+    <script src="{{ asset('assets/js/validation.js') }}"></script>
     <script src="{{ asset('assets/js/pages/form_wizard.js') }}"></script>
     <script src="{{ asset('assets/js/pages/cart.js') }}"></script>
 @stop
