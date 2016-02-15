@@ -92,17 +92,17 @@ function updatePassengersForm() {
                     "</div>" +
 
                     "<div class='form-group required'>" +
-                        "<label for='dob-"+i+"' class='col-sm-2 control-label'>Date of Birth</label>" +							
+                        "<label for='dob-"+i+"' class='col-sm-2 control-label'>Date of Birth</label>" +
                         "<div class='col-sm-3'>" +
 														"<select class='form-control' data-rule-required='true' id='month-dob-"+i+"' name='month-dob-"+i+"'>"+month+"</select>"+
 											  "</div>"+
 												"<div class='col-sm-3'>" +
 														"<select class='form-control' data-rule-number='true'  data-rule-required='true' id='day-dob-"+i+"' name='day-dob-"+i+"'>"+day+"</select>"+
 												"</div>"+
-                                                "<div class='col-sm-3'>" +
-                                                    "<input data-rule-rangelength='4,4' data-rule-number='true' data-rule-required='true' id='year-dob-"+i+"' name='year-dob-"+i+"' type='text' class='form-control' " +
+                        "<div class='col-sm-3'>" +
+                          	"<input data-rule-rangelength='4,4' data-rule-number='true' data-rule-required='true' id='year-dob-"+i+"' name='year-dob-"+i+"' type='text' class='form-control' " +
                                                            " placeholder='yyyy'/>" +
-                                                "</div>" +
+                        "</div>" +
                     "</div>" +
 
                     "<div class='form-group required'>" +
@@ -113,14 +113,14 @@ function updatePassengersForm() {
                     "</div>" +
 
                     "<div class='form-group required'>" +
-                        "<label for='passportExp-"+i+"' class='col-sm-2 control-label'>Pasport Expiration.</label>" +												
+                        "<label for='passportExp-"+i+"' class='col-sm-2 control-label'>Pasport Expiration.</label>" +
                         "<div class='col-sm-3'>" +
 														"<select class='form-control' data-rule-required='true' id='month-passportExp-"+i+"' name='month-passportExp-"+i+"'>"+month+"</select>"+
 											  "</div>"+
 												"<div class='col-sm-3'>" +
 														"<select class='form-control' data-rule-number='true'  data-rule-required='true' id='day-passportExp-"+i+"' name='day-passportExp-"+i+"'>"+day+"</select>"+
 												"</div>"+
-                                                "<div class='col-sm-3'>" +
+                       "<div class='col-sm-3'>" +
                             "<input data-rule-rangelength='4,4' data-rule-number='true' data-rule-required='true' id='passportExp-dob-"+i+"' name='year-passportExp-"+i+"' type='text' class='form-control' " +
                                    " placeholder='yyyy'/>" +
                         "</div>" +

@@ -119,8 +119,9 @@ class CartController extends Controller
 
         if($request->has('cardnum')){
 
+            $expDate = $request->get('expDate-year').'-'.$request->get('expDate-month');
             $request->session()->put('cardnum',$request->get('cardnum'));
-            $request->session()->put('expDate',$request->get('expDate'));
+            $request->session()->put('expDate',$expDate);
             $request->session()->put('ccv',$request->get('ccv'));
             $request->session()->put('bname',$request->get('bname'));
             $request->session()->put('bcity',$request->get('bcity'));
@@ -141,17 +142,19 @@ class CartController extends Controller
         {
             if(!$request->has("passenger_id-".$i))
             {
+
+                $birthdate = $request->get("year-dob-".$i).'-'.$request->get("month-dob-".$i).'-'.$request->get("day-dob-".$i);
+                $passport_expirate = $request->get("year-passportExp-".$i).'-'.$request->get("month-passportExp-".$i).'-'.$request->get("day-passportExp-".$i);
                 $passenger = Passenger::create(['first_name'=>$request->get("fname-".$i),
                                               'last_name'=>$request->get("lname-".$i),
                                               'gender'=>$request->get("gender-".$i),
-                                              'birthdate'=>$request->get("dob-".$i),
+                                              'birthdate'=>$birthdate,
                                               'passport_num'=>$request->get("passport-".$i),
-                                              'passport_expirate'=>$request->get("passportExp-".$i)
+                                              'passport_expirate'=>$passport_expirate
                             ]);
             }
 
             $passenger->cartitem()->attach($cartItem);
-
         }
 
 

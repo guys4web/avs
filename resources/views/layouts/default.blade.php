@@ -99,9 +99,9 @@
                     @else
                         <li {{ (Request::is('my-account') ? 'class=active' : '') }}><a href="{{ URL::to('my-account') }}">My Account</a>
                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ URL::to('logout') }}">Logout</a></li>   
+                                <li><a href="{{ URL::to('logout') }}">Logout</a></li>
                             </ul>
-                        </li>                        
+                        </li>
                     @endif
                 </ul>
             </div>
@@ -109,7 +109,7 @@
         <!-- Nav bar End -->
     </header>
     <!-- //Header End -->
-    
+
     <!-- slider / breadcrumbs section -->
     @yield('top')
 
@@ -159,7 +159,7 @@
                     <li><i class="livicon icon4 icon3" data-name="skype" data-size="18" data-loop="true" data-c="#ccc" data-hc="#ccc"></i> Skype:
                         <span class="text-success">americanvisaservices</span>
                     </li>
-                </ul>                
+                </ul>
             </div>
             <!-- //Contact Section End -->
             <!-- Recent post Section Start -->
@@ -181,7 +181,7 @@
         <div class="container">
         <p>
             Copyright &copy;  American Visa Services, 2015
-            <a href="#" data-toggle="modal" data-target="#privacyModal">Privacy Policy</a> | 
+            <a href="#" data-toggle="modal" data-target="#privacyModal">Privacy Policy</a> |
             <a href="javascript:;" data-toggle="modal" data-target="#termsModal">Terms of Service</a>
         </p>
         <!-- Terms Modal -->
@@ -264,8 +264,8 @@
                   411 Hackensack Ave. <br>
                   Hackensack, NJ 07601<br>
                   </p>
-                  info@americanvisaservices.net 
-                
+                  info@americanvisaservices.net
+
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -277,6 +277,28 @@
     <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Return to top" data-toggle="tooltip" data-placement="left">
         <i class="livicon" data-name="plane-up" data-size="18" data-loop="true" data-c="#fff" data-hc="white"></i>
     </a>
+
+    <!-- /.modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalError" >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Error</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+                {{  \Session::get('error') }}
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal -->
+
     <!--global js starts-->
     <script src="{{ asset('assets/js/jquery-1.11.1.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}" type="text/javascript"></script>
@@ -288,6 +310,14 @@
     <!-- begin page level js -->
     @yield('footer_scripts')
     <!-- end page level js -->
+    @if(\Session::get('error','')!='')
+      <script>
+          $(document).ready(function({
+              $('#modalError').modal("show");
+          });
+      </script>
+    @endif
+
 </body>
 
 </html>

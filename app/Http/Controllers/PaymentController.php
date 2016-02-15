@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Payum\Core\Request\GetHumanStatus;
 use Payum\LaravelPackage\Controller\PayumController;
 
+use Sentinel;
+
 class PaymentController extends PayumController{
 
 	private $auth_login_id = "62MD5gVpe6" ;
@@ -23,12 +25,13 @@ class PaymentController extends PayumController{
 	public function prepare($currencycode,$amt)
 	{
 				$storage = $this->getPayum()->getStorage('Payum\Core\Model\ArrayObject');
-
+				$user = Sentinel::getUser();
         $details = $storage->create();
-        $details['paymentrequest_0_currencycode'] = strtoupper($currencycode);
-        $details['paymentrequest_0_amt'] = $amt;
+        //$details['paymentrequest_0_currencycode'] = strtoupper($currencycode);
+        //$details['paymentrequest_0_amt'] = $amt;
         $details['currencycode'] = strtoupper($currencycode);
         $details['amount'] = $amt;
+				//$details['billTo'] = ['firstName'=>$user->first_name,'lastName'=>$user->last_name , 'city'=> \Session::get('bcity') , 'address' => \Session::get("baddress") , 'state' => \Session::get('bstate') , 'zip' => \Session::get('postal') ]  ;
         $storage->update($details);
 
         $captureToken = $this->getPayum()->getTokenFactory()->createCaptureToken('authorize_net', $details, 'payment_done');
@@ -56,11 +59,15 @@ class PaymentController extends PayumController{
 						}
 						else
 						{
+								print_r($details);
+								die;
 								return redirect()->route("home")->with("error","Payment error");
 						}
 				}
 				else
 				{
+						print_r($details);
+						die;
 						return redirect()->route("home")->with("error","Payment error");
 				}
 
