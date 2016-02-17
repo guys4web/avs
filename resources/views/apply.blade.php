@@ -66,8 +66,8 @@ Visa Application
                                 <section>
 
                                     <div class="form-group">
-                                        <label for="service" class="col-md-6 control-label">How soon would you like to go to <b> {{ $country->name}}</b> ? *</label>
-                                        <div class="col-md-5">
+                                        <label for="service" class="col-md-6 control-label">How soon would you like to go ? *</label>
+                                        <div class="col-md-6">
                                            <select class="form-control input" name="services" id="services">
                                             <option selected disabled>Please select a service</option>
                                             @if($services)
@@ -196,10 +196,10 @@ Visa Application
                                     <div class="form-group required">
                                         <label for="bstate" class="col-sm-4 control-label">Billing State</label>
                                         <div class="col-sm-8">
-                                            <select class="form-control" name="bstates" id="bstates" style="width: 100%">
+                                            <select class="form-control" name="bstate" id="bstate" style="width: 100%">
                                                 <option selected disabled>Select State</option>
                                                 @foreach($states as $id => $item)
-                                                    <option value="{{$id}}">{{$item}}</option>
+                                                    <option value="{{$item}}">{{$item}}</option>
                                                 @endforeach
                                            </select>
                                         </div>
