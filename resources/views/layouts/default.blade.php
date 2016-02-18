@@ -97,8 +97,10 @@
                         <li><a href="{{ URL::to('register') }}">Register</a>
                         </li>
                     @else
-                        <li {{ (Request::is('my-account') ? 'class=active' : '') }}><a href="{{ URL::to('my-account') }}">My Account</a>
+                        <li class="dropdown-toggle {{ (Request::is('my-account') ? 'active' : '') }}">
+                            <a href="#" data-toggle="dropdown">My Account</a>
                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ URL::to('my-account') }}">Profile</a>
                                 <li><a href="{{ URL::to('logout') }}">Logout</a></li>
                             </ul>
                         </li>
