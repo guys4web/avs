@@ -18,4 +18,9 @@ class Requirement extends Model  {
      */
     protected $fillable = ['title', 'description'];
 
+    public function visas()
+    {
+        return $this->belongsToMany('App\Visa', 'visa_requirements', 'requirement_id', 'visa_id');
+    }
+
 }
