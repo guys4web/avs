@@ -18,4 +18,24 @@
             </a>
         </li>
     </ul>
+</li><li {!! (Request::is('admin/agents') || Request::is('admin/agents/create') || Request::is('admin/agents/*') ? 'class="active"' : '') !!}>
+    <a href="#">
+        <i class="livicon" data-name="list-ul" data-size="18" data-c="#418BCA" data-hc="#418BCA" data-loop="true"></i>
+        <span class="title">Agents</span>
+        <span class="fa arrow"></span>
+    </a>
+    <ul class="sub-menu">
+        <li {!! (Request::is('admin/agents') ? 'class="active" id="active"' : '') !!}>
+            <a href="{{ URL::to('admin/agents') }}">
+                <i class="fa fa-angle-double-right"></i>
+                Agents
+            </a>
+        </li>
+        <li {!! (Request::is('admin/agents/create') ? 'class="active" id="active"' : '') !!}>
+            <a href="{{ URL::to('admin/agents/create') }}">
+                <i class="fa fa-angle-double-right"></i>
+                Add New Agent
+            </a>
+        </li>
+    </ul>
 </li>

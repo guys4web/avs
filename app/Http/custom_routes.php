@@ -4,4 +4,7 @@
 Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), function () {Route::resource('requirements', 'RequirementsController');
 	Route::get('requirements/{id}/delete', array('as' => 'admin.requirements.delete', 'uses' => 'RequirementsController@getDelete'));
 	Route::get('requirements/{id}/confirm-delete', array('as' => 'admin.requirements.confirm-delete', 'uses' => 'RequirementsController@getModalDelete'));
+});Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), function () {Route::resource('agents', 'AgentsController');
+	Route::get('agents/{id}/delete', array('as' => 'admin.agents.delete', 'uses' => 'AgentsController@getDelete'));
+	Route::get('agents/{id}/confirm-delete', array('as' => 'admin.agents.confirm-delete', 'uses' => 'AgentsController@getModalDelete'));
 });
