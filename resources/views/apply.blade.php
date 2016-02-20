@@ -97,12 +97,32 @@ Visa Application
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="form-group" id="numPassengers">
-                                        <label for="qty" class="col-md-6 control-label">How many people are traveling ? *</label>
-                                        <div class="col-sm-1">
-                                            <input type="number" name="qty" id="qty" value="1" min="1">
+                                    <div id="numPassengers">
+                                        <div class="form-group" >
+                                            <label for="qty" class="col-md-6 control-label">How many people are traveling ? *</label>
+                                            <div class="col-sm-1">
+                                                <input type="number" name="qty" id="qty" value="1" min="1">
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="form-group">
+                                            <label for="qty" class="col-md-6 control-label">Group:</label>
+                                            <div class="col-sm-2">
+                                                <input type="text" name="group" id="group" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group" >
+                                            <label for="carrier" class="col-md-6 control-label">Shipping Carrier:</label>
+                                            <div class="col-sm-1">
+                                                <input type="text" name="carrier" id="carrier">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" >
+                                            <label for="track_num" class="col-md-6 control-label">Tracking Number:</label>
+                                            <div class="col-sm-1">
+                                                <input type="text" name="track_num" id="track_num">
+                                            </div>
+                                        </div>
+                                    </div>  
                                     <p>(*) Mandatory</p>
 
                                 </section>
