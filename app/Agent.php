@@ -18,4 +18,14 @@ class Agent extends Model  {
      */
     protected $fillable = ['first_name', 'last_name', 'mobile_phone', 'office_phone', 'email'];
 
+    public function service()
+    {
+        return $this->belongsToMany('App\Service', 'service_visas', 'visa_id', 'service_id');
+    }
+
+    public function passenger()
+    {
+        return $this->belongsToMany("App\Passenger","agent_id","id");
+    }
+
 }

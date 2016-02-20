@@ -1,158 +1,113 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests\GroupRequest;
-use Input;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+use App\Group;
+use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Lang;
-use Redirect;
-use Sentinel;
-use View;
 
-class GroupsController extends JoshController
-{
-    /**
-     * Show a list of all the groups.
-     *
-     * @return View
-     */
-    public function index()
-    {
-        // Grab all the groups
-        $roles = Sentinel::getRoleRepository()->all();
+class GroupsController extends Controller {
 
-        // Show the page
-        return View('admin/groups/index', compact('roles'));
-    }
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index()
+	{
+		$groups = Group::latest()->get();
+		return view('admin.groups.index', compact('groups'));
+	}
 
-    /**
-     * Group create.
-     *
-     * @return View
-     */
-    public function create()
-    {
-        // Show the page
-        return View('admin/groups/create');
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+		return view('admin.groups.create');
+	}
 
-    /**
-     * Group create form processing.
-     *
-     * @return Redirect
-     */
-    public function store(GroupRequest $request)
-    {
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function store(Request $request)
+	{
+		group::create($request->all());
+		return redirect('admin/groups')->with('success', Lang::get('message.success.create'));
+	}
 
-        if ($role = Sentinel::getRoleRepository()->createModel()->create([
-            'name' => Input::get('name'),
-            'slug' => str_slug(Input::get('name'))
-        ])
-        ) {
-            // Redirect to the new group page
-            return Redirect::route('groups')->with('success', Lang::get('groups/message.success.create'));
-        }
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		$group = Group::findOrFail($id);
+		return view('admin.groups.show', compact('group'));
+	}
 
-        // Redirect to the group create page
-        return Redirect::route('create/group')->withInput()->with('error', Lang::get('groups/message.error.create'));
-    }
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+		$group = Group::findOrFail($id);
+		return view('admin.groups.edit', compact('group'));
+	}
 
-    /**
-     * Group update.
-     *
-     * @param  int $id
-     * @return View
-     */
-    public function edit($id = null)
-    {
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update($id, Request $request)
+	{
+		//$this->validate($request, ['name' => 'required']); // Uncomment and modify if needed.
+		$group = Group::findOrFail($id);
+		$group->update($request->all());
+		return redirect('admin/groups')->with('success', Lang::get('message.success.update'));
+	}
 
+	/**
+    	 * Delete confirmation for the given Group.
+    	 *
+    	 * @param  int      $id
+    	 * @return View
+    	 */
+    	public function getModalDelete($id = null)
+    	{
+            $error = '';
+            $model = '';
+            $confirm_route =  route('admin.groups.delete',['id'=>$id]);
+            return View('admin/layouts/modal_confirmation', compact('error','model', 'confirm_route'));
 
-        try {
-            // Get the group information
-            $role = Sentinel::findRoleById($id);
+    	}
 
-        } catch (GroupNotFoundException $e) {
-            // Redirect to the groups management page
-            return Redirect::route('groups')->with('error', Lang::get('groups/message.group_not_found', compact('id')));
-        }
-
-        // Show the page
-        return View('admin/groups/edit', compact('role'));
-    }
-
-    /**
-     * Group update form processing page.
-     *
-     * @param  int $id
-     * @return Redirect
-     */
-    public function update($id = null, GroupRequest $request)
-    {
-        try {
-            // Get the group information
-            $group = Sentinel::findRoleById($id);
-        } catch (GroupNotFoundException $e) {
-            // Redirect to the groups management page
-            return Rediret::route('groups')->with('error', Lang::get('groups/message.group_not_found', compact('id')));
-        }
-
-        // Update the group data
-        $group->name = Input::get('name');
-
-        // Was the group updated?
-        if ($group->save()) {
-            // Redirect to the group page
-            return Redirect::route('groups')->with('success', Lang::get('groups/message.success.update'));
-        } else {
-            // Redirect to the group page
-            return Redirect::route('update/group', $id)->with('error', Lang::get('groups/message.error.update'));
-        }
-
-    }
-
-    /**
-     * Delete confirmation for the given group.
-     *
-     * @param  int $id
-     * @return View
-     */
-    public function getModalDelete($id = null)
-    {
-        $model = 'groups';
-        $confirm_route = $error = null;
-        try {
-            // Get group information
-            $role = Sentinel::findRoleById($id);
-
-
-            $confirm_route = route('delete/group', ['id' => $role->id]);
-            return View('admin/layouts/modal_confirmation', compact('error', 'model', 'confirm_route'));
-        } catch (GroupNotFoundException $e) {
-
-            $error = Lang::get('admin/groups/message.group_not_found', compact('id'));
-            return View('admin/layouts/modal_confirmation', compact('error', 'model', 'confirm_route'));
-        }
-    }
-
-    /**
-     * Delete the given group.
-     *
-     * @param  int $id
-     * @return Redirect
-     */
-    public function destroy($id = null)
-    {
-        try {
-            // Get group information
-            $role = Sentinel::findRoleById($id);
-
-            // Delete the group
-            $role->delete();
+    	/**
+    	 * Delete the given Group.
+    	 *
+    	 * @param  int      $id
+    	 * @return Redirect
+    	 */
+    	public function getDelete($id = null)
+    	{
+    		$group = Group::destroy($id);
 
             // Redirect to the group management page
-            return Redirect::route('groups')->with('success', Lang::get('groups/message.success.delete'));
-        } catch (GroupNotFoundException $e) {
-            // Redirect to the group management page
-            return Redirect::route('groups')->with('error', Lang::get('groups/message.group_not_found', compact('id')));
-        }
-    }
+            return redirect('admin/groups')->with('success', Lang::get('message.success.delete'));
+
+    	}
 
 }

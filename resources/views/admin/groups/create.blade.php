@@ -1,19 +1,23 @@
-@extends('admin/layouts/default') {{-- Web site Title --}} @section('title') @lang('admin/groups/title.create') :: @parent @stop {{-- Content --}} @section('content')
+@extends('admin/layouts/default')
+
+{{-- Page title --}}
+@section('title')
+Create New group
+@parent
+@stop
+
+{{-- Page content --}}
+@section('content')
 <section class="content-header">
-    <h1>
-        @lang('groups/title.create')
-    </h1>
+    <h1>Groups</h1>
     <ol class="breadcrumb">
         <li>
-            <a href="{{ route('dashboard') }}">
-                <i class="livicon" data-name="home" data-size="14" data-color="#000"></i>
-                @lang('general.dashboard')
+            <a href="{{ route('dashboard') }}"> <i class="livicon" data-name="home" data-size="16" data-color="#000"></i>
+                Dashboard
             </a>
         </li>
-        <li>@lang('groups/title.groups')</li>
-        <li class="active">
-            @lang('groups/title.create')
-        </li>
+        <li>groups</li>
+        <li class="active">Create New group</li>
     </ol>
 </section>
 
@@ -23,53 +27,51 @@
         <div class="col-lg-12">
             <div class="panel panel-primary ">
                 <div class="panel-heading">
-                    <h4 class="panel-title"> <i class="livicon" data-name="users-add" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
-                        @lang('groups/title.create')
+                    <h4 class="panel-title"> <i class="livicon" data-name="plus-alt" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
+                        Create a new group
                     </h4>
                 </div>
                 <div class="panel-body">
-                    {!! $errors->first('slug', '<span class="help-block">Another role with same slug exists, please choose another name</span> ') !!}
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                     @if ($errors->any())
+                        <ul class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     @endif
-                    <form class="form-horizontal" role="form" method="post" action="">
-                        <!-- CSRF Token -->
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                        <div class="form-group {{ $errors->
-                            first('name', 'has-error') }}">
-                            <label for="title" class="col-sm-2 control-label">
-                                @lang('groups/form.name')
-                            </label>
-                            <div class="col-sm-5">
-                                <input type="text" id="name" name="name" class="form-control" placeholder="Group Name" value="{!! Input::old('name') !!}">
-                            </div>
-                            <div class="col-sm-4">
-                                {!! $errors->first('name', '<span class="help-block">:message</span> ') !!}
-                            </div>
-                        </div>
+                    {!! Form::open(['url' => 'admin/groups']) !!}
 
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-4">
-                                <a class="btn btn-danger" href="{{ route('groups') }}">
-                                    @lang('button.cancel')
-                                </a>
-                                <button type="submit" class="btn btn-success">
-                                    @lang('button.save')
-                                </button>
-                            </div>
+                    <div class="form-group">
+                        {!! Form::label('name', 'Name: ') !!}
+                        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                    </div>
+
+					<div class="form-group">
+                        {!! Form::label('travel_date', 'Travel Date: ') !!}
+                        {!! Form::text('travel_date', null, ['class' => 'form-control']) !!}
+                    </div>
+
+					
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-4">
+                            <a class="btn btn-danger" href="{{ route('admin.groups.index') }}">
+                                @lang('button.cancel')
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                @lang('button.save')
+                            </button>
                         </div>
-                    </form>
+                    </div>
+
+                    {!! Form::close() !!}
+
                 </div>
             </div>
         </div>
     </div>
     <!-- row-->
 </section>
+
 @stop

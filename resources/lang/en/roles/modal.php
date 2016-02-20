@@ -6,8 +6,8 @@
 */
 return array(
 
-    'title'         => 'Delete Group',
-    'body'			=> 'Are you sure to delete this group? This operation is irreversible.',
+    'title'         => 'Delete Role',
+    'body'			=> 'Are you sure to delete this role? This operation is irreversible.',
     'cancel'		=> 'Cancel',
     'confirm'		=> 'Delete',
 

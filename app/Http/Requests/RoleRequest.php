@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class GroupRequest extends Request
+class RoleRequest extends Request
 {
 
     /**

@@ -5,11 +5,11 @@
 */
 return array(
 
-    'name'			=> 'Group Name',
+    'name'			=> 'Role Name',
     'slug'          => 'Slug',
     'general' 		=> 'General',
     'permissions'	=> 'Permissions',
     'users_exists' => 'users exists',
-    'delete_group' => 'delete group',
+    'delete_role' => 'delete role',
 
 );

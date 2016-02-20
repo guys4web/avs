@@ -85,16 +85,16 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 
 	Route::get('deleted_users',array('as' => 'deleted_users','before' => 'Sentinel', 'uses' => 'UsersController@getDeletedUsers'));
 
-	# Group Management
-    Route::group(array('prefix' => 'groups'), function () {
-        Route::get('/', array('as' => 'groups', 'uses' => 'GroupsController@index'));
-        Route::get('create', array('as' => 'create/group', 'uses' => 'GroupsController@create'));
-        Route::post('create', 'GroupsController@store');
-        Route::get('{groupId}/edit', array('as' => 'update/group', 'uses' => 'GroupsController@edit'));
-        Route::post('{groupId}/edit', 'GroupsController@update');
-        Route::get('{groupId}/delete', array('as' => 'delete/group', 'uses' => 'GroupsController@destroy'));
-        Route::get('{groupId}/confirm-delete', array('as' => 'confirm-delete/group', 'uses' => 'GroupsController@getModalDelete'));
-        Route::get('{groupId}/restore', array('as' => 'restore/group', 'uses' => 'GroupsController@getRestore'));
+	# Role Management
+    Route::group(array('prefix' => 'roles'), function () {
+        Route::get('/', array('as' => 'roles', 'uses' => 'RolesController@index'));
+        Route::get('create', array('as' => 'create/role', 'uses' => 'RolesController@create'));
+        Route::post('create', 'RolesController@store');
+        Route::get('{roleId}/edit', array('as' => 'update/role', 'uses' => 'RolesController@edit'));
+        Route::post('{roleId}/edit', 'RolesController@update');
+        Route::get('{roleId}/delete', array('as' => 'delete/role', 'uses' => 'RolesController@destroy'));
+        Route::get('{roleId}/confirm-delete', array('as' => 'confirm-delete/role', 'uses' => 'RolesController@getModalDelete'));
+        Route::get('{roleId}/restore', array('as' => 'restore/role', 'uses' => 'RolesController@getRestore'));
     });
     /*routes for blog*/
 	Route::group(array('prefix' => 'blog'), function () {
