@@ -3,12 +3,12 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Group;
+use App\Agent;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Lang;
 
-class GroupsController extends Controller {
+class AgentsController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -17,8 +17,8 @@ class GroupsController extends Controller {
 	 */
 	public function index()
 	{
-		$groups = Group::latest()->get();
-		return view('admin.groups.index', compact('groups'));
+		$agents = Agent::latest()->get();
+		return view('admin.agents.index', compact('agents'));
 	}
 
 	/**
@@ -28,7 +28,7 @@ class GroupsController extends Controller {
 	 */
 	public function create()
 	{
-		return view('admin.groups.create');
+		return view('admin.agents.create');
 	}
 
 	/**
@@ -38,8 +38,8 @@ class GroupsController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		group::create($request->all());
-		return redirect('admin/groups')->with('success', Lang::get('message.success.create'));
+		agent::create($request->all());
+		return redirect('admin/agents')->with('success', Lang::get('message.success.create'));
 	}
 
 	/**
@@ -50,8 +50,8 @@ class GroupsController extends Controller {
 	 */
 	public function show($id)
 	{
-		$group = Group::findOrFail($id);
-		return view('admin.groups.show', compact('group'));
+		$agent = Agent::findOrFail($id);
+		return view('admin.agents.show', compact('agent'));
 	}
 
 	/**
@@ -62,8 +62,8 @@ class GroupsController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$group = Group::findOrFail($id);
-		return view('admin.groups.edit', compact('group'));
+		$agent = Agent::findOrFail($id);
+		return view('admin.agents.edit', compact('agent'));
 	}
 
 	/**
@@ -75,13 +75,13 @@ class GroupsController extends Controller {
 	public function update($id, Request $request)
 	{
 		//$this->validate($request, ['name' => 'required']); // Uncomment and modify if needed.
-		$group = Group::findOrFail($id);
-		$group->update($request->all());
-		return redirect('admin/groups')->with('success', Lang::get('message.success.update'));
+		$agent = Agent::findOrFail($id);
+		$agent->update($request->all());
+		return redirect('admin/agents')->with('success', Lang::get('message.success.update'));
 	}
 
 	/**
-    	 * Delete confirmation for the given Group.
+    	 * Delete confirmation for the given Agent.
     	 *
     	 * @param  int      $id
     	 * @return View
@@ -90,23 +90,23 @@ class GroupsController extends Controller {
     	{
             $error = '';
             $model = '';
-            $confirm_route =  route('admin.groups.delete',['id'=>$id]);
+            $confirm_route =  route('admin.agents.delete',['id'=>$id]);
             return View('admin/layouts/modal_confirmation', compact('error','model', 'confirm_route'));
 
     	}
 
     	/**
-    	 * Delete the given Group.
+    	 * Delete the given Agent.
     	 *
     	 * @param  int      $id
     	 * @return Redirect
     	 */
     	public function getDelete($id = null)
     	{
-    		$group = Group::destroy($id);
+    		$agent = Agent::destroy($id);
 
             // Redirect to the group management page
-            return redirect('admin/groups')->with('success', Lang::get('message.success.delete'));
+            return redirect('admin/agents')->with('success', Lang::get('message.success.delete'));
 
     	}
 

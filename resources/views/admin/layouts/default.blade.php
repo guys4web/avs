@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>
         @section('title')
-            | Josh Admin Template
+            | AVS Admin
         @show
     </title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -791,24 +791,24 @@
                             </li>
                         </ul>
                     </li>
-                    <li {!! (Request::is('admin/groups') || Request::is('admin/groups/create') || Request::is('admin/groups/*') ? 'class="active"' : '') !!}>
+                    <li {!! (Request::is('admin/roles') || Request::is('admin/roles/create') || Request::is('admin/roles/*') ? 'class="active"' : '') !!}>
                         <a href="#">
                             <i class="livicon" data-name="users" data-size="18" data-c="#418BCA" data-hc="#418BCA"
                                data-loop="true"></i>
-                            <span class="title">Groups</span>
+                            <span class="title">Roles</span>
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="sub-menu">
-                            <li {!! (Request::is('admin/groups') ? 'class="active" id="active"' : '') !!}>
-                                <a href="{{ URL::to('admin/groups') }}">
+                            <li {!! (Request::is('admin/roles') ? 'class="active" id="active"' : '') !!}>
+                                <a href="{{ URL::to('admin/roles') }}">
                                     <i class="fa fa-angle-double-right"></i>
-                                    Groups
+                                    Roles
                                 </a>
                             </li>
-                            <li {!! (Request::is('admin/groups/create') ? 'class="active" id="active"' : '') !!}>
-                                <a href="{{ URL::to('admin/groups/create') }}">
+                            <li {!! (Request::is('admin/roles/create') ? 'class="active" id="active"' : '') !!}>
+                                <a href="{{ URL::to('admin/roles/create') }}">
                                     <i class="fa fa-angle-double-right"></i>
-                                    Add New Group
+                                    Add New Role
                                 </a>
                             </li>
                         </ul>

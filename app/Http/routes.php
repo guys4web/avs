@@ -85,16 +85,16 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 
 	Route::get('deleted_users',array('as' => 'deleted_users','before' => 'Sentinel', 'uses' => 'UsersController@getDeletedUsers'));
 
-	# Group Management
-    Route::group(array('prefix' => 'groups'), function () {
-        Route::get('/', array('as' => 'groups', 'uses' => 'GroupsController@index'));
-        Route::get('create', array('as' => 'create/group', 'uses' => 'GroupsController@create'));
-        Route::post('create', 'GroupsController@store');
-        Route::get('{groupId}/edit', array('as' => 'update/group', 'uses' => 'GroupsController@edit'));
-        Route::post('{groupId}/edit', 'GroupsController@update');
-        Route::get('{groupId}/delete', array('as' => 'delete/group', 'uses' => 'GroupsController@destroy'));
-        Route::get('{groupId}/confirm-delete', array('as' => 'confirm-delete/group', 'uses' => 'GroupsController@getModalDelete'));
-        Route::get('{groupId}/restore', array('as' => 'restore/group', 'uses' => 'GroupsController@getRestore'));
+	# Role Management
+    Route::group(array('prefix' => 'roles'), function () {
+        Route::get('/', array('as' => 'roles', 'uses' => 'RolesController@index'));
+        Route::get('create', array('as' => 'create/role', 'uses' => 'RolesController@create'));
+        Route::post('create', 'RolesController@store');
+        Route::get('{roleId}/edit', array('as' => 'update/role', 'uses' => 'RolesController@edit'));
+        Route::post('{roleId}/edit', 'RolesController@update');
+        Route::get('{roleId}/delete', array('as' => 'delete/role', 'uses' => 'RolesController@destroy'));
+        Route::get('{roleId}/confirm-delete', array('as' => 'confirm-delete/role', 'uses' => 'RolesController@getModalDelete'));
+        Route::get('{roleId}/restore', array('as' => 'restore/role', 'uses' => 'RolesController@getRestore'));
     });
     /*routes for blog*/
 	Route::group(array('prefix' => 'blog'), function () {
@@ -199,13 +199,15 @@ Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@post
 
 #frontend views
 Route::get('/', array('as' => 'home', 'uses' => 'JoshController@showUserIndex'));
-Route::post('apply', array('as' => 'apply', 'uses' => 'CartController@create'));
+// Route::post('apply', array('as' => 'apply', 'uses' => 'CartController@create'));
+Route::any('apply', array('middleware'=>'SentinelUser','as' => 'apply', 'uses' => 'CartController@create'));
 Route::any('cart/additem/{productId}', array('middleware'=>'SentinelUser','as' => 'additem', 'uses' => 'CartController@addItem'));
 Route::any('cart/removeitem/{id}', array('middleware'=>'SentinelUser','as' => 'removeitem', 'uses' => 'CartController@removeItem'));
 Route::post('cart/payment', array('middleware'=>'SentinelUser','as' => 'cart_payment', 'uses' => 'CartController@payment'));
 Route::any('cart/done', array('middleware'=>'SentinelUser','as' => 'cart_done', 'uses' => 'CartController@done'));
 Route::get("cart/passengers",array('middleware'=>'SentinelUser',"as"=>"cart_passengers","uses"=>"CartController@passengers"));
 Route::any('cart', array('middleware'=>'SentinelUser','as' => 'cart', 'uses' => 'CartController@showCart'));
+
 Route::resource('carts', 'CartController');
 
 Route::get('blog', array('as' => 'blog', 'uses' => 'BlogController@getIndexFrontend'));

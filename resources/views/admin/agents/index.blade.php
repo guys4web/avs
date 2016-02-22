@@ -2,22 +2,22 @@
 
 {{-- Page title --}}
 @section('title')
-groups List
+agents List
 @parent
 @stop
 
 {{-- Page content --}}
 @section('content')
 <section class="content-header">
-    <h1>Groups</h1>
+    <h1>Agents</h1>
     <ol class="breadcrumb">
         <li>
             <a href="{{ route('dashboard') }}"> <i class="livicon" data-name="home" data-size="16" data-color="#000"></i>
                 Dashboard
             </a>
         </li>
-        <li>groups</li>
-        <li class="active">groups</li>
+        <li>agents</li>
+        <li class="active">agents</li>
     </ol>
 </section>
 
@@ -26,10 +26,10 @@ groups List
         <div class="panel panel-primary ">
             <div class="panel-heading clearfix">
                 <h4 class="panel-title pull-left"> <i class="livicon" data-name="list-ul" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
-                    Groups List
+                    Agents List
                 </h4>
                 <div class="pull-right">
-                    <a href="{{ route('admin.groups.create') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> @lang('button.create')</a>
+                    <a href="{{ route('admin.agents.create') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> @lang('button.create')</a>
                 </div>
             </div>
             <br />
@@ -38,26 +38,32 @@ groups List
                     <thead>
                         <tr class="filters">
                             <th>ID</th>
-                            <th>Name</th>
-							<th>Travel_date</th>
+                            <th>First_name</th>
+							<th>Last_name</th>
+							<th>Mobile_phone</th>
+							<th>Office_phone</th>
+							<th>Email</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($groups as $group)
+                    @foreach ($agents as $agent)
                         <tr>
-                            <td>{!! $group->id !!}</td>
-                            <td>{!! $group->name !!}</td>
-							<td>{!! $group->travel_date !!}</td>
+                            <td>{!! $agent->id !!}</td>
+                            <td>{!! $agent->first_name !!}</td>
+							<td>{!! $agent->last_name !!}</td>
+							<td>{!! $agent->mobile_phone !!}</td>
+							<td>{!! $agent->office_phone !!}</td>
+							<td>{!! $agent->email !!}</td>
                             <td>
-                                <a href="{{ route('admin.groups.show', $group->id) }}">
-                                    <i class="livicon" data-name="info" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="view group"></i>
+                                <a href="{{ route('admin.agents.show', $agent->id) }}">
+                                    <i class="livicon" data-name="info" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="view agent"></i>
                                 </a>
-                                <a href="{{ route('admin.groups.edit', $group->id) }}">
-                                    <i class="livicon" data-name="edit" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="edit group"></i>
+                                <a href="{{ route('admin.agents.edit', $agent->id) }}">
+                                    <i class="livicon" data-name="edit" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="edit agent"></i>
                                 </a>
-                                <a href="{{ route('admin.groups.confirm-delete', $group->id) }}" data-toggle="modal" data-target="#delete_confirm">
-                                    <i class="livicon" data-name="remove-alt" data-size="18" data-loop="true" data-c="#f56954" data-hc="#f56954" title="delete group"></i>
+                                <a href="{{ route('admin.agents.confirm-delete', $agent->id) }}" data-toggle="modal" data-target="#delete_confirm">
+                                    <i class="livicon" data-name="remove-alt" data-size="18" data-loop="true" data-c="#f56954" data-hc="#f56954" title="delete agent"></i>
                                 </a>
                             </td>
                         </tr>

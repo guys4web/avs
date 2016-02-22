@@ -12,4 +12,9 @@ class Passenger extends Model{
          return $this->belongsToMany('App\Cartitem','cartitems_passengers', 'passenger_id', 'cartitems_id');
      }
 
+     public function group()
+     {
+         return $this->belongsToMany('App\Group','group_passengers', 'passenger_id', 'group_id');
+     }
+
 }

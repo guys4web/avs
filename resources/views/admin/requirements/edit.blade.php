@@ -2,22 +2,22 @@
 
 {{-- Page title --}}
 @section('title')
-Create New group
+Edit a requirement
 @parent
 @stop
 
-{{-- Page content --}}
+
 @section('content')
 <section class="content-header">
-    <h1>Groups</h1>
+    <h1>Requirements</h1>
     <ol class="breadcrumb">
         <li>
             <a href="{{ route('dashboard') }}"> <i class="livicon" data-name="home" data-size="16" data-color="#000"></i>
                 Dashboard
             </a>
         </li>
-        <li>groups</li>
-        <li class="active">Create New group</li>
+        <li>requirements</li>
+        <li class="active">Create New requirement</li>
     </ol>
 </section>
 
@@ -27,8 +27,8 @@ Create New group
         <div class="col-lg-12">
             <div class="panel panel-primary ">
                 <div class="panel-heading">
-                    <h4 class="panel-title"> <i class="livicon" data-name="plus-alt" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
-                        Create a new group
+                    <h4 class="panel-title"> <i class="livicon" data-name="edit" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
+                        Edit requirement
                     </h4>
                 </div>
                 <div class="panel-body">
@@ -40,38 +40,28 @@ Create New group
                         </ul>
                     @endif
 
-                    {!! Form::open(['url' => 'admin/groups']) !!}
+                    {!! Form::model($requirement, ['method' => 'PATCH', 'action' => ['RequirementsController@update', $requirement->id]]) !!}
 
                     <div class="form-group">
-                        {!! Form::label('name', 'Name: ') !!}
-                        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                        {!! Form::label('title', 'Title: ') !!}
+                        {!! Form::text('title', null, ['class' => 'form-control']) !!}
                     </div>
 
 					<div class="form-group">
-                        {!! Form::label('travel_date', 'Travel Date: ') !!}
-                        {!! Form::text('travel_date', null, ['class' => 'form-control']) !!}
+                        {!! Form::label('description', 'Description: ') !!}
+                        {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
                     </div>
 
 					
 
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-4">
-                            <a class="btn btn-danger" href="{{ route('admin.groups.index') }}">
-                                @lang('button.cancel')
-                            </a>
-                            <button type="submit" class="btn btn-success">
-                                @lang('button.save')
-                            </button>
-                        </div>
+                        {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
                     </div>
-
                     {!! Form::close() !!}
 
                 </div>
             </div>
         </div>
     </div>
-    <!-- row-->
 </section>
-
 @stop

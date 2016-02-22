@@ -2,22 +2,22 @@
 
 {{-- Page title --}}
 @section('title')
-Edit a group
+Edit a agent
 @parent
 @stop
 
 
 @section('content')
 <section class="content-header">
-    <h1>Groups</h1>
+    <h1>Agents</h1>
     <ol class="breadcrumb">
         <li>
             <a href="{{ route('dashboard') }}"> <i class="livicon" data-name="home" data-size="16" data-color="#000"></i>
                 Dashboard
             </a>
         </li>
-        <li>groups</li>
-        <li class="active">Create New group</li>
+        <li>agents</li>
+        <li class="active">Create New agent</li>
     </ol>
 </section>
 
@@ -28,7 +28,7 @@ Edit a group
             <div class="panel panel-primary ">
                 <div class="panel-heading">
                     <h4 class="panel-title"> <i class="livicon" data-name="edit" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
-                        Edit group
+                        Edit agent
                     </h4>
                 </div>
                 <div class="panel-body">
@@ -40,16 +40,31 @@ Edit a group
                         </ul>
                     @endif
 
-                    {!! Form::model($group, ['method' => 'PATCH', 'action' => ['GroupsController@update', $group->id]]) !!}
+                    {!! Form::model($agent, ['method' => 'PATCH', 'action' => ['AgentsController@update', $agent->id]]) !!}
 
                     <div class="form-group">
-                        {!! Form::label('name', 'Name: ') !!}
-                        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                        {!! Form::label('first_name', 'First Name: ') !!}
+                        {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
                     </div>
 
 					<div class="form-group">
-                        {!! Form::label('travel_date', 'Travel Date: ') !!}
-                        {!! Form::text('travel_date', null, ['class' => 'form-control']) !!}
+                        {!! Form::label('last_name', 'Last Name: ') !!}
+                        {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
+                    </div>
+
+					<div class="form-group">
+                        {!! Form::label('mobile_phone', 'Mobile Phone: ') !!}
+                        {!! Form::text('mobile_phone', null, ['class' => 'form-control']) !!}
+                    </div>
+
+					<div class="form-group">
+                        {!! Form::label('office_phone', 'Office Phone: ') !!}
+                        {!! Form::text('office_phone', null, ['class' => 'form-control']) !!}
+                    </div>
+
+					<div class="form-group">
+                        {!! Form::label('email', 'Email: ') !!}
+                        {!! Form::email('email', null, ['class' => 'form-control']) !!}
                     </div>
 
 					
