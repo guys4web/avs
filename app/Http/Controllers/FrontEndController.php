@@ -58,7 +58,8 @@ class FrontEndController extends JoshController
         try {
             // Try to log the user in
             if (Sentinel::authenticate($request->only('email', 'password'), $request->get('remember-me', 0))) {
-                return Redirect::route("my-account")->with('success', Lang::get('auth/message.login.success'));
+                return redirect()->intended('my-account')->with('success', Lang::get('auth/message.login.success'));
+                //return Redirect::route("my-account")->with('success', Lang::get('auth/message.login.success'));
             } else {
                 return Redirect::to('login')->with('error', 'Username or password is incorrect.');
                 //return Redirect::back()->withInput()->withErrors($validator);

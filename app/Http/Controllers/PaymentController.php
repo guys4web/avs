@@ -59,15 +59,11 @@ class PaymentController extends PayumController{
 						}
 						else
 						{
-								print_r($details);
-								die;
 								return redirect()->route("home")->with("error","Payment error");
 						}
 				}
 				else
 				{
-						print_r($details);
-						die;
 						return redirect()->route("home")->with("error","Payment error");
 				}
 
