@@ -14,4 +14,10 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), function () {Route::resource('groups', 'GroupsController');
 	Route::get('groups/{id}/delete', array('as' => 'admin.groups.delete', 'uses' => 'GroupsController@getDelete'));
 	Route::get('groups/{id}/confirm-delete', array('as' => 'admin.groups.confirm-delete', 'uses' => 'GroupsController@getModalDelete'));
+});Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), function () {Route::resource('packages', 'PackagesController');
+	Route::get('packages/{id}/delete', array('as' => 'admin.packages.delete', 'uses' => 'PackagesController@getDelete'));
+	Route::get('packages/{id}/confirm-delete', array('as' => 'admin.packages.confirm-delete', 'uses' => 'PackagesController@getModalDelete'));
+});Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), function () {Route::resource('documents', 'DocumentsController');
+	Route::get('documents/{id}/delete', array('as' => 'admin.documents.delete', 'uses' => 'DocumentsController@getDelete'));
+	Route::get('documents/{id}/confirm-delete', array('as' => 'admin.documents.confirm-delete', 'uses' => 'DocumentsController@getModalDelete'));
 });
