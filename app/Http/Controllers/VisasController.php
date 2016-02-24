@@ -21,12 +21,9 @@ class VisasController extends Controller
      */
     public function adminIndex()
     {
-        $visas = Visa::join('service_visas', 'service_visas.visa_id', '=', 'visas.id')
-                             ->join('services', 'service_visas.service_id', '=', 'services.id')
-                             ->select('visas.id', 'visas.name', 'services.name as service_name', 'min_process', 'price')
-                             ->orderBy('services.min_process')->get();
+       $visas = Visa::all();
 
-      $countries = Country::orderBy('name')->get();
+       $countries = Country::orderBy('name')->get();
 
         return View('admin.visas', [
                             'visas' => $visas ,
@@ -92,9 +89,11 @@ class VisasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
-        //
+        $visa = Visa::findOrFail($id);
+        $countries = Country::orderBy('name')->get();
+        return view("admin.visa_show",["visa"=>$visa,"countries"=>$countries]);
     }
 
     /**
@@ -117,7 +116,7 @@ class VisasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return redirect()->action("VisasController@show",['id'=>$id]);
     }
 
     /**

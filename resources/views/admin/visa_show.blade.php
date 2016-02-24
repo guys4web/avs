@@ -41,28 +41,26 @@ Visas Data
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="livicon" data-name="responsive" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
-                        Visas
+                        List of products
                     </div>
                 </div>
                 <div class="portlet-body flip-scroll">
                     <table class="table table-bordered table-striped table-condensed flip-content">
                         <thead class="flip-content">
                             <tr>
-                                <th>Name</th>
-                                <th>Description</th>
                                 <th>&nbsp;</th>
+                                <th>Service</th>
+                                <th>Price</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($visas as $visa)
-                                <tr>
-                                    <td>{{$visa->name}}</td>
-                                    <td>{{$visa->description}}</td>
-                                    <td>
-                                        <a class="btn btn-default" href="{{ action('VisasController@show',['id'=>$visa->id]) }}">View/Edit</a>
-                                    </td>
-                                </tr>
-                                @endforeach
+                            @foreach($visa->products as $product)
+                              <tr>
+                                  <td></td>
+                                  <td class="info-service" data-service="{{ $product->service->id }}" data-price="{{ $product->price }}" data-country="{{ $product->service->country_id }}">{{ $product->service->name }}</td>
+                                  <td>{{ $product->price }}</td>
+                              </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -72,7 +70,7 @@ Visas Data
                   <span class="btn-label">
                           <i class="glyphicon glyphicon-plus"></i>
                   </span>
-                  Create a new visa
+                  Attach a new service/product to this visa
             </a>
             <!-- END SAMPLE TABLE PORTLET-->
         </div>
@@ -84,28 +82,12 @@ Visas Data
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Create Visa</h4>
+        <h4 class="modal-title" id="myModalLabel">Create a Product</h4>
       </div>
       <div class="modal-body">
-        <form id="form-add-visa"  class="form-horizontal" action="{{ action('VisasController@create') }}" method="POST">
+        <form id="form-add-visa"  class="form-horizontal" action="{{ action('VisasController@update',['id'=>$visa->id]) }}" method="POST">
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
             <div class="form-body">
-                <div class="form-group">
-                    <label for="name" class="col-md-3 control-label">
-                        Name
-                    </label>
-                    <div class="col-md-9">
-                            <input type="text" id="name"  name="name" placeholder="Name visa" class="form-control"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="description" class="col-md-3 control-label">
-                        Description
-                    </label>
-                    <div class="col-md-9">
-                        <textarea name="description" class="form-control"></textarea>
-                    </div>
-                </div>
                 <div class="form-group">
                     <label for="price" class="col-md-3 control-label">
                         Price
@@ -154,4 +136,26 @@ Visas Data
     <script src="{{ asset('assets/js/pages/table-responsive.js') }}"></script>
     <script src="{{ asset('assets/vendors/select2/select2.full.js') }}"></script>
     <script src="{{ asset('assets/js/visa.js') }}"></script>
+    <script>
+          $(document).on('change','#service',function(){
+              var val = $(this).val();
+              $('.info-service').each(function(i,e){
+                  if($(e).attr("data-service")==val){
+                      $('#price').val($(e).attr("data-price"));
+                      $('#visa-save-change').html("Update Products");
+                  }
+              });
+          });
+          $(document).ready(function(){
+              $('#myModal').on('hidden.bs.modal', function (e) {
+                  $('#price').val("");
+                  $('#country').find("option").removeAttr("selected");
+                  $('#country').find("option[val='']").attr("selected","selected");
+                  $('#service').html("<option value=''>Service list</option>");
+                  $('#visa-save-change').html("Save changes");
+              });
+
+
+          });
+    </script>
 @stop
