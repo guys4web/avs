@@ -25,7 +25,22 @@ class ServicesController extends Controller
 
         return View('admin.services', [
                             'services' => $services
-                            ]);      
+                            ]);
+    }
+
+    public function countries($country)
+    {
+        $services = Service::join('service_visas', 'services.id', '=', 'service_visas.service_id')
+              ->select('services.id', 'services.name', 'min_process', 'max_process')
+              ->orderBy('min_process')
+              ->orderBy('max_process')
+              ->where('country_id', '=', $country)
+              ->groupBy('services.id')
+              ->get();
+
+
+        return response()->json($services);  
+
     }
 
     /**

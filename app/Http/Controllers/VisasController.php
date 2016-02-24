@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Visa;
+use App\Country;
+use App\Service;
+use App\Product;
+
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -22,10 +26,15 @@ class VisasController extends Controller
                              ->select('visas.id', 'visas.name', 'services.name as service_name', 'min_process', 'price')
                              ->orderBy('services.min_process')->get();
 
+      $countries = Country::orderBy('name')->get();
+
         return View('admin.visas', [
-                            'visas' => $visas
-                            ]);      
+                            'visas' => $visas ,
+                            'countries' => $countries
+                            ]);
     }
+
+
 
     public function findByService($serviceId)
     {
@@ -39,14 +48,31 @@ class VisasController extends Controller
             'data' => iterator_to_array($visas)
         ));
     }
+
+
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $visa = new Visa();
+        $visa->name = $request->get("name");
+        $visa->description = $request->get("description","");
+        $visa->save();
+
+        $service = Service::findOrFail($request->get("service",0));
+
+        $product = new Product;
+        $product->visa_id = $visa->id;
+        $product->service_id = $service->id;
+        $product->price = $request->get('price',0);
+        $product->save();
+
+        return redirect()->action("VisasController@adminIndex")->with('message','Visa added');
+
     }
 
     /**

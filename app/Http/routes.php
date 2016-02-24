@@ -141,10 +141,10 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 
 	# services
 	Route::get('services', 'ServicesController@adminIndex');
-
+	Route::any('countries/{country}', 'ServicesController@countries');
 	# visas
 	Route::get('visas', 'VisasController@adminIndex');
-
+	Route::post('visas/create', 'VisasController@create');
 	# datatables
 	Route::get('datatables', 'DataTablesController@index');
 	Route::get('datatables/data', array('as' => 'admin.datatables.data', 'uses' => 'DataTablesController@data'));

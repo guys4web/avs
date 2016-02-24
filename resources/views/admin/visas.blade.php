@@ -8,9 +8,11 @@ Visas Data
 
 {{-- page level styles --}}
 @section('header_styles')
-    <link href="{{ asset('assets/vendors/datatables/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('assets/vendors/datatables/extensions/Responsive/css/responsive.dataTables.min.css') }}" rel="stylesheet" type="text/css"/>
-	<link href="{{ asset('assets/css/pages/tables.css') }}" rel="stylesheet" type="text/css" />
+      <link href="{{ asset('assets/vendors/datatables/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+      <link href="{{ asset('assets/vendors/datatables/extensions/Responsive/css/responsive.dataTables.min.css') }}" rel="stylesheet" type="text/css"/>
+	   <link href="{{ asset('assets/css/pages/tables.css') }}" rel="stylesheet" type="text/css" />
+     <link href="{{ asset('assets/vendors/select2/select2.min.css') }}" rel="stylesheet"/>
+     <link href="{{ asset('assets/vendors/select2/select2-bootstrap.min.css') }}"/>
     <!-- end of page level css-->
 @stop
 
@@ -26,7 +28,7 @@ Visas Data
                 <i class="livicon" data-name="home" data-size="18" data-loop="true"></i>
                 Dashboard
             </a>
-        </li>        
+        </li>
         <li class="active">Visas</li>
     </ol>
 </section>
@@ -48,7 +50,7 @@ Visas Data
                             <tr>
                                 <th>Name</th>
                                 <th>Service</th>
-                                <th>Price</th>                                
+                                <th>Price</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,24 +58,98 @@ Visas Data
                                 <tr>
                                     <td>{{$visa->name}}</td>
                                     <td>{{$visa->service_name}}</td>
-                                    <td>{{$visa->price}}</td>                                    
-                                </tr>                            
-                                @endforeach                            
+                                    <td>{{$visa->price}}</td>
+                                </tr>
+                                @endforeach
                         </tbody>
                     </table>
                 </div>
+
             </div>
-            <!-- END SAMPLE TABLE PORTLET-->            
+            <a href="#myModal" data-toggle="modal" data-target="#myModal" class="btn btn-labeled btn-success">
+                  <span class="btn-label">
+                          <i class="glyphicon glyphicon-plus"></i>
+                  </span>
+                  Create a new visa
+            </a>
+            <!-- END SAMPLE TABLE PORTLET-->
         </div>
     </div>
 </section>
-
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create Visa</h4>
+      </div>
+      <div class="modal-body">
+        <form id="form-add-visa"  class="form-horizontal" action="{{ action('VisasController@create') }}" method="POST">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <div class="form-body">
+                <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">
+                        Name
+                    </label>
+                    <div class="col-md-9">
+                            <input type="text" id="name"  name="name" placeholder="Name visa" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-md-3 control-label">
+                        Description
+                    </label>
+                    <div class="col-md-9">
+                        <textarea name="description" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="price" class="col-md-3 control-label">
+                        Price
+                    </label>
+                    <div class="col-md-9">
+                            <input type="text"  id="price" name="price" placeholder="Price visa" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">Select country:</label>
+                    <div class="col-md-9">
+                        <select data-placeholder="Choose a country"  data-href="{{ action('ServicesController@countries',["country"=>"#value#"]) }}" id="country" name="country" style="width:100%" class="form-control select2">
+                            <option>Choose a country</option>
+                            @foreach($countries as $country)
+                            <option value="{{ $country['id'] }}">{{ $country['name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3">Service:</label>
+                  <div class="col-md-9">
+                      <select id="service" name="service" class="form-control">
+                          <option value="">Service list</option>
+                      </select>
+                  </div>
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="visa-save-change" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 @stop
 
 {{-- page level scripts --}}
 @section('footer_scripts')
+    <script type="text/javascript" src="{{ asset('assets/vendors/wizard/jquery-steps/js/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/datatables/js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/datatables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/table-responsive.js') }}"></script>
+    <script src="{{ asset('assets/vendors/select2/select2.full.js') }}"></script>
+    <script src="{{ asset('assets/js/visa.js') }}"></script>
 @stop
