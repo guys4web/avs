@@ -17,4 +17,14 @@ class Passenger extends Model{
          return $this->belongsToMany('App\Group','group_passengers', 'passenger_id', 'group_id');
      }
 
+     public function package()
+    {
+        return $this->hasMany('App\Package');
+    }
+
+    public function document()
+    {
+        return $this->hasMany('App\Document');
+    }
+
 }

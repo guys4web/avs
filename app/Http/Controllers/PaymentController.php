@@ -36,8 +36,8 @@ class PaymentController extends PayumController{
     	$details['last_name'] 	= $user->last_name;
     	$details['address']		= \Session::get('baddress');
     	$details['city']		= \Session::get('bcity');
-    	$details['state']		= \Session::get('bstate');
-    	$details['zip_code']	= \Session::get('postal');
+    	$details['state']		= \Session::get('bstate');    	
+    	$details['zip']	= \Session::get('postal');
 
         $storage->update($details);
 
@@ -61,18 +61,21 @@ class PaymentController extends PayumController{
 				{
 						if($details['approved']==true && $details['declined']==false)
 						{
-								$request->session()->put("payment_data",serialize($details));
-								return redirect()->route("cart_done");
+							$request->session()->put("payment_data",serialize($details));
+							return redirect()->route("cart_done");
 						}
 						else
 						{
-
-								return redirect()->route("home")->with("error","Payment error");
+							
+							// echo '<pre>';print_r($details);die;
+							return redirect()->route("home")->with("error","Payment error");
 						}
 				}
 				else
 				{
-						return redirect()->route("home")->with("error","Payment error");
+
+					// echo '<pre>';print_r($details);die;
+					return redirect()->route("home")->with("error","Payment error");
 				}
 
     }

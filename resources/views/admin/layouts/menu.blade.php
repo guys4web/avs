@@ -58,4 +58,44 @@
             </a>
         </li>
     </ul>
+</li><li {!! (Request::is('admin/packages') || Request::is('admin/packages/create') || Request::is('admin/packages/*') ? 'class="active"' : '') !!}>
+    <a href="#">
+        <i class="livicon" data-name="list-ul" data-size="18" data-c="#418BCA" data-hc="#418BCA" data-loop="true"></i>
+        <span class="title">Packages</span>
+        <span class="fa arrow"></span>
+    </a>
+    <ul class="sub-menu">
+        <li {!! (Request::is('admin/packages') ? 'class="active" id="active"' : '') !!}>
+            <a href="{{ URL::to('admin/packages') }}">
+                <i class="fa fa-angle-double-right"></i>
+                Packages
+            </a>
+        </li>
+        <li {!! (Request::is('admin/packages/create') ? 'class="active" id="active"' : '') !!}>
+            <a href="{{ URL::to('admin/packages/create') }}">
+                <i class="fa fa-angle-double-right"></i>
+                Add New Package
+            </a>
+        </li>
+    </ul>
+</li><li {!! (Request::is('admin/documents') || Request::is('admin/documents/create') || Request::is('admin/documents/*') ? 'class="active"' : '') !!}>
+    <a href="#">
+        <i class="livicon" data-name="list-ul" data-size="18" data-c="#418BCA" data-hc="#418BCA" data-loop="true"></i>
+        <span class="title">Documents</span>
+        <span class="fa arrow"></span>
+    </a>
+    <ul class="sub-menu">
+        <li {!! (Request::is('admin/documents') ? 'class="active" id="active"' : '') !!}>
+            <a href="{{ URL::to('admin/documents') }}">
+                <i class="fa fa-angle-double-right"></i>
+                Documents
+            </a>
+        </li>
+        <li {!! (Request::is('admin/documents/create') ? 'class="active" id="active"' : '') !!}>
+            <a href="{{ URL::to('admin/documents/create') }}">
+                <i class="fa fa-angle-double-right"></i>
+                Add New Document
+            </a>
+        </li>
+    </ul>
 </li>
