@@ -7,6 +7,7 @@ use App\Visa;
 use App\Country;
 use App\Service;
 use App\Product;
+use App\Requirement;
 
 
 use App\Http\Requests;
@@ -21,13 +22,16 @@ class VisasController extends Controller
      */
     public function adminIndex()
     {
-       $visas = Visa::with('Service', 'Service.country')->get();
-       
+       $visas = Visa::with('Service', 'Service.country', 'Requirement')->get();
+
        $countries = Country::orderBy('name')->get();
+
+       $requirements = Requirement::orderBy('title')->get();
 
         return View('admin.visas', [
                             'visas' => $visas ,
-                            'countries' => $countries
+                            'countries' => $countries,
+                            'requirements' => $requirements
                             ]);
     }
 
@@ -36,6 +40,7 @@ class VisasController extends Controller
     public function findByService($serviceId)
     {
         $visas = Visa::join('service_visas', 'visas.id', '=', 'service_visas.visa_id')
+                ->select('visas.id', 'visas.name', 'visas.max_stay', 'service_visas.price')
                 ->orderBy('price')
                 ->where('service_id', '=', $serviceId)
                 ->get();
@@ -46,8 +51,6 @@ class VisasController extends Controller
         ));
     }
 
-
-
     /**
      * Show the form for creating a new resource.
      *
@@ -55,9 +58,10 @@ class VisasController extends Controller
      */
     public function create(Request $request)
     {
+
         $visa = new Visa();
         $visa->name = $request->get("name");
-        $visa->description = $request->get("description","");
+        $visa->description = $request->get("description","");        
         $visa->save();
 
         $service = Service::findOrFail($request->get("service",0));
@@ -68,6 +72,10 @@ class VisasController extends Controller
         $product->price = $request->get('price',0);
         $product->save();
 
+        $requirements = $request->get('requirements');
+        foreach ($requirements as $req) {
+            $visa->requirement()->attach($req);
+        }
         return redirect()->action("VisasController@adminIndex")->with('message','Visa added');
 
     }

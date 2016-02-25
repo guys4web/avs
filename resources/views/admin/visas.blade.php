@@ -60,7 +60,9 @@ Visas Data
                             </tr>
                         </thead>
                         <tbody>
+
                             @foreach($visas as $visa)
+
                                 <tr>
                                     <td>{{$visa->name}}</td>
                                     <td class="truncate">{{$visa->description}}</td>
@@ -143,6 +145,16 @@ Visas Data
                           <option value="">Service list</option>
                       </select>
                   </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-9">Requirements</label>
+                    <div class="col-md-9">
+                        <ul>
+                         @foreach($requirements as $req)
+                            <li><input type="checkbox" name="requirements[]" value="{{$req->id}}">{{$req->title}}</li>
+                        @endforeach
+                        </ul>
+                    </div>
                 </div>
             </div>
         </form>

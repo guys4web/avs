@@ -26,7 +26,7 @@ $(function () {
                         "<td>" + item.name + "</td>" +
                         "<td>" + (item.max_stay || '30 days') + "</td>" +
                         "<td>" + item.price + "</td>" +
-                        "<td>requirements </td>" +
+                        "<td><a href='#' onClick='getRequirements(this)' data-visa_id='" + item.id + "'>requirements</a> </td>" +
                         "</tr>");
                 });
 
@@ -46,6 +46,26 @@ $(function () {
 
     updatePassengersForm();
 });
+
+function getRequirements (visa) {
+    
+    $.ajax({
+            type: "GET",
+            url: "requirements/visa/"+$(visa).data('visa_id'),
+            success: function (result) {
+                console.log(result.data);
+                $.each(result.data, function (i, item) {
+
+                    
+                });
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.responseText);
+            }
+        });
+    
+}
 
 function updateVisa(visa) {
     // console.log($(visa).data('name'), visa);

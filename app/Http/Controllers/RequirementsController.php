@@ -21,6 +21,20 @@ class RequirementsController extends Controller {
 		return view('admin.requirements.index', compact('requirements'));
 	}
 
+	public function findByVisa($visaId)
+    {
+        $requirements = Requirement::join('visa_requirements', 'requirements.id', '=', 'visa_requirements.requirement_id')
+                ->orderBy('title')
+                ->where('visa_id', '=', $visaId)
+                ->get();
+
+        return \Response::json(array(
+            'status' => 'success',
+            'data' => iterator_to_array($requirements)
+        ));
+    }
+
+
 	/**
 	 * Show the form for creating a new resource.
 	 *

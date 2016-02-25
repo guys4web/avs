@@ -220,7 +220,7 @@ Route::any('prepare_payment/{currencycode}/{amt}', array('as' => 'prepare_paymen
 Route::any('payment_done/{payum_token}', array('as' => 'payment_done','uses' => 'PaymentController@done'));
 
 Route::any('visa/service/{id}', 'VisasController@findByService');
-
+Route::any('requirements/visa/{id}', 'RequirementsController@findByVisa');
 Route::get('{name?}', 'JoshController@showFrontEndView');
 # End of frontend views
 
