@@ -285,6 +285,13 @@ Custom tables
     border-left: 2px solid #f3565d;
 }
 
+td.truncate {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 @media (max-width: 767px) {
     /* 767px */
     .table-advance tr > td.highlight:first-child a {

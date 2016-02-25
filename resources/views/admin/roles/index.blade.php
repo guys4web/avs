@@ -35,7 +35,7 @@
                     <a href="{{ route('create/role') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> @lang('button.create')</a>
                     </div>
                 </div>
-                <br />
+                
                 <div class="panel-body">
                     @if ($roles->count() >= 1)
 

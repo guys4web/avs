@@ -21,8 +21,8 @@ class VisasController extends Controller
      */
     public function adminIndex()
     {
-       $visas = Visa::all();
-
+       $visas = Visa::with('Service', 'Service.country')->get();
+       
        $countries = Country::orderBy('name')->get();
 
         return View('admin.visas', [

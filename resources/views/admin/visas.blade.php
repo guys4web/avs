@@ -37,11 +37,14 @@ Visas Data
     <div class="row">
         <div class="col-md-12">
             <!-- BEGIN SAMPLE TABLE PORTLET-->
-            <div class="portlet box primary">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <i class="livicon" data-name="responsive" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
-                        Visas
+            <div class="portlet box panel-primary">
+                <div class="panel-heading clearfix">
+                    <h4 class="panel-title pull-left"> 
+                        <i class="livicon" data-name="medal" data-size="18" data-loop="true" data-c="#fff" data-hc="white"></i>
+                        >@lang('visas/title.visaslist')
+                    </h4>
+                    <div class="pull-right">
+                    <a href="#myModal" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> @lang('button.create')</a>
                     </div>
                 </div>
                 <div class="portlet-body flip-scroll">
@@ -50,16 +53,30 @@ Visas Data
                             <tr>
                                 <th>Name</th>
                                 <th>Description</th>
-                                <th>&nbsp;</th>
+                                <th>Service</th>
+                                <th>Country</th>
+                                <th>Price</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($visas as $visa)
                                 <tr>
                                     <td>{{$visa->name}}</td>
-                                    <td>{{$visa->description}}</td>
+                                    <td class="truncate">{{$visa->description}}</td>
+                                    <td>{{$visa->Service[0]->name}}</td>
+                                    <td>{{$visa->Service[0]->Country->name}}</td>
+                                    <td>{{$visa->Service[0]->pivot->price}}</td>
                                     <td>
-                                        <a class="btn btn-default" href="{{ action('VisasController@show',['id'=>$visa->id]) }}">View/Edit</a>
+                                        <a href="#">
+                                            <i class="livicon" data-name="edit" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="edit visa"></i>
+                                        </a>
+                                    
+                                        <a href="#" data-toggle="modal" data-target="#delete_confirm">
+                                            <i class="livicon" data-name="remove-alt" data-size="18"
+                                               data-loop="true" data-c="#f56954" data-hc="#f56954"
+                                               title="delete visa"></i>
+                                        </a>                                        
                                     </td>
                                 </tr>
                                 @endforeach
@@ -67,13 +84,7 @@ Visas Data
                     </table>
                 </div>
 
-            </div>
-            <a href="#myModal" data-toggle="modal" data-target="#myModal" class="btn btn-labeled btn-success">
-                  <span class="btn-label">
-                          <i class="glyphicon glyphicon-plus"></i>
-                  </span>
-                  Create a new visa
-            </a>
+            </div>            
             <!-- END SAMPLE TABLE PORTLET-->
         </div>
     </div>

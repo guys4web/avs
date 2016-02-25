@@ -717,6 +717,12 @@ footer .btn-primary.text-white {
 #numPassengers {
     display: none;
 }
+.truncate {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 @media(max-width: 759px) {
     .navbar-nav .dropdown-menu:before {
