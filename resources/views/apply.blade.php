@@ -113,7 +113,11 @@ Visa Application
                                         <div class="form-group" >
                                             <label for="carrier" class="col-md-6 control-label">Shipping Carrier:</label>
                                             <div class="col-sm-1">
-                                                <input type="text" name="carrier" id="carrier">
+                                                <select name="carrier" id="carrier">
+                                                    <option value="USPS">USPS</option>
+                                                    <option value="DHL">DHL</option>
+                                                    <option value="Fedex">Fedex</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group" >
@@ -122,7 +126,7 @@ Visa Application
                                                 <input type="text" name="track_num" id="track_num">
                                             </div>
                                         </div>
-                                    </div>  
+                                    </div>
                                     <p>(*) Mandatory</p>
                                     <div class="modal fade" id="reqModal" role="dialog">
                                       <div class="modal-dialog" role="document">
@@ -151,6 +155,16 @@ Visa Application
                                 <!-- third tab -->
                                 <h1>Payment</h1>
                                 <section>
+                                  <div class="form-group">
+                                      <label for="service" class="col-md-6 control-label">How soon would you like to go ? *</label>
+                                      <div class="col-md-6">
+                                         <select data-select2="false" class="form-control input" name="payment_type" id="payment_type">
+                                           <option value="cc">Card credit</option>
+                                           <option value="check">Check</option>
+                                           <option value="money">Money Order</option>
+                                         </select>
+                                      </div>
+                                  </div>
                                     <div class="form-group required">
                                         <label for="cardnum" class="col-sm-4 control-label">Card Number</label>
                                         <div class="col-sm-8">
@@ -161,9 +175,9 @@ Visa Application
                                     </div>
                                     <div class="form-group required">
                                         <label for="expDate" class="col-sm-4 control-label">Expiration Date</label>
-                                        
+
                                         <div class="col-sm-4">
-                                            <select data-select2="false" data-rule-required='true' class="form-control" id="expDate-month" name="expDate-month">
+                                            <select data-select2="false" class="form-control" id="expDate-month" name="expDate-month">
                                                 <option value="">Month</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
@@ -181,7 +195,7 @@ Visa Application
                                         </div>
 
                                         <div class="col-sm-4">
-                                          <select data-select2="false" data-rule-required='true' class="form-control" id="expDate-year" name="expDate-year">
+                                          <select data-select2="false" class="form-control" id="expDate-year" name="expDate-year">
                                               @for($i=0;$i<=7;$i++)
                                                 <option value="{{ ((int)date('Y')) + $i }}">{{ ((int)date('Y')) + $i }}</option>
                                               @endfor

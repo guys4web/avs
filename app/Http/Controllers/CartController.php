@@ -115,9 +115,10 @@ class CartController extends Controller
 
         $user = Sentinel::getUser();
         $cart = $this->_createCart();
+        $cart->payment_type = $request->get('payment_type');
+        $cart->save();
 
-
-        if($request->has('cardnum')){
+        if($request->has('cardnum') && $request->has('payment_type')!="cc"){
 
             $expDate = $request->get('expDate-year').'-'.$request->get('expDate-month');
             $request->session()->put('cardnum',$request->get('cardnum'));
@@ -135,6 +136,8 @@ class CartController extends Controller
         $cartItem->product_id=$productId;
         $cartItem->cart_id= $cart->id;
         $cartItem->quantity = $qty;
+        $cartItem->track_num = $request->get('track_num','');
+        $cartItem->carrier = $request->get('carrier','');
         $cartItem->unit_price = $product->price;
         $cartItem->save();
 

@@ -31,13 +31,13 @@ class PaymentController extends PayumController{
         $details['paymentrequest_0_amt'] = $amt;
         $details['currencycode'] = strtoupper($currencycode);
         $details['amount'] = 1; //$amt;
-		$details['billTo'] = ['firstName'=>$user->first_name,'lastName'=>$user->last_name , 'city'=> \Session::get('bcity') , 'address' => \Session::get("baddress") , 'state' => \Session::get('bstate') , 'zip' => \Session::get('postal') ]  ;
-		$details['first_name'] 	= $user->first_name;
-    	$details['last_name'] 	= $user->last_name;
-    	$details['address']		= \Session::get('baddress');
-    	$details['city']		= \Session::get('bcity');
-    	$details['state']		= \Session::get('bstate');    	
-    	$details['zip']	= \Session::get('postal');
+				$details['billTo'] = ['firstName'=>$user->first_name,'lastName'=>$user->last_name , 'city'=> \Session::get('bcity') , 'address' => \Session::get("baddress") , 'state' => \Session::get('bstate') , 'zip' => \Session::get('postal') ]  ;
+				$details['first_name'] 	= $user->first_name;
+    		$details['last_name'] 	= $user->last_name;
+    		$details['address']		= \Session::get('baddress');
+    		$details['city']		= \Session::get('bcity');
+    		$details['state']		= \Session::get('bstate');
+    		$details['zip']	= \Session::get('postal');
 
         $storage->update($details);
 
@@ -66,7 +66,7 @@ class PaymentController extends PayumController{
 						}
 						else
 						{
-							
+
 							// echo '<pre>';print_r($details);die;
 							return redirect()->route("home")->with("error","Payment error");
 						}

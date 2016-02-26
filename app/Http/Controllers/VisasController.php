@@ -40,7 +40,7 @@ class VisasController extends Controller
     public function findByService($serviceId)
     {
         $visas = Visa::join('service_visas', 'visas.id', '=', 'service_visas.visa_id')
-                ->select('visas.id', 'visas.name', 'visas.max_stay', 'service_visas.price')
+                ->select('visas.id', 'visas.name', 'service_visas.price')
                 ->orderBy('price')
                 ->where('service_id', '=', $serviceId)
                 ->get();
@@ -61,7 +61,7 @@ class VisasController extends Controller
 
         $visa = new Visa();
         $visa->name = $request->get("name");
-        $visa->description = $request->get("description","");        
+        $visa->description = $request->get("description","");
         $visa->save();
 
         $service = Service::findOrFail($request->get("service",0));

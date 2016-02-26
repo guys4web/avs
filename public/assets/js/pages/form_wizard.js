@@ -72,28 +72,58 @@ $(function () {
                 equalTo: "#password"
             } ,
             cardnum : {
-                required:true ,
-                number: true
+                required:function(element) {
+                  return $("#payment_type").val() == "cc";
+                },
+                number: function(element) {
+                  return $("#payment_type").val() == "cc";
+                }
             },
             ccv : {
-                required:true ,
-                number: true ,
-                rangelength: [3, 3]
+                required:function(element) {
+                  return $("#payment_type").val() == "cc";
+                } ,
+                number: function(element) {
+                  return $("#payment_type").val() == "cc";
+                } ,
+                rangelength:function(element) {
+                  return ($("#payment_type").val() == "cc")? [3, 3] : false ;
+                }
+            },
+            "expDate-month" : {
+              required:function(element) {
+                return $("#payment_type").val() == "cc";
+              }
+            },
+            "expDate-year" : {
+              required:function(element) {
+                return $("#payment_type").val() == "cc";
+              }
             },
             bname : {
-              required : true
+              required : function(element) {
+                return $("#payment_type").val() == "cc";
+              }
             },
             baddress : {
-              required : true
+              required : function(element) {
+                return $("#payment_type").val() == "cc";
+              }
             },
             bcity : {
-              required:true
+              required:function(element) {
+                return $("#payment_type").val() == "cc";
+              }
             },
             bstates : {
-              required:true
+              required:function(element) {
+                return $("#payment_type").val() == "cc";
+              }
             },
             postal :{
-              required : true
+              required : function(element) {
+                return $("#payment_type").val() == "cc";
+              }
             },
             services : {
                 required:true
