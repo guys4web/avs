@@ -48,22 +48,29 @@ $(function () {
 });
 
 function getRequirements (visa) {
-    
+    $('#visa_requirements').empty();
     $.ajax({
             type: "GET",
             url: "requirements/visa/"+$(visa).data('visa_id'),
             success: function (result) {
-                console.log(result.data);
-                $.each(result.data, function (i, item) {
-
+                console.log(result);
+                if(result.data.length > 0) {
+                    $.each(result.data, function (i, item) {
+                        $('#visa_requirements').append("<li><b>" + item.title + "</b>"
+                            + "<p>" + item.description + "</p></li>");
+                    });    
+                } else {
                     
-                });
+                    $('#visa_requirements').append("<li>No requirments available for this visa</li>");                    
+                }
+                
 
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(xhr.responseText);
             }
         });
+    $('#reqModal').modal('toggle')
     
 }
 

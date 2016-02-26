@@ -724,6 +724,10 @@ footer .btn-primary.text-white {
     text-overflow: ellipsis;
 }
 
+#visa_requirements {
+    margin-left: 20px;
+}
+
 @media(max-width: 759px) {
     .navbar-nav .dropdown-menu:before {
         content: none;
