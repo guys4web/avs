@@ -70,13 +70,12 @@ Cart items
         </div>
         <div class="col-xs-6 col-md-4">
           <section>
-              <ul>
+              <ul @if($cart->payment_type!="cc") class="hidden" @endif>
                   <li><b>Card Number : </b> <span> {{ session('cardnum','') }} </span></li>
                   <li><b>Expiration Date : </b> <span> {{ session('expDate','') }} </span></li>
                   <li><b>CCV : </b> <span>  {{ session('ccv','') }} </span></li>
                   <li><b>Name on Card : </b> <span>  {{ session('bname','') }} </span></li>
               </ul>
-
           </section>
         </div>
       </div>

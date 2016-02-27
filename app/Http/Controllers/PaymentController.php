@@ -24,8 +24,11 @@ class PaymentController extends PayumController{
 
 	public function prepare($currencycode,$amt)
 	{
-				$storage = $this->getPayum()->getStorage('Payum\Core\Model\ArrayObject');
 				$user = Sentinel::getUser();
+				
+
+
+				$storage = $this->getPayum()->getStorage('Payum\Core\Model\ArrayObject');
         $details = $storage->create();
         $details['paymentrequest_0_currencycode'] = strtoupper($currencycode);
         $details['paymentrequest_0_amt'] = $amt;

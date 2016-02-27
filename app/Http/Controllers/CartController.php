@@ -99,7 +99,16 @@ class CartController extends Controller
             return redirect("/");
         }
         $total = $this->_getCartTotal($cart);
-        return redirect()->route("prepare_payment",["currencycode"=>"DOLLAR","amt"=>$total]);
+        if($cart->payment_type=="cc")
+        {
+            return redirect()->route("prepare_payment",["currencycode"=>"DOLLAR","amt"=>$total]);
+        }
+        else
+        {
+          $request->session()->put('payment_data',serialize(array()))
+          return redirect()->route("cart_done");
+        }
+
     }
 
     public function addItem (Request $request,$productId){
@@ -118,19 +127,19 @@ class CartController extends Controller
         $cart->payment_type = $request->get('payment_type');
         $cart->save();
 
-        if($request->has('cardnum') && $request->has('payment_type')!="cc"){
 
-            $expDate = $request->get('expDate-year').'-'.$request->get('expDate-month');
-            $request->session()->put('cardnum',$request->get('cardnum'));
-            $request->session()->put('expDate',$expDate);
-            $request->session()->put('ccv',$request->get('ccv'));
-            $request->session()->put('bname',$request->get('bname'));
-            $request->session()->put('bcity',$request->get('bcity'));
-            $request->session()->put('baddress',$request->get('baddress'));
-            $request->session()->put('bstate',$request->get('bstate'));
-            $request->session()->put('postal',$request->get('postal'));
 
-        }
+        $expDate = $request->get('expDate-year','').'-'.$request->get('expDate-month','');
+        $request->session()->put('cardnum',$request->get('cardnum',''));
+        $request->session()->put('expDate',$expDate);
+        $request->session()->put('ccv',$request->get('ccv',''));
+        $request->session()->put('bname',$request->get('bname',''));
+        $request->session()->put('bcity',$request->get('bcity',''));
+        $request->session()->put('baddress',$request->get('baddress',''));
+        $request->session()->put('bstate',$request->get('bstate',''));
+        $request->session()->put('postal',$request->get('postal',''));
+
+
 
         $cartItem  = new Cartitem();
         $cartItem->product_id=$productId;
