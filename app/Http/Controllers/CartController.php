@@ -105,7 +105,7 @@ class CartController extends Controller
         }
         else
         {
-          $request->session()->put('payment_data',serialize(array()))
+          $request->session()->put('payment_data',serialize(array()));
           return redirect()->route("cart_done");
         }
 
