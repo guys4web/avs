@@ -19,6 +19,23 @@ class Order extends Model{
       return $this->belongsTo('App\User','user_id');
     }
 
+    public function payment()
+    {
+        $cart = $this->cart;
+        if($cart->payment_type=="check")
+        {
+            return "Check" ;
+        }
+        else if($cart->payment_type=="money")
+        {
+            return "Order money" ;
+        }
+        else
+        {
+            return "Credit Card" ;
+        }
+    }
+
 
 
 }

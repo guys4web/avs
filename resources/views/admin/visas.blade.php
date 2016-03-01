@@ -39,7 +39,7 @@ Visas Data
             <!-- BEGIN SAMPLE TABLE PORTLET-->
             <div class="portlet box panel-primary">
                 <div class="panel-heading clearfix">
-                    <h4 class="panel-title pull-left"> 
+                    <h4 class="panel-title pull-left">
                         <i class="livicon" data-name="medal" data-size="18" data-loop="true" data-c="#fff" data-hc="white"></i>
                         >@lang('visas/title.visaslist')
                     </h4>
@@ -70,15 +70,15 @@ Visas Data
                                     <td>{{$visa->Service[0]->Country->name}}</td>
                                     <td>{{$visa->Service[0]->pivot->price}}</td>
                                     <td>
-                                        <a href="#">
+                                        <a href="{{ action('VisasController@show',['id'=>$visa->id])  }}">
                                             <i class="livicon" data-name="edit" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="edit visa"></i>
                                         </a>
-                                    
+
                                         <a href="#" data-toggle="modal" data-target="#delete_confirm">
                                             <i class="livicon" data-name="remove-alt" data-size="18"
                                                data-loop="true" data-c="#f56954" data-hc="#f56954"
                                                title="delete visa"></i>
-                                        </a>                                        
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -86,7 +86,7 @@ Visas Data
                     </table>
                 </div>
 
-            </div>            
+            </div>
             <!-- END SAMPLE TABLE PORTLET-->
         </div>
     </div>

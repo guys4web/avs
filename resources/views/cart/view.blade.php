@@ -76,6 +76,9 @@ Cart items
                   <li><b>CCV : </b> <span>  {{ session('ccv','') }} </span></li>
                   <li><b>Name on Card : </b> <span>  {{ session('bname','') }} </span></li>
               </ul>
+              <ul @if($cart->payment_type=="cc") class="hidden" @endif>
+                  <li><b>Payment Type : </b> <span> {{ ($cart->payment_type=="check")?"Check":"Order Money" }} </span></li>
+              </ul>
           </section>
         </div>
       </div>

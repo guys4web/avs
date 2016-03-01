@@ -25,6 +25,9 @@
                         </ul>
                     </td>
                     <td>
+                        {{ $order->payment() }}
+                    </td>
+                    <td>
                         <a href="#" data-order-id="{{ $order->id }}" data-id="{{ $order->cart->id }}" class="btn-passengers btn btn-default btn-xs">Lists passengers</a>
                     </td>
                     <td>
