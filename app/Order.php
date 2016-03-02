@@ -22,6 +22,7 @@ class Order extends Model{
     public function payment()
     {
         $cart = $this->cart;
+        
         if($cart->payment_type=="check")
         {
             return "Check" ;
