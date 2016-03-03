@@ -97,18 +97,18 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         Route::get('{roleId}/restore', array('as' => 'restore/role', 'uses' => 'RolesController@getRestore'));
     });
     /*routes for blog*/
-	Route::group(array('prefix' => 'blog'), function () {
-        Route::get('/', array('as' => 'blogs', 'uses' => 'BlogController@index'));
-        Route::get('create', array('as' => 'create/blog', 'uses' => 'BlogController@create'));
-        Route::post('create', 'BlogController@store');
-        Route::get('{blog}/edit', array('as' => 'update/blog', 'uses' => 'BlogController@edit'));
-        Route::post('{blog}/edit', 'BlogController@update');
-        Route::get('{blog}/delete', array('as' => 'delete/blog', 'uses' => 'BlogController@destroy'));
-		Route::get('{blog}/confirm-delete', array('as' => 'confirm-delete/blog', 'uses' => 'BlogController@getModalDelete'));
-		Route::get('{blog}/restore', array('as' => 'restore/blog', 'uses' => 'BlogController@getRestore'));
-        Route::get('{blog}/show', array('as' => 'blog/show', 'uses' => 'BlogController@show'));
-        Route::post('{blog}/storecomment', array('as' => 'restore/blog', 'uses' => 'BlogController@storecomment'));
-	});
+    Route::group(array('prefix' => 'blog'), function () {
+            Route::get('/', array('as' => 'blogs', 'uses' => 'BlogController@index'));
+            Route::get('create', array('as' => 'create/blog', 'uses' => 'BlogController@create'));
+            Route::post('create', 'BlogController@store');
+            Route::get('{blog}/edit', array('as' => 'update/blog', 'uses' => 'BlogController@edit'));
+            Route::post('{blog}/edit', 'BlogController@update');
+            Route::get('{blog}/delete', array('as' => 'delete/blog', 'uses' => 'BlogController@destroy'));
+                    Route::get('{blog}/confirm-delete', array('as' => 'confirm-delete/blog', 'uses' => 'BlogController@getModalDelete'));
+                    Route::get('{blog}/restore', array('as' => 'restore/blog', 'uses' => 'BlogController@getRestore'));
+            Route::get('{blog}/show', array('as' => 'blog/show', 'uses' => 'BlogController@show'));
+            Route::post('{blog}/storecomment', array('as' => 'restore/blog', 'uses' => 'BlogController@storecomment'));
+    });
 
     /*routes for blog category*/
 	Route::group(array('prefix' => 'blogcategory'), function () {
@@ -168,7 +168,13 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 	Route::get('service/new', 'ServicesController@newProduct');
 	Route::get('services/destroy/{id}', 'ServicesController@destroy');
 	Route::post('services/save', 'ServicesController@add');
-
+    #orders
+    Route::group(array('prefix' => 'orders'), function () {
+        
+        Route::get('index', 'OrdersController@index');
+        Route::any('datatables', 'OrdersController@datatables');
+        
+    });
 
 
 });

@@ -333,6 +333,13 @@
                             <span class="title">Visas</span>
                         </a>
                     </li>
+                    <li {!! (Request::is('admin/orders') ? 'class="active"' : '') !!}>
+                        <a href="{{ action('OrdersController@index') }}">
+                            <i class="livicon" data-name="medal" data-size="18" data-c="#418BCA" data-hc="#418BCA"
+                               data-loop="true"></i>
+                            <span class="title">Orders</span>
+                        </a>
+                    </li>
                     <li {!! (Request::is('admin/datatables') || Request::is('admin/dropzone') || Request::is('admin/multiple_upload')? 'class="active"' : '') !!}>
                         <a href="#">
                             <i class="livicon" data-name="medal" data-size="18" data-c="#6CC66C" data-hc="#6CC66C"
