@@ -30,7 +30,9 @@ class OrdersController extends Controller {
         
         return Datatables::of($orders)
             ->addColumn('action', function ($model) {
-                return '<a href="#modal-edit" data-order-id="'.$model->id.'" data-id="'.$model->cart->id.'" class="btn btn-xs btn-primary btn-passengers"><i class="glyphicon glyphicon-zoom-in"></i></a>';
+                return  '<a href="#modal-edit" data-order-id="'.$model->id.'" data-id="'.$model->cart->id.'" class="btn btn-xs btn-primary btn-passengers"><i class="glyphicon glyphicon-zoom-in"></i></a>'.
+                        '<a href="#modal-edit" data-order-id="'.$model->id.'" data-id="'.$model->cart->id.'" class="btn btn-xs btn-default btn-passengers"><i class="glyphicon glyphicon-pencil"></i></a>'
+                        ;
             })     
             ->editColumn('cart_id', function($model){
                 return $model->payment();
