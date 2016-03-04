@@ -243,10 +243,10 @@ class CartController extends Controller
         $cart = Cart::find($id);
 
         if(!$cart){
-          return "" ;
+            return "" ;
         }
-        if($cart->user_id!=$user->id){
-          return "" ;
+        if($cart->user_id!=$user->id && !Sentinel::inRole('admin')){
+            return "" ;
         }
 
         return view("partials.passengers",["cart"=>$cart]);
