@@ -74,6 +74,24 @@ Orders
         </div><!-- /.modal-dialog -->
       </div><!-- /.modal -->
  <!-- end modal -->
+  <!-- modal-global -->
+    <div id="modal-global" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="gridSystemModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+ <!-- end modal -->
 @stop
 
 {{-- page level scripts --}}
@@ -105,6 +123,14 @@ Orders
                     $('#modal-passengers .modal-body').html(html);
                     $('#modal-passengers').modal("show");
                 },"html");
+        });
+        $(document).on('click','.btn-payment',function(){
+            var order_id = $(this).attr("data-order-id");
+            $.get("{{action('OrdersController@payment')}}",{id:order_id},function(html){
+                    $('#modal-global .modal-title').html("Payment information");
+                    $('#modal-global .modal-body').html(html);
+                    $('#modal-global').modal("show");
+            },"html");
         });
     </script>
 @stop

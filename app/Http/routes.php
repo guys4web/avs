@@ -104,8 +104,8 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
             Route::get('{blog}/edit', array('as' => 'update/blog', 'uses' => 'BlogController@edit'));
             Route::post('{blog}/edit', 'BlogController@update');
             Route::get('{blog}/delete', array('as' => 'delete/blog', 'uses' => 'BlogController@destroy'));
-                    Route::get('{blog}/confirm-delete', array('as' => 'confirm-delete/blog', 'uses' => 'BlogController@getModalDelete'));
-                    Route::get('{blog}/restore', array('as' => 'restore/blog', 'uses' => 'BlogController@getRestore'));
+            Route::get('{blog}/confirm-delete', array('as' => 'confirm-delete/blog', 'uses' => 'BlogController@getModalDelete'));
+            Route::get('{blog}/restore', array('as' => 'restore/blog', 'uses' => 'BlogController@getRestore'));
             Route::get('{blog}/show', array('as' => 'blog/show', 'uses' => 'BlogController@show'));
             Route::post('{blog}/storecomment', array('as' => 'restore/blog', 'uses' => 'BlogController@storecomment'));
     });
@@ -124,9 +124,9 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 
 	/*routes for file*/
 	Route::group(array('prefix' => 'file'), function () {
-        Route::post('create', 'FileController@store');
-		Route::post('createmulti', 'FileController@postFilesCreate');
-		Route::delete('delete', 'FileController@delete');
+            Route::post('create', 'FileController@store');
+            Route::post('createmulti', 'FileController@postFilesCreate');
+            Route::delete('delete', 'FileController@delete');
 	});
 
 	Route::get('crop_demo', function () {
@@ -173,7 +173,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
         
         Route::get('index', 'OrdersController@index');
         Route::any('datatables', 'OrdersController@datatables');
-        
+        Route::any('payment', 'OrdersController@payment');
     });
 
 

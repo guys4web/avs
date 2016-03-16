@@ -252,5 +252,7 @@ class CartController extends Controller
         return view("partials.passengers",["cart"=>$cart]);
 
     }
+    
+   
 
 }
