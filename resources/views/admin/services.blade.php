@@ -10,7 +10,9 @@ Services Data
 @section('header_styles')
     <link href="{{ asset('assets/vendors/datatables/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('assets/vendors/datatables/extensions/Responsive/css/responsive.dataTables.min.css') }}" rel="stylesheet" type="text/css"/>
-	<link href="{{ asset('assets/css/pages/tables.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/pages/tables.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/vendors/select2/select2.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/vendors/select2/select2-bootstrap.min.css') }}"/>
     <!-- end of page level css-->
 @stop
 
@@ -41,6 +43,9 @@ Services Data
                         <i class="livicon" data-name="responsive" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
                         Services
                     </div>
+                     <div class="pull-right">
+                        <a href="#myModal" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> @lang('button.create')</a>
+                    </div>
                 </div>
                 <div class="portlet-body flip-scroll">
                     <table class="table table-bordered table-striped table-condensed flip-content">
@@ -69,13 +74,98 @@ Services Data
         </div>
     </div>
 </section>
-
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create Service</h4>
+      </div>
+      <div class="modal-body">
+        <form id="form-add-service"  class="form-horizontal" action="{{ action('ServicesController@store') }}" method="POST">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <div class="form-body">
+                <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">
+                        Name
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" id="name"  name="name" placeholder="Service name" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">Select country:</label>
+                    <div class="col-md-9">
+                        <select data-placeholder="Choose a country"  id="country" name="country" style="width:100%" class="form-control select2">
+                            <option>Choose a country</option>
+                            @foreach($countries as $country)
+                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="price" class="col-md-3 control-label">
+                        Min process
+                    </label>
+                    <div class="col-md-9">
+                            <input type="number"  id="min" name="min" placeholder="Min process" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="price" class="col-md-3 control-label">
+                        Max process
+                    </label>
+                    <div class="col-md-9">
+                            <input type="number"  id="Max process" name="Max process" placeholder="Max process" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="save-service" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
 @stop
 
 {{-- page level scripts --}}
 @section('footer_scripts')
+     <script type="text/javascript" src="{{ asset('assets/vendors/wizard/jquery-steps/js/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/datatables/js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/datatables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/table-responsive.js') }}"></script>
+    <script src="{{ asset('assets/vendors/select2/select2.full.js') }}"></script>
+    
+    <script>
+           $(document).ready(function(){
+                $('.select2').select2(); 
+              
+                $('#form-add-service').validate({
+                    errorPlacement: function (error, element) {
+                        element.before(error);
+                    },
+                    rules: {
+                        name : {
+                            required:true
+                        },
+                        country : {
+                          required:true,
+                        }
+                    },
+                    messages: {
+
+                    }
+                });
+              
+           });
+           $(document).on("click","#save-service",function(){
+                $('#form-add-service').submit();
+           });
+    </script>
 @stop

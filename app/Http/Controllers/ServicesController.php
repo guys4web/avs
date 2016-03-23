@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use View;
 use DB;
 use App\Service;
+use App\Country;
 
 class ServicesController extends Controller
 {
@@ -24,8 +25,9 @@ class ServicesController extends Controller
                              ->orderBy('services.min_process')->get();
 
         return View('admin.services', [
-                            'services' => $services
-                            ]);
+            'services' => $services ,
+            'countries' => Country::all()
+        ]);
     }
 
     public function countries($country)
@@ -61,7 +63,20 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->get('name');
+        $country = $request->get('country');
+        $min = $request->get('min');
+        $max = $request->get('max');
+        
+        $service = new Service;
+        $service->name = $name;
+        $service->country_id = $country;
+        $service->min_process = (int)$min;
+        $service->max_process = (int)$max;
+        $service->save();
+        
+        return redirect()->action("ServicesController@adminIndex");
+        
     }
 
     /**

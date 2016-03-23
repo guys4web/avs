@@ -44,7 +44,7 @@ Visas Data
                         >@lang('visas/title.visaslist')
                     </h4>
                     <div class="pull-right">
-                    <a href="#myModal" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> @lang('button.create')</a>
+                        <a href="#myModal" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> @lang('button.create')</a>
                     </div>
                 </div>
                 <div class="portlet-body flip-scroll">
