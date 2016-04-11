@@ -55,6 +55,7 @@ Services Data
                                 <th>Country</th>
                                 <th>Min. Processing</th>
                                 <th>Max. Processing</th>
+                                <th> &nbsp; </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,7 +64,10 @@ Services Data
                                     <td>{{$service->name}}</td>
                                     <td>{{$service->country}}</td>
                                     <td>{{$service->min_process}}</td>
-                                    <td>{{$service->max_process}}</td>                                    
+                                    <td>{{$service->max_process}}</td>
+                                    <td>  
+                                        
+                                    </td>                                    
                                 </tr>                            
                                 @endforeach                            
                         </tbody>

@@ -39,3 +39,15 @@ $(document).on('click','#visa-save-change',function(){
     var form =   $('#form-add-visa');
     form.submit();
 });
+
+$(document).on('click','.show_delete_modal',function(){
+    if ($(this).attr("data-delete")!=0){
+        var text = "Can't delete " ;
+        $('#delete-confirm-btn').hide();
+    }else{
+        var text = "De you want delete this visa?" ;
+        $('#delete-confirm-btn').show();
+    }
+    $("#delete_confirm").find('.modal-body').html(text);
+    $("#delete_confirm").modal("show");   
+});

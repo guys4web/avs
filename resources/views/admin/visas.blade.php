@@ -41,7 +41,7 @@ Visas Data
                 <div class="panel-heading clearfix">
                     <h4 class="panel-title pull-left">
                         <i class="livicon" data-name="medal" data-size="18" data-loop="true" data-c="#fff" data-hc="white"></i>
-                        >@lang('visas/title.visaslist')
+                        @lang('visas/title.visaslist')
                     </h4>
                     <div class="pull-right">
                         <a href="#myModal" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-plus"></span> @lang('button.create')</a>
@@ -73,12 +73,13 @@ Visas Data
                                         <a href="{{ action('VisasController@show',['id'=>$visa->id])  }}">
                                             <i class="livicon" data-name="edit" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="edit visa"></i>
                                         </a>
-
-                                        <a href="#" data-toggle="modal" data-target="#delete_confirm">
+                                        
+                                        <a  data-delete="{{$visa->products->count()}}" href="#" class="show_delete_modal">
                                             <i class="livicon" data-name="remove-alt" data-size="18"
                                                data-loop="true" data-c="#f56954" data-hc="#f56954"
                                                title="delete visa"></i>
                                         </a>
+                                       
                                     </td>
                                 </tr>
                                 @endforeach
@@ -166,6 +167,25 @@ Visas Data
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="delete_confirm" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Delete Visa</h4>
+      </div>
+      <div class="modal-body">
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="delete-confirm-btn" class="btn btn-primary">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 @stop
 
 {{-- page level scripts --}}

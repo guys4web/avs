@@ -73,9 +73,12 @@ class VisasController extends Controller
         $product->save();
 
         $requirements = $request->get('requirements');
-        foreach ($requirements as $req) {
-            $visa->requirement()->attach($req);
+        if(is_array($requirements)){
+            foreach ($requirements as $req) {
+                $visa->requirement()->attach($req);
+            }
         }
+        
         return redirect()->action("VisasController@adminIndex")->with('message','Visa added');
 
     }
@@ -135,6 +138,6 @@ class VisasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }
