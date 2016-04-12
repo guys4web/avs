@@ -26,10 +26,9 @@
                     <a class="hiddenanchor" id="toforgot"></a>
                     <div id="wrapper">
                         <div id="login" class="animate form">
-                            <form action="{{ route('signin') }}" autocomplete="on" method="post" role="form">
-                                <h3 class="black_bg">
-                                    <img src="{{ asset('assets/img/logo.png') }}" alt="josh logo">
-                                    <br>Log in</h3>
+                            <form action="{{ route('signin') }}" autocomplete="on" method="post" role="form">                                
+                                    <div class="text-center"><br/><img src="{{ asset('assets/images/logo.png') }}" alt="logo"></div>
+                                    <h3>Log in</h3>
                                     <!-- CSRF Token -->
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
