@@ -20,7 +20,7 @@ class SentinelAdmin
         if(!Sentinel::check())
             return Redirect::to('admin/signin')->with('error', 'You must be logged in!');
         elseif(!Sentinel::inRole('admin'))
-            return Redirect::to('home');
+            return Redirect::to('/');
 
         return $next($request);
     }

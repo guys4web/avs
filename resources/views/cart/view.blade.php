@@ -21,8 +21,12 @@ Cart items
           </div>
       </div>
       <div class="row">
+        
         <div class="col-xs-6 col-md-8 ">
-        <table class="table table-stripped">
+            @if(Session::has('error'))
+                <div class="alert alert-danger"><em> {!! session('error') !!}</em></div>
+            @endif
+            <table class="table table-stripped">
             <thead>
                 <tr>
                     <th>Service name & visa </th>

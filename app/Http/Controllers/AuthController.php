@@ -1,4 +1,7 @@
-<?php namespace App\Http\Controllers;
+<?php 
+namespace App\Http\Controllers;
+
+
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
 use Input;
@@ -10,6 +13,8 @@ use Sentinel;
 use URL;
 use Validator;
 use View;
+use Activation;
+
 
 class AuthController extends JoshController
 {
@@ -206,11 +211,14 @@ class AuthController extends JoshController
             $data = array(
                 'user' => $user,
                 //'forgotPasswordUrl' => URL::route('forgot-password-confirm', $user->getResetPasswordCode()),
-                'forgotPasswordUrl' => URL::route('forgot-password-confirm', [$user->id, $reminder->code]),
+                'forgotPasswordUrl' => URL::route('admin-forgot-password-confirm', [$user->id, $reminder->code]),
             );
 
+               
             // Send the activation code through email
-            Mail::send('emails.forgot-password', $data, function ($m) use ($user) {
+            $config = config('mail.from');
+            Mail::send('emails.forgot-password', $data, function ($m) use ($user,$config) {
+                $m->sender($config['address']);
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);
                 $m->subject('Account Password Recovery');
             });

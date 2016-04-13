@@ -43,7 +43,7 @@ Route::group(array('prefix' => 'admin'), function () {
 	Route::get('signin', array('as' => 'signin', 'uses' => 'AuthController@getSignin'));
 	Route::post('signin', 'AuthController@postSignin');
 	Route::post('signup', array('as' => 'signup', 'uses' => 'AuthController@postSignup'));
-	Route::post('forgot-password', array('as' => 'forgot-password', 'uses' => 'AuthController@postForgotPassword'));
+	Route::post('forgot-password', array('as' => 'admin-forgot-password', 'uses' => 'AuthController@postForgotPassword'));
 	Route::get('login2', function () {
 		return View::make('admin/login2');
 	});
@@ -55,7 +55,7 @@ Route::group(array('prefix' => 'admin'), function () {
 	Route::post('register2', array('as' => 'register2', 'uses' => 'AuthController@postRegister2'));
 
 	# Forgot Password Confirmation
-	Route::get('forgot-password/{userId}/{passwordResetCode}', array('as' => 'forgot-password-confirm', 'uses' => 'AuthController@getForgotPasswordConfirm'));
+	Route::get('forgot-password/{userId}/{passwordResetCode}', array('as' => 'admin-forgot-password-confirm', 'uses' => 'AuthController@getForgotPasswordConfirm'));
 	Route::post('forgot-password/{userId}/{passwordResetCode}', 'AuthController@postForgotPasswordConfirm');
 
 	# Logout

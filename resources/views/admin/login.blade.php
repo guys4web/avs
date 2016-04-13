@@ -70,7 +70,7 @@
                         <div id="register" class="animate form">
                             <form action="{{ route('signup') }}" autocomplete="on" method="post" role="form">
                                 <h3 class="black_bg">
-                                    <img src="{{ asset('assets/img/logo.png') }}" alt="josh logo">
+                                    <img src="{{ asset('assets/images/logo.png') }}" alt="logo">
                                     <br>Sign Up</h3>
                                     <!-- CSRF Token -->
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -151,9 +151,10 @@
                             </form>
                         </div>
                         <div id="forgot" class="animate form">
-                            <form action="{{ route('forgot-password') }}" autocomplete="on" method="post" role="form">
-                                <h3 class="black_bg">
-                                    <img src="{{ asset('assets/img/logo.png') }}" alt="josh logo">Password</h3>
+                            <form action="{{ route('admin-forgot-password') }}" autocomplete="on" method="post" role="form">
+                                <p>&nbsp;</p>
+                                <p class="text-center"> <img src="{{ asset('assets/images/logo.png') }}" alt="logo"></p>
+                                <h3 class="black_bg">Password</h3>
                                 <p>
                                     Enter your email address below and we'll send a special reset password link to your inbox.
                                 </p>

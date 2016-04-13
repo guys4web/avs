@@ -279,7 +279,6 @@ class FrontEndController extends JoshController
      */
     public function postForgotPassword(UserRequest $request)
     {
-
         try {
             // Get the user password recovery code
             //$user = Sentinel::getUserProvider()->findByLogin($request->get('email'));
@@ -299,9 +298,11 @@ class FrontEndController extends JoshController
                 //'forgotPasswordUrl' => URL::route('forgot-password-confirm', $user->getResetPasswordCode()),
                 'forgotPasswordUrl' => URL::route('forgot-password-confirm', [$user->id, $reminder->code]),
             );
-
-            // Send the activation code through email
-            Mail::send('emails.forgot-password', $data, function ($m) use ($user) {
+            
+            
+            $config = config('mail.from');
+            Mail::send('emails.forgot-password', $data, function ($m) use ($user,$config) {
+                $m->sender($config['address']);
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);
                 $m->subject('Account Password Recovery');
             });
