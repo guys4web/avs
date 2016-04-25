@@ -122,7 +122,7 @@ Services Data
                         Max process
                     </label>
                     <div class="col-md-9">
-                            <input type="number"  id="Max process" name="Max process" placeholder="Max process" class="form-control"/>
+                            <input type="number"  id="Max process" name="max" placeholder="Max process" class="form-control"/>
                     </div>
                 </div>
             </div>

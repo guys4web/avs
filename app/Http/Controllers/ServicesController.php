@@ -32,7 +32,7 @@ class ServicesController extends Controller
 
     public function countries($country)
     {
-        $services = Service::join('service_visas', 'services.id', '=', 'service_visas.service_id')
+        $services = Service::leftJoin('service_visas', 'services.id', '=', 'service_visas.service_id')
               ->select('services.id', 'services.name', 'min_process', 'max_process')
               ->orderBy('min_process')
               ->orderBy('max_process')
