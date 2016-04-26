@@ -72,6 +72,12 @@ Visas Data
                   </span>
                   Attach a new service/product to this visa
             </a>
+            <a href="#visaName" data-toggle="modal" data-target="#visaName" class="btn btn-labeled btn-success">
+                  <span class="btn-label">
+                          <i class="glyphicon glyphicon-pencil"></i>
+                  </span>
+                  Edit visa name
+            </a>
             <!-- END SAMPLE TABLE PORTLET-->
         </div>
     </div>
@@ -125,6 +131,40 @@ Visas Data
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" id="visaName" role="dialog">
+  <div class="modal-dialog" role="document">
+   <form id="form-add-visa"  class="modal-content" action="{{ action('VisasController@edit',['id'=>$visa->id]) }}" method="POST">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Edit visa name / description</h4>
+      </div>
+      <div class="modal-body">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <div class="form-body">
+                <div class="form-group">
+                    <label>
+                        Name
+                    </label>
+                    <input type="text"  id="name" name="name" value="{{ $visa->name }}" placeholder="Visa name" class="form-control" required/>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea  class="form-control" name="description">{{ $visa->description }}</textarea>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" id="visa-name-change" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
 @stop
 
 {{-- page level scripts --}}
@@ -147,13 +187,13 @@ Visas Data
               });
           });
           $(document).ready(function(){
-              $('#myModal').on('hidden.bs.modal', function (e) {
-                  $('#price').val("");
-                  $('#country').find("option").removeAttr("selected");
-                  $('#country').find("option[val='']").attr("selected","selected");
-                  $('#service').html("<option value=''>Service list</option>");
-                  $('#visa-save-change').html("Save changes");
-              });
+                $('#myModal').on('hidden.bs.modal', function (e) {
+                    $('#price').val("");
+                    $('#country').find("option").removeAttr("selected");
+                    $('#country').find("option[val='']").attr("selected","selected");
+                    $('#service').html("<option value=''>Service list</option>");
+                    $('#visa-save-change').html("Save changes");
+                });
 
 
           });

@@ -74,7 +74,7 @@ Visas Data
                                             <i class="livicon" data-name="edit" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="edit visa"></i>
                                         </a>
                                         
-                                        <a  data-delete="{{$visa->products->count()}}" href="#" class="show_delete_modal">
+                                        <a  data-id="{{ $visa->id }}" data-delete="{{$visa->products->count()}}" href="#" class="show_delete_modal">
                                             <i class="livicon" data-name="remove-alt" data-size="18"
                                                data-loop="true" data-c="#f56954" data-hc="#f56954"
                                                title="delete visa"></i>
@@ -180,7 +180,7 @@ Visas Data
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" id="delete-confirm-btn" class="btn btn-primary">OK</button>
+        <button type="button" id="delete-visa-confirm-btn" data-href="{{ route("del_visa",["id"=>"#id#"]) }}" class="btn btn-primary">OK</button>
       </div>
     </div>
   </div>

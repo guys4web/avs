@@ -146,9 +146,10 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 	# visas
 	Route::get('visas', 'VisasController@adminIndex');
 	Route::post('visas/create', 'VisasController@create');
-	Route::get('visas/destroy/{id}', 'VisasController@destroy');
+	Route::get('visas/destroy/{id}',array( 'uses' => 'VisasController@destroy' , 'as' => 'del_visa' ));
 	Route::get('visas/show/{id}', 'VisasController@show');
 	Route::post('visas/update/{id}', 'VisasController@update');
+        Route::post('visas/edit/{id}', 'VisasController@edit');
 	# datatables
 	Route::get('datatables', 'DataTablesController@index');
 	Route::get('datatables/data', array('as' => 'admin.datatables.data', 'uses' => 'DataTablesController@data'));

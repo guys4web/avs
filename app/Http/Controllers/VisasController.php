@@ -113,9 +113,18 @@ class VisasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
-        //
+        $visa = Visa::find($id);
+        if(!$visa){
+            return redirect()->action("VisasController@adminIndex");
+        }
+        
+        $visa->name = $request->get('name');
+        $visa->description = $request->get('description');
+        $visa->save();
+        
+        return redirect()->action("VisasController@show",['id'=>$id]);
     }
 
     /**
@@ -138,6 +147,12 @@ class VisasController extends Controller
      */
     public function destroy($id)
     {
+        $visa = Visa::find($id);
+        if(!$visa){
+            return redirect()->action("VisasController@adminIndex");
+        }
         
+        $visa->delete();
+        return redirect()->action("VisasController@adminIndex");
     }
 }
