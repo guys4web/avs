@@ -155,7 +155,7 @@ Visa Application
                                 <!-- third tab -->
                                 <h1>Payment</h1>
                                 <section>
-                                    @include('payment.blade.php')
+                                    @include('payment')
                                 </section>
 
                             </form>
