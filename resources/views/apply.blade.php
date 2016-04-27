@@ -202,4 +202,5 @@ Visa Application
     <script src="{{ asset('assets/js/validation.js') }}"></script>
     <script src="{{ asset('assets/js/pages/form_wizard.js') }}"></script>
     <script src="{{ asset('assets/js/pages/cart.js') }}"></script>
+    <script src="{{ asset('assets/js/payment.js') }}"></script>
 @stop

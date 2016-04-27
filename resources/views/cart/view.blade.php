@@ -9,6 +9,8 @@ Cart items
 {{-- page level styles --}}
 @section('header_styles')
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link href="{{ asset('assets/vendors/select2/select2.min.css') }}" rel="stylesheet"/>
+  <link rel="stylesheet"  href="{{ asset('assets/css/bootstrap-datepicker3.css') }}"/>
 @stop
 
 
@@ -64,7 +66,7 @@ Cart items
                         <form method="POST" action="{{ route('cart_payment') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                             <button class="btn btn-primary" type="submit">Make payment</button>
-                            <button data-id="{{ $cart->id }}" class="btn btn-default" type="button" id="edit-billing">Edit Billing Informations</button>
+                            <a data-toggle="modal" href="#modal-billing" data-id="{{ $cart->id }}" class="btn btn-default"  id="edit-billing">Edit Billing Informations</a>
                             <button data-id="{{ $cart->id }}" class="btn btn-default" type="button" id="view-passengers">List of passengers</button>
                         </form>
                     </td>
@@ -104,11 +106,35 @@ Cart items
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     <!-- end modal -->
+    
+    <!-- modal billing informations -->
+    <div id="modal-billing" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">List of passengers<span id="modal-order-num"></span></h4>
+              </div>
+              <div class="modal-body">
+                  <form class="form-horizontal">
+                      @include("payment")
+                  </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- end modal -->
 @stop
 
 {{-- page level scripts --}}
 @section('footer_scripts')
+    <script src="{{ asset('assets/vendors/select2/select2.full.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/bootstrap-datepicker.js') }}"  ></script>
     <script type="text/javascript" src="{{ asset('assets/vendors/wizard/jquery-steps/js/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('assets/js/payment.js') }}"></script>
     <script>
         $(document).on('click','#view-passengers',function(){
           var cart_id = $(this).attr("data-id");
@@ -117,8 +143,9 @@ Cart items
               $('#modal-passengers').modal("show");
           },"html");
         });
-        $(document).on('click','#edit-billing',function(){
-            
+        $(document).ready(function(){
+            $('#payment_type').trigger("change");
+            $('#cardnum').val({{ session('cardnum') }});
         });
     </script>
 @stop

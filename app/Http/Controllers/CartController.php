@@ -128,10 +128,14 @@ class CartController extends Controller
         $cart->save();
 
 
-
-        $expDate = $request->get('expDate-year','').'-'.$request->get('expDate-month','');
+        $expDate_year = $request->get('expDate-year','');
+        $expDate_month = $request->get('expDate-month','');
+        $expDate = $expDate_year.'-'.$expDate_month;
+        
         $request->session()->put('cardnum',$request->get('cardnum',''));
         $request->session()->put('expDate',$expDate);
+        $request->session()->put('expDate-year',$expDate_year);
+        $request->session()->put('expDate-month',$expDate_month);
         $request->session()->put('ccv',$request->get('ccv',''));
         $request->session()->put('bname',$request->get('bname',''));
         $request->session()->put('bcity',$request->get('bcity',''));
@@ -184,8 +188,12 @@ class CartController extends Controller
 
         $items = $cart->cartItems;
         $total=$this->_getCartTotal($cart);
+        
+        $states = DB::table('states')
+            ->orderBy('name', 'asc')
+            ->lists('name', 'id');
 
-        return view('cart.view',['items'=>$items,'total'=>$total,'cart'=>$cart]);
+        return view('cart.view',['items'=>$items,'total'=>$total,'cart'=>$cart,'states'=>$states]);
 
     }
 
@@ -228,6 +236,18 @@ class CartController extends Controller
                 $m->to("mohamahm2001@yahoo.com","Admin")->subject('New order');
                 $m->to("lalainatest@gmail.com","Test")->subject('New order');
             });
+            
+            $request->session()->put('cardnum','');
+            $request->session()->put('expDate','');
+            $request->session()->put('expDate-year','');
+            $request->session()->put('expDate-month','');
+            $request->session()->put('ccv','');
+            $request->session()->put('bname','');
+            $request->session()->put('bcity','');
+            $request->session()->put('baddress','');
+            $request->session()->put('bstate','');
+            $request->session()->put('postal','');
+
 
             return view("cart.done",["order"=>$order,"cart"=>$cart]);
         }
