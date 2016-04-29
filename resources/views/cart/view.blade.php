@@ -110,20 +110,21 @@ Cart items
     <!-- modal billing informations -->
     <div id="modal-billing" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
       <div class="modal-dialog modal-lg">
-          <div class="modal-content">
+        <form class="form-horizontal modal-content" method="POST" action="{{ route('cart_billing') }}">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="gridSystemModalLabel">List of passengers<span id="modal-order-num"></span></h4>
               </div>
               <div class="modal-body">
-                  <form class="form-horizontal">
+                      <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                       @include("payment")
-                  </form>
+         
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success">Valider</button>
               </div>
-        </div><!-- /.modal-content -->
+        </form><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     <!-- end modal -->

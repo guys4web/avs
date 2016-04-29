@@ -209,6 +209,7 @@ Route::post('contact',array('as' => 'contact','uses' => 'FrontEndController@post
 Route::get('/', array('as' => 'home', 'uses' => 'JoshController@showUserIndex'));
 // Route::post('apply', array('as' => 'apply', 'uses' => 'CartController@create'));
 Route::any('apply', array('middleware'=>'SentinelUser','as' => 'apply', 'uses' => 'CartController@create'));
+Route::post('cart/billing', array('middleware'=>'SentinelUser','as' => 'cart_billing', 'uses' => 'CartController@updateBilling'));
 Route::any('cart/additem/{productId}', array('middleware'=>'SentinelUser','as' => 'additem', 'uses' => 'CartController@addItem'));
 Route::any('cart/removeitem/{id}', array('middleware'=>'SentinelUser','as' => 'removeitem', 'uses' => 'CartController@removeItem'));
 Route::post('cart/payment', array('middleware'=>'SentinelUser','as' => 'cart_payment', 'uses' => 'CartController@payment'));

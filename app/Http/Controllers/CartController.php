@@ -124,25 +124,7 @@ class CartController extends Controller
 
         $user = Sentinel::getUser();
         $cart = $this->_createCart();
-        $cart->payment_type = $request->get('payment_type');
-        $cart->save();
-
-
-        $expDate_year = $request->get('expDate-year','');
-        $expDate_month = $request->get('expDate-month','');
-        $expDate = $expDate_year.'-'.$expDate_month;
-        
-        $request->session()->put('cardnum',$request->get('cardnum',''));
-        $request->session()->put('expDate',$expDate);
-        $request->session()->put('expDate-year',$expDate_year);
-        $request->session()->put('expDate-month',$expDate_month);
-        $request->session()->put('ccv',$request->get('ccv',''));
-        $request->session()->put('bname',$request->get('bname',''));
-        $request->session()->put('bcity',$request->get('bcity',''));
-        $request->session()->put('baddress',$request->get('baddress',''));
-        $request->session()->put('bstate',$request->get('bstate',''));
-        $request->session()->put('postal',$request->get('postal',''));
-
+        $this->billing($cart, $request);
 
 
         $cartItem  = new Cartitem();
@@ -270,6 +252,38 @@ class CartController extends Controller
         }
 
         return view("partials.passengers",["cart"=>$cart]);
+
+    }
+    
+    public function updateBilling(Request $request)
+    {
+        $cart = $this->_createCart();
+        $this->billing($cart, $request);
+    
+        return redirect()->route("cart");
+    }
+    
+    
+    protected function billing($cart,Request $request)
+    {
+        $cart->payment_type = $request->get('payment_type');
+        $cart->save();
+
+
+        $expDate_year = $request->get('expDate-year','');
+        $expDate_month = $request->get('expDate-month','');
+        $expDate = $expDate_year.'-'.$expDate_month;
+        
+        $request->session()->put('cardnum',$request->get('cardnum',''));
+        $request->session()->put('expDate',$expDate);
+        $request->session()->put('expDate-year',$expDate_year);
+        $request->session()->put('expDate-month',$expDate_month);
+        $request->session()->put('ccv',$request->get('ccv',''));
+        $request->session()->put('bname',$request->get('bname',''));
+        $request->session()->put('bcity',$request->get('bcity',''));
+        $request->session()->put('baddress',$request->get('baddress',''));
+        $request->session()->put('bstate',$request->get('bstate',''));
+        $request->session()->put('postal',$request->get('postal',''));
 
     }
     
