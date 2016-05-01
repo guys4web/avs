@@ -88,7 +88,28 @@ class FrontEndController extends JoshController
     public function myAccount(User $user)
     {
         $user = Sentinel::getUser();
-        return View::make('user_account', compact('user', 'countries'));
+        $tabDob = explode("-",$user->dob);
+        $year = $month = $day = "" ;
+        if(count($tabDob)>2)
+        {
+            list($year,$month,$day) = $tabDob;
+        }
+        
+        $months = array(
+            "1" => "Jan",
+            "2" => "Feb" ,
+            "3" => "Mar" ,
+            "4" => "Apr" ,
+            "5" => "Mey" ,
+            "6" => "Jun" ,
+            "7" => "Jul" ,
+            "8" => "Aug" ,
+            "9" => "Sep" ,
+            "10" => "Oct" ,
+            "11" => "Nov" ,
+            "12" => "Dec"
+        );
+        return View::make('user_account',compact('user','countries','months','year','month','day'));
     }
 
 
@@ -116,14 +137,21 @@ class FrontEndController extends JoshController
      */
     public function update(Request $request, User $user)
     {
-
+        $dob = NULL;
         $user = Sentinel::getUser();
-
+        $day = $request->get("day","");
+        $month = $request->get("month","");
+        $year = $request->get("year","");
+        if(!empty($day) && !empty($month) && !empty($day))
+        {
+            $dob = $year.'-'.$month.'-'.$day;
+        }
+        
         //update values
         $user->first_name = $request->get('first_name');
         $user->last_name = $request->get('last_name');
         $user->email = $request->get('email');
-        $user->dob = $request->get('dob');
+        $user->dob = $dob ;
         $user->bio = $request->get('bio');
         $user->gender = $request->get('gender');
         $user->country = $request->get('country');

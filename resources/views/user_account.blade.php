@@ -229,18 +229,28 @@ User Account
                             </div>
 
                             <div class="form-group {{ $errors->first('dob', 'has-error') }}">
-                                        <label class="col-lg-2 control-label">
-                                            DOB:
-                                        </label>
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-fw fa-calendar text-primary"></i>
-                                            </span>
-                                            {!!  Form::text('dob', Input::old('dob',$user->dob), array('id' => 'datepicker','class' => 'form-control', 'data-date-format'=> 'yyyy-mm-dd','readonly'=>'readonly'))  !!} </div>
-                                            <span class="help-block">{{ $errors->first('dob', ':message') }}</span>
-                                        </div>
-                                    </div>
+                                <label class="col-lg-2 control-label">
+                                    DOB:
+                                </label>
+                                <div class='col-sm-2'>
+                                    <select class='form-control' data-rule-required='true' id='month' name='month'>
+                                        @for($ii=1;$ii<=12;$ii++)
+                                            <option @if($month==$ii) selected="selected" @endif value="{{ $ii }}">{{ $months[$ii] }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                <div class='col-sm-2'>
+                                    <select class='form-control' data-rule-number='true'  data-rule-required='true' id='day' name='day'>
+                                        @for($m=1;$m<=31;$m++)
+                                            <option @if($day==$m) selected="selected" @endif value="{{ $m }}">{{ $m }}</option>
+                                        @endfor
+                                    </select>
+				</div>
+                                <div class='col-sm-2'>
+                                    <input value="{{ $year }}" data-rule-rangelength='4,4' data-rule-number='true' data-rule-required='true' id='year' name='year' type='text' class='form-control' placeholder='yyyy'/>
+                                </div>
+                                <span class="help-block">{{ $errors->first('dob', ':message') }}</span>
+                            </div>
 
                             <div class="form-group">
                                         <div class="col-lg-offset-2 col-lg-10">
