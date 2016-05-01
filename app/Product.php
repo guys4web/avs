@@ -17,5 +17,10 @@ class Product extends Model
     {
         return $this->belongsTo('App\Service',"service_id");
     }
+    
+    public function nbCartItem()
+    {
+        return CartItem::where("product_id",$this->id)->count();
+    }
 
 }

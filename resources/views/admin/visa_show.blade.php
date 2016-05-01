@@ -41,7 +41,7 @@ Visas Data
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="livicon" data-name="responsive" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
-                        List of products
+                        List of products : {{ $visa->name }}
                     </div>
                 </div>
                 <div class="portlet-body flip-scroll">
@@ -56,7 +56,14 @@ Visas Data
                         <tbody>
                             @foreach($visa->products as $product)
                               <tr>
-                                  <td></td>
+                                  <td>
+                                      <a title="Edit price" data-id="{{ $product->id }}" data-value="{{ $product->price }}" class="edit-product-price"  href="#">
+                                          <i class="livicon" data-name="edit" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA"></i>
+                                      </a>
+                                      <a href="#" class="delete-product-price" data-id="{{ $product->id }}" data-value="{{ $product->nbCartItem() }}">
+                                           <i class="livicon" data-name="remove-alt" data-size="18" data-loop="true" data-c="#f56954" data-hc="#f56954" title="delete product"></i>
+                                      </a>
+                                  </td>
                                   <td class="info-service" data-service="{{ $product->service->id }}" data-price="{{ $product->price }}" data-country="{{ $product->service->country_id }}">{{ $product->service->name }}</td>
                                   <td>{{ $product->price }}</td>
                               </tr>
@@ -164,6 +171,52 @@ Visas Data
 </div>
 
 
+<div class="modal fade" id="model_price" role="dialog">
+  <div class="modal-dialog" role="document">
+   <form class="modal-content" action="{{ action('VisasController@price') }}" method="POST">
+       <input type="hidden" name="id" />
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Edit product price</h4>
+      </div>
+      <div class="modal-body">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <div class="form-body">
+                <div class="form-group">
+                    <label>
+                        Price
+                    </label>
+                    <input type="text" name="price" value="" placeholder="Product price" class="form-control" required/>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="modal fade" id="model_delete" role="dialog">
+  <div class="modal-dialog" role="document">
+   <form class="modal-content" action="{{ action('VisasController@delete') }}" method="POST">
+       <input type="hidden" name="id" />
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Delete product</h4>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 
 @stop
 
@@ -197,5 +250,28 @@ Visas Data
 
 
           });
+          $(document).on('click','.edit-product-price',function(){
+                var id = $(this).attr("data-id");
+                var price = $(this).attr("data-value");
+                
+                $('#model_price').find('input[name="id"]').val(id);
+                $('#model_price').find('input[name="price"]').val(price);
+                
+                $('#model_price').modal("show");
+          });
+          $(document).on('click','.delete-product-price',function(){
+                var id = $(this).attr("data-id");
+                var nb = $(this).attr("data-value");
+                $('#model_delete').find('input[name="id"]').val(id);
+                if(parseInt(nb)>0){
+                    $('#model_delete').find("button[type='submit']").hide();
+                    var text = "Can't delete this product , because have "+nb+" items cart " ;
+                }else{
+                    $('#model_delete').find("button[type='submit']").show();
+                    var text = "Are you sure ?" ;
+                }
+                $('#model_delete').find('.modal-body').html(text);
+                $('#model_delete').modal("show");
+          });        
     </script>
 @stop

@@ -66,9 +66,9 @@ Visas Data
                                 <tr>
                                     <td>{{$visa->name}}</td>
                                     <td class="truncate">{{$visa->description}}</td>
-                                    <td>{{$visa->Service[0]->name}}</td>
-                                    <td>{{$visa->Service[0]->Country->name}}</td>
-                                    <td>{{$visa->Service[0]->pivot->price}}</td>
+                                    <td> @if($visa->products->count()>0) {{$visa->Service[0]->name}} @endif</td>
+                                    <td> @if($visa->products->count()>0) {{$visa->Service[0]->Country->name}} @endif</td>
+                                    <td> @if($visa->products->count()>0) {{$visa->Service[0]->pivot->price}} @endif</td>
                                     <td>
                                         <a href="{{ action('VisasController@show',['id'=>$visa->id])  }}">
                                             <i class="livicon" data-name="edit" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="edit visa"></i>
@@ -180,7 +180,7 @@ Visas Data
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" id="delete-visa-confirm-btn" data-href="{{ route("del_visa",["id"=>"#id#"]) }}" class="btn btn-primary">OK</button>
+        <button type="button" class="delete-visa-confirm-btn btn btn-danger" id="delete-visa-confirm-btn" data-href="{{ route("del_visa",["id"=>"#id#"]) }}">OK</button>
       </div>
     </div>
   </div>

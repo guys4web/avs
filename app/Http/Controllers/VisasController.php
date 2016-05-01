@@ -136,7 +136,24 @@ class VisasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         return redirect()->action("VisasController@show",['id'=>$id]);
+    }
+    
+    //edit price
+    public function  price(Request $request)
+    {
+        $price = $request->get("price");
+        $id = $request->get("id");
+        $product = Product::find($id);
+        if(!$product){
+            return redirect()->action("VisasController@adminIndex");
+        }
+        
+        $product->price = $price;
+        $product->save();
+        
+        return redirect()->action("VisasController@show",['id'=>$product->visa_id]);
     }
 
     /**
@@ -154,5 +171,22 @@ class VisasController extends Controller
         
         $visa->delete();
         return redirect()->action("VisasController@adminIndex");
+    }
+    
+    
+    public function delete(Request $request)
+    {
+        $id = $request->get("id");
+        $product = Product::find($id);
+        if(!$product){
+            return redirect()->action("VisasController@adminIndex");
+        }
+        if($product->nbCartItem()>0){
+            return redirect()->action("VisasController@adminIndex");
+        }
+        
+        $product->delete();
+        return redirect()->action("VisasController@adminIndex");
+        
     }
 }
