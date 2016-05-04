@@ -66,7 +66,12 @@ Services Data
                                     <td>{{$service->min_process}}</td>
                                     <td>{{$service->max_process}}</td>
                                     <td>  
-                                        
+                                        <a data-id="{{ $service->id }}" class="edit-service" href="#">
+                                            <i class="livicon" data-name="edit" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="edit service"></i>
+                                        </a>                                        
+                                        <a  data-id="{{ $service->id }}" class="delete-service" data-nb="{{$service->nbProduct() }}" href="#">
+                                            <i class="livicon" data-name="remove-alt" data-size="18"  data-loop="true" data-c="#f56954" data-hc="#f56954" title="delete service"></i>
+                                        </a>
                                     </td>                                    
                                 </tr>                            
                                 @endforeach                            
@@ -135,6 +140,27 @@ Services Data
     </div>
   </div>
 </div>
+<!-- modal delete service -->
+<div class="modal fade" id="modal-delete" role="dialog">
+  <div class="modal-dialog" role="document">
+    <form method="POST" action="{{ action('ServicesController@delete') }}" class="modal-content">
+        <input type="hidden" name="id"/>
+        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Delete Service</h4>
+        </div>
+        <div class="modal-body">          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" id="btn-delete-service" class="btn btn-danger">Delete</button>
+        </div>
+    </form>
+  </div>
+</div>
+
+
 @stop
 
 {{-- page level scripts --}}
@@ -170,6 +196,26 @@ Services Data
            });
            $(document).on("click","#save-service",function(){
                 $('#form-add-service').submit();
+           });
+           $(document).on('click','.delete-service',function(){
+                var id = $(this).attr("data-id");
+                var nb = $(this).attr("data-nb");
+                
+                if(parseInt(nb)>0){
+                    var texte = "You can't delete this service because this have "+nb+" products " ;
+                    $('#btn-delete-service').hide();
+                }else{
+                    var texte = "Are you sure ?" ;
+                    $('#btn-delete-service').attr("data-id",id);
+                    $('#btn-delete-service').show();
+                }
+                
+                $('#modal-delete').find('.modal-body').html(texte);
+                $('#modal-delete').modal("show");
+           });
+           $(document).on('click','#btn-delete-service',function(){
+               var id = $(this).attr("data-id");
+               var href = "" ;
            });
     </script>
 @stop

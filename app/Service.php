@@ -19,5 +19,10 @@ class Service extends Model
     public function getTitleAttribute() 
     {
     	return $this->attributes['name'] . ': ' . $this->attributes['min_process'] . ' - ' . $this->attributes['max_process']. ' Business Days ';
-	}
+    }
+    
+    public function nbProduct()
+    {
+        return Product::where('service_id',$this->id)->count();
+    }
 }
