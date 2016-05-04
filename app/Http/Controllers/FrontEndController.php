@@ -305,9 +305,14 @@ class FrontEndController extends JoshController
      *
      * @return Redirect
      */
-    public function postForgotPassword(UserRequest $request)
+    public function postForgotPassword(Request $request)
     {
+
+        
         try {
+            
+            
+            
             // Get the user password recovery code
             //$user = Sentinel::getUserProvider()->findByLogin($request->get('email'));
             $user = Sentinel::findByCredentials(['email' => $request->get('email')]);
@@ -367,7 +372,7 @@ class FrontEndController extends JoshController
      * @param  string $passwordResetCode
      * @return Redirect
      */
-    public function postForgotPasswordConfirm(UserRequest $request, $userId, $passwordResetCode = null)
+    public function postForgotPasswordConfirm(Request $request, $userId, $passwordResetCode = null)
     {
 
         $user = Sentinel::findById($userId);
