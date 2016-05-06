@@ -140,7 +140,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'SentinelAdmin'), functi
 	Route::get('countries/data', array('as' => 'admin.countries.data', 'uses' => 'CountriesController@index'));
 
 	# services
-	Route::get('services', 'ServicesController@adminIndex');
+	Route::get('services',array( 'uses' => 'ServicesController@adminIndex' , 'as' => 'admin_service_index' ));
         Route::post('services/post', 'ServicesController@store');
 	Route::post('services/delete', 'ServicesController@delete');
         Route::any('countries/{country}', 'ServicesController@countries');

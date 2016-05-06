@@ -206,6 +206,7 @@ Services Data
                     $('#btn-delete-service').hide();
                 }else{
                     var texte = "Are you sure ?" ;
+                    $('#modal-delete').find('input[name="id"]').val(id);
                     $('#btn-delete-service').attr("data-id",id);
                     $('#btn-delete-service').show();
                 }

@@ -114,8 +114,14 @@ class ServicesController extends Controller
     }
 
     
-    public function  delete()
+    public function  delete(Request $request)
     {
-        
+        $id = $request->get('id',0);
+        $service = Service::find($id);
+        if(!$service){
+            return redirect()->route("admin_service_index");
+        }
+        $service->delete();
+        return redirect()->route("admin_service_index");
     }
 }
