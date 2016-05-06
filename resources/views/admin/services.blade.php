@@ -66,7 +66,7 @@ Services Data
                                     <td>{{$service->min_process}}</td>
                                     <td>{{$service->max_process}}</td>
                                     <td>  
-                                        <a data-id="{{ $service->id }}" class="edit-service" href="#">
+                                        <a data-id="{{ $service->id }}" data-json='{{ json_encode($service->toArray()) }}' class="edit-service" href="#">
                                             <i class="livicon" data-name="edit" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="edit service"></i>
                                         </a>                                        
                                         <a  data-id="{{ $service->id }}" class="delete-service" data-nb="{{$service->nbProduct() }}" href="#">
@@ -150,11 +150,68 @@ Services Data
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="myModalLabel">Delete Service</h4>
         </div>
-        <div class="modal-body">          
+        <div class="modal-body"> 
+           
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="submit" id="btn-delete-service" class="btn btn-danger">Delete</button>
+        </div>
+    </form>
+  </div>
+</div>
+<!-- modal edit service -->
+<div class="modal fade" id="modal-edit" role="dialog">
+  <div class="modal-dialog" role="document">
+    <form method="POST" action="{{ action('ServicesController@edit') }}" class="modal-content">
+        <input type="hidden" name="id"/>
+        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Edit Service</h4>
+        </div>
+        <div class="modal-body"> 
+             <div class="form-body">
+                <div class="form-group">
+                    <label for="name" class="control-label">
+                        Name
+                    </label>
+                    <div>
+                        <input type="text" name="name" placeholder="Service name" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Select country:</label>
+                    <div>
+                        <select data-placeholder="Choose a country"  name="country" style="width:100%" class="form-control select2">
+                            <option>Choose a country</option>
+                            @foreach($countries as $country)
+                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="price" class="control-label">
+                        Min process
+                    </label>
+                    <div>
+                            <input type="number"  name="min" placeholder="Min process" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="price" class="control-label">
+                        Max process
+                    </label>
+                    <div>
+                            <input type="number"  id="Max process" name="max" placeholder="Max process" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" id="btn-delete-service" class="btn btn-primary">Save</button>
         </div>
     </form>
   </div>
@@ -214,9 +271,16 @@ Services Data
                 $('#modal-delete').find('.modal-body').html(texte);
                 $('#modal-delete').modal("show");
            });
-           $(document).on('click','#btn-delete-service',function(){
+           $(document).on('click','.edit-service',function(){
                var id = $(this).attr("data-id");
-               var href = "" ;
+               var json = JSON.parse($(this).attr("data-json"));
+               var country = $(this).attr("data-country");
+               $('#modal-edit').find('input[name="id"]').val(id);
+               $('#modal-edit').find('input[name="name"]').val(json['name']);
+               $('#modal-edit').find('input[name="min"]').val(json['min_process']);
+               $('#modal-edit').find('input[name="max"]').val(json['max_process']);
+               $('#modal-edit').find("select[name='country']").select2().val( json['country_id'] ).trigger("change");
+               $('#modal-edit').modal("show");              
            });
     </script>
 @stop

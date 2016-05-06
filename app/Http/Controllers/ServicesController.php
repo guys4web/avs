@@ -21,7 +21,7 @@ class ServicesController extends Controller
     public function adminIndex()
     {
         $services = Service::join('countries', 'services.country_id', '=', 'countries.id')
-                             ->select('services.id', 'services.name', 'min_process', 'max_process', 'countries.name as country')
+                             ->select('services.id', 'services.name', 'min_process', 'max_process', 'countries.name as country','services.country_id')
                              ->orderBy('services.min_process')->get();
 
         return View('admin.services', [
@@ -96,9 +96,19 @@ class ServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $id = $request->get('id','');
+        $service = Service::find($id);
+        if(!$service){
+            return redirect()->route("admin_service_index");
+        }
+        $service->name = $request->get("name","");
+        $service->min_process = $request->get("min","");
+        $service->max_process = $request->get("max","");
+        $service->country_id = $request->get("country","");
+        $service->save();
+        return redirect()->route("admin_service_index");
     }
 
     /**
