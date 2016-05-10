@@ -11,8 +11,8 @@ use Sentinel;
 
 class PaymentController extends PayumController{
 
-	private $auth_login_id = "62MD5gVpe6" ;
-	private $key = "5Csva6BJ52f2UN4U" ;
+	private $auth_login_id = "7x3G8sKS" ;
+	private $key = "63CC5ue63g95pKv8" ;
 	private $secret= "Simon" ;
 
 	public function postIndex(Request $request)
@@ -55,23 +55,22 @@ class PaymentController extends PayumController{
             $gateway->execute($status = new GetHumanStatus($token));
             $status_txt = $status->getValue();
             $details = iterator_to_array($status->getFirstModel());
-
-				if($status_txt=="captured")
-				{
-                                    if($details['approved']==true && $details['declined']==false)
-                                    {
-					$request->session()->put("payment_data",serialize($details));
-					return redirect()->route("cart_done");
-                                    }
-                                    else
-                                    {
-                                        return redirect()->route("cart")->with("error","Payment error");
-                                    }
-				}
-				else
-				{
-					return redirect()->route("cart")->with("error","Payment error");
-				}
+            if($status_txt=="captured")
+            {
+                if($details['approved']==true && $details['declined']==false)
+                {
+                    $request->session()->put("payment_data",serialize($details));
+                    return redirect()->route("cart_done");
+                }
+                else
+                {
+                    return redirect()->route("cart")->with("error","Payment error , validation error ");
+                }
+            }
+            else
+            {
+		return redirect()->route("cart")->with("error","Payment error , statut not captured ".$status_txt);
+            }
 
         }
 }
