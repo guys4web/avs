@@ -86,8 +86,7 @@
                     </li>
                     <li {!! (Request::is('track') ? 'class="active"' : '') !!}><a href="{{ URL::to('track') }}">Track Order</a>
                     </li>
-                    <li {!! (Request::is('blog') || Request::is('blogitem/*') ? 'class="active"' : '') !!}><a href="{{ URL::to('blog') }}"> Blog</a>
-                    </li>
+                    
                     <li {!! (Request::is('contact') ? 'class="active"' : '') !!}><a href="{{ URL::to('contact') }}">Contact</a>
                     </li>
                     {{--based on anyone login or not display menu items--}}
