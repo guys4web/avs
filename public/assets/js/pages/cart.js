@@ -21,7 +21,7 @@ $(function () {
                 $.each(result.data, function (i, item) {
 
                     $('#service_visas').append("<tr class='visa_item'>" +
-                        "<td><input type='radio' value='"+item.id+"' name='visa' onClick='updateVisa(this)' class='visas' data-name='" + item.name +
+                        "<td><input type='radio' value='"+item.productid+"' name='visa' onClick='updateVisa(this)' class='visas' data-name='" + item.name +
                         "' data-id='" + item.id + "' data-price='" + item.price + "'></td>" +
                         "<td>" + item.name + "</td>" +
                         "<td>" + (item.max_stay || '30 days') + "</td>" +

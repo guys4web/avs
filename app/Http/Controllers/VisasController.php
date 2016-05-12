@@ -40,7 +40,7 @@ class VisasController extends Controller
     public function findByService($serviceId)
     {
         $visas = Visa::join('service_visas', 'visas.id', '=', 'service_visas.visa_id')
-                ->select('visas.id', 'visas.name', 'service_visas.price')
+                ->select('visas.id', 'visas.name', 'service_visas.price',\DB::raw('service_visas.id as productid'))
                 ->orderBy('price')
                 ->where('service_id', '=', $serviceId)
                 ->get();

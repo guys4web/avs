@@ -65,7 +65,7 @@ Cart items
                     <td colspan="5">
                         <form method="POST" action="{{ route('cart_payment') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                            <button class="btn btn-primary" type="submit">Make payment</button>
+                            <button @if(count($items)==0) disabled="disabled" @endif class="btn btn-primary" type="submit">Make payment</button>
                             <a data-toggle="modal" href="#modal-billing" data-id="{{ $cart->id }}" class="btn btn-default"  id="edit-billing">Edit Billing Informations</a>
                             <button data-id="{{ $cart->id }}" class="btn btn-default" type="button" id="view-passengers">List of passengers</button>
                         </form>
