@@ -11,8 +11,8 @@ use Sentinel;
 
 class PaymentController extends PayumController{
 
-	private $auth_login_id = "7x3G8sKS" ;
-	private $key = "63CC5ue63g95pKv8" ;
+	private $auth_login_id = "62MD5gVpe6" ;
+    private $key = "28M42L4dSnCn833T" ;
 	private $secret= "Simon" ;
 
 	public function postIndex(Request $request)

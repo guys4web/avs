@@ -28,7 +28,7 @@
                           <td>
                               <small class="text-uppercase gra">Birthday</small>
                               <br/>
-                              {{  $passenger->birthday }}
+                              {{ date('F d, Y', strtotime($passenger->birthdate)) }}
                           </td>
                       </tr>
                       <tr>
@@ -51,8 +51,8 @@
                           </td>
                           <td>
                               <small class="text-uppercase gra">PassPort ExpDate</small>
-                              <br/>
-                              {{  $passenger->passport_expirate }}
+                              <br/>                              
+                              {{ date('F d, Y', strtotime($passenger->passport_expirate)) }}
                           </td>
                       </tr>
                   </table>
